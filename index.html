@@ -8,26 +8,27 @@
 <link rel="icon" href="assets/img/favicon.png">
 <style>
   :root{
-    /* ｍやるゼ！ ブランドカラー */
-    --cyan:#0891b2;
-    --cyan-deep:#0e7490;
-    --cyan-soft:#e6f6fa;
-    --cyan-line:#bfe7f0;
-    --navy:#0f3a4a;
-    --green:#3d7a5d;
-    --green-soft:#eaf3ee;
-    --bg:#f4f7f9;
+    /* ライト系＋原色アクセント（ダーク系不使用） */
+    --cyan:#06b6d4;          /* 鮮やかシアン（原色寄り） */
+    --cyan-deep:#0891b2;     /* アクセント濃いめでも明るいシアン */
+    --cyan-soft:#e3fafe;     /* ごく薄い水色 */
+    --cyan-line:#a5ecf7;
+    --navy:#0891b2;          /* 旧navy参照を明るいシアンに統一（ダーク撤去） */
+    --green:#16a34a;         /* 原色グリーン */
+    --green-soft:#e7faee;
+    --blue:#2563eb;          /* 原色ブルー */
+    --bg:#ffffff;            /* 白ベース */
     --white:#ffffff;
-    --grey:#eef1f4;
-    --grey-line:#dde3e8;
-    --ink:#16242b;
-    --ink-soft:#566069;
-    --warn:#b5562e;
-    --warn-soft:#fbeee6;
-    --gold:#a8843a;
+    --grey:#f3f6f8;
+    --grey-line:#e4eaee;
+    --ink:#0f2730;           /* 文字は濃いが背景は常に白＝視認性確保 */
+    --ink-soft:#52646f;
+    --warn:#f97316;          /* 原色オレンジ */
+    --warn-soft:#fff1e6;
+    --gold:#eab308;          /* 原色イエロー */
     --radius:16px;
-    --shadow:0 2px 10px rgba(15,58,74,.06),0 8px 30px rgba(15,58,74,.07);
-    --shadow-lg:0 10px 40px rgba(15,58,74,.16);
+    --shadow:0 2px 10px rgba(6,182,212,.07),0 8px 30px rgba(6,182,212,.08);
+    --shadow-lg:0 10px 40px rgba(6,182,212,.18);
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:smooth}
@@ -36,17 +37,18 @@
     background:var(--bg);color:var(--ink);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;
   }
   .demo-bar{
-    position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;
-    display:flex;align-items:center;gap:16px;padding:10px 18px;font-size:14px;box-shadow:0 2px 12px rgba(0,0,0,.18);
+    position:sticky;top:0;z-index:100;background:#fff;color:var(--ink);
+    display:flex;align-items:center;gap:16px;padding:10px 18px;font-size:14px;
+    border-bottom:3px solid var(--cyan);box-shadow:0 2px 12px rgba(6,182,212,.12);
   }
-  .demo-bar .logo{font-weight:800;font-size:17px;letter-spacing:.04em;display:flex;align-items:center;gap:9px}
+  .demo-bar .logo{font-weight:800;font-size:17px;letter-spacing:.04em;display:flex;align-items:center;gap:9px;color:var(--cyan-deep)}
   .demo-bar .logo .mark{width:26px;height:26px;border-radius:7px;background:var(--cyan);display:flex;align-items:center;justify-content:center;overflow:hidden}
   .demo-bar .logo .mark img{width:100%;height:100%;object-fit:cover}
   .demo-bar .logo .mark span{color:#fff;font-size:15px;font-weight:900}
-  .demo-bar .tag{background:rgba(255,255,255,.13);padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.05em}
+  .demo-bar .tag{background:var(--cyan-soft);color:var(--cyan-deep);padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.05em;font-weight:700}
   .demo-bar .views{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
-  .demo-bar .views button{background:transparent;border:1px solid rgba(255,255,255,.22);color:#cfe6ee;padding:7px 14px;border-radius:999px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:.18s;font-weight:600}
-  .demo-bar .views button:hover{background:rgba(255,255,255,.1);color:#fff}
+  .demo-bar .views button{background:#fff;border:1.5px solid var(--grey-line);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:.18s;font-weight:700}
+  .demo-bar .views button:hover{border-color:var(--cyan);color:var(--cyan-deep)}
   .demo-bar .views button.active{background:var(--cyan);border-color:var(--cyan);color:#fff}
 
   .screen{display:none;animation:fade .4s ease}
@@ -65,9 +67,11 @@
   .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cyan)}
   .stat.warn::before{background:var(--warn)}
   .stat.green::before{background:var(--green)}
+  .stat.blue::before{background:var(--blue)}
   .stat .num{font-size:34px;font-weight:800;color:var(--cyan-deep);line-height:1.1}
   .stat.warn .num{color:var(--warn)}
   .stat.green .num{color:var(--green)}
+  .stat.blue .num{color:var(--blue)}
   .stat .lbl{font-size:14px;color:var(--ink-soft);margin-top:4px}
 
   .panel{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--grey-line);overflow:hidden;margin-bottom:24px}
@@ -159,21 +163,21 @@
   .check-ring svg path{stroke:var(--cyan);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .5s .25s forwards ease}
   @keyframes draw{to{stroke-dashoffset:0}}
 
-  .sq-card{background:linear-gradient(135deg,#0f3a4a,#0b2630);border-radius:16px;padding:22px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden}
-  .sq-card::after{content:"";position:absolute;right:-20px;top:-20px;width:90px;height:90px;border-radius:50%;background:rgba(8,145,178,.25)}
-  .sq-card .lbl{font-size:11px;opacity:.6;letter-spacing:.1em}
+  .sq-card{background:linear-gradient(135deg,#06b6d4,#22d3ee);border-radius:16px;padding:22px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(6,182,212,.3)}
+  .sq-card::after{content:"";position:absolute;right:-20px;top:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.22)}
+  .sq-card .lbl{font-size:11px;opacity:.85;letter-spacing:.1em}
   .sq-card .no{font-size:20px;letter-spacing:.14em;font-variant-numeric:tabular-nums;margin:6px 0 16px}
   .sq-foot{display:flex;justify-content:space-between;font-size:13px;opacity:.85}
   .sq-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);margin-top:10px}
 
   .sms-stage{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;justify-content:center}
-  .phone{width:300px;flex-shrink:0;background:#0f1115;border-radius:38px;padding:12px;box-shadow:var(--shadow-lg);border:2px solid #23262e}
-  .phone .notch{width:120px;height:22px;background:#0f1115;border-radius:0 0 14px 14px;margin:0 auto 6px}
-  .phone .scr{background:#e9ebf0;border-radius:28px;min-height:430px;padding:16px 12px;display:flex;flex-direction:column}
-  .phone .scr .stbar{display:flex;justify-content:space-between;font-size:12px;color:#3a3f48;font-weight:700;padding:0 6px 8px}
+  .phone{width:300px;flex-shrink:0;background:#eef3f6;border-radius:38px;padding:12px;box-shadow:var(--shadow-lg);border:2px solid #dbe6ec}
+  .phone .notch{width:120px;height:22px;background:#dbe6ec;border-radius:0 0 14px 14px;margin:0 auto 6px}
+  .phone .scr{background:#fbfdff;border-radius:28px;min-height:430px;padding:16px 12px;display:flex;flex-direction:column;border:1px solid #e4eaee}
+  .phone .scr .stbar{display:flex;justify-content:space-between;font-size:12px;color:#52646f;font-weight:700;padding:0 6px 8px}
   .sender{text-align:center;font-size:13px;color:#7a8089;margin-bottom:12px}
-  .sender b{display:block;color:#2b2f36;font-size:15px}
-  .bubble{background:#fff;border-radius:18px 18px 18px 5px;padding:13px 15px;font-size:14.5px;line-height:1.6;color:#23262e;box-shadow:0 1px 3px rgba(0,0,0,.08);max-width:90%;margin-bottom:8px;opacity:0;transform:translateY(10px)}
+  .sender b{display:block;color:var(--cyan-deep);font-size:15px}
+  .bubble{background:var(--cyan-soft);border-radius:18px 18px 18px 5px;padding:13px 15px;font-size:14.5px;line-height:1.6;color:var(--ink);box-shadow:0 1px 3px rgba(6,182,212,.1);max-width:90%;margin-bottom:8px;opacity:0;transform:translateY(10px)}
   .bubble.show{animation:bubbleIn .4s forwards}
   @keyframes bubbleIn{to{opacity:1;transform:none}}
   .bubble .lnk{color:var(--cyan-deep);font-weight:700;word-break:break-all}
@@ -207,7 +211,7 @@
   .footer a{color:var(--cyan-deep);text-decoration:none;font-weight:700}
 
   .hide{display:none!important}
-  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:#fff;padding:14px 24px;border-radius:12px;font-size:15px;font-weight:700;box-shadow:var(--shadow-lg);z-index:300;opacity:0;transition:.35s}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--cyan-deep);color:#fff;padding:14px 24px;border-radius:12px;font-size:15px;font-weight:700;box-shadow:var(--shadow-lg);z-index:300;opacity:0;transition:.35s}
   .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
   @media(max-width:560px){
@@ -249,7 +253,7 @@
       <div class="stat warn"><div class="num">3</div><div class="lbl">未完了の手続き</div></div>
       <div class="stat warn"><div class="num">2</div><div class="lbl">今月の未収</div></div>
       <div class="stat green"><div class="num">1</div><div class="lbl">本日の新規入居</div></div>
-      <div class="stat"><div class="num">5</div><div class="lbl">再請求 対応中</div></div>
+      <div class="stat blue"><div class="num">5</div><div class="lbl">再請求 対応中</div></div>
       <div class="stat green"><div class="num">¥1,284,000</div><div class="lbl">今月の請求済 売上</div></div>
     </div>
     <div class="panel">
