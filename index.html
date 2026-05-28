@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarePay Register｜介護施設向け 契約・請求ハブ（デモ）</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.png">
+<style>
+  :root{
+    /* ｍやるゼ！ ブランドカラー */
+    --cyan:#0891b2;
+    --cyan-deep:#0e7490;
+    --cyan-soft:#e6f6fa;
+    --cyan-line:#bfe7f0;
+    --navy:#0f3a4a;
+    --green:#3d7a5d;
+    --green-soft:#eaf3ee;
+    --bg:#f4f7f9;
+    --white:#ffffff;
+    --grey:#eef1f4;
+    --grey-line:#dde3e8;
+    --ink:#16242b;
+    --ink-soft:#566069;
+    --warn:#b5562e;
+    --warn-soft:#fbeee6;
+    --gold:#a8843a;
+    --radius:16px;
+    --shadow:0 2px 10px rgba(15,58,74,.06),0 8px 30px rgba(15,58,74,.07);
+    --shadow-lg:0 10px 40px rgba(15,58,74,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI",-apple-system,sans-serif;
+    background:var(--bg);color:var(--ink);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  .demo-bar{
+    position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;
+    display:flex;align-items:center;gap:16px;padding:10px 18px;font-size:14px;box-shadow:0 2px 12px rgba(0,0,0,.18);
+  }
+  .demo-bar .logo{font-weight:800;font-size:17px;letter-spacing:.04em;display:flex;align-items:center;gap:9px}
+  .demo-bar .logo .mark{width:26px;height:26px;border-radius:7px;background:var(--cyan);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .demo-bar .logo .mark img{width:100%;height:100%;object-fit:cover}
+  .demo-bar .logo .mark span{color:#fff;font-size:15px;font-weight:900}
+  .demo-bar .tag{background:rgba(255,255,255,.13);padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.05em}
+  .demo-bar .views{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .demo-bar .views button{background:transparent;border:1px solid rgba(255,255,255,.22);color:#cfe6ee;padding:7px 14px;border-radius:999px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:.18s;font-weight:600}
+  .demo-bar .views button:hover{background:rgba(255,255,255,.1);color:#fff}
+  .demo-bar .views button.active{background:var(--cyan);border-color:var(--cyan);color:#fff}
+
+  .screen{display:none;animation:fade .4s ease}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 40px}
+  .family-shell{max-width:480px;margin:0 auto;padding:20px 16px 40px}
+
+  h1{font-size:30px;line-height:1.3;letter-spacing:.01em;color:var(--navy)}
+  h2{font-size:22px;color:var(--navy);margin-bottom:4px;letter-spacing:.01em}
+  .sub{color:var(--ink-soft);font-size:15px}
+
+  .admin-top{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:26px}
+  .stat{background:var(--white);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);border:1px solid var(--grey-line);position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cyan)}
+  .stat.warn::before{background:var(--warn)}
+  .stat.green::before{background:var(--green)}
+  .stat .num{font-size:34px;font-weight:800;color:var(--cyan-deep);line-height:1.1}
+  .stat.warn .num{color:var(--warn)}
+  .stat.green .num{color:var(--green)}
+  .stat .lbl{font-size:14px;color:var(--ink-soft);margin-top:4px}
+
+  .panel{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--grey-line);overflow:hidden;margin-bottom:24px}
+  .panel-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--grey-line);flex-wrap:wrap;gap:10px}
+  .panel-head h2{margin:0}
+
+  table{width:100%;border-collapse:collapse;font-size:16px}
+  th{text-align:left;font-size:13px;color:var(--ink-soft);font-weight:700;letter-spacing:.04em;padding:12px 16px;background:var(--grey);border-bottom:1px solid var(--grey-line)}
+  td{padding:14px 16px;border-bottom:1px solid var(--grey-line);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tbody tr{transition:.15s}
+  tbody tr:hover{background:#fafdfe}
+  .who{font-weight:700;color:var(--ink)}
+  .who small{display:block;font-weight:400;color:var(--ink-soft);font-size:13px}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:13.5px;font-weight:700;white-space:nowrap}
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .b-done{background:var(--green-soft);color:var(--green)}
+  .b-card{background:var(--cyan-soft);color:var(--cyan-deep)}
+  .b-wait{background:#fdf4e3;color:var(--gold)}
+  .b-unpaid{background:var(--warn-soft);color:var(--warn)}
+  .b-paper{background:var(--grey);color:var(--ink-soft)}
+  .b-sent{background:var(--cyan-soft);color:var(--cyan-deep)}
+
+  .btn{font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;border:none;border-radius:12px;padding:13px 22px;transition:.18s;letter-spacing:.02em}
+  .btn-primary{background:var(--cyan);color:#fff}
+  .btn-primary:hover{background:var(--cyan-deep);transform:translateY(-1px);box-shadow:0 6px 18px rgba(8,145,178,.3)}
+  .btn-green{background:var(--green);color:#fff}
+  .btn-green:hover{background:#326a4f;transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--cyan-deep);border:1.5px solid var(--grey-line)}
+  .btn-ghost:hover{border-color:var(--cyan);background:#f5fcfe}
+  .btn-warn{background:var(--warn);color:#fff}
+  .btn-warn:hover{background:#9a4727}
+  .btn-sm{padding:8px 16px;font-size:14px;border-radius:10px}
+  .btn-block{width:100%;display:block}
+  .btn-lg{padding:18px 26px;font-size:19px;border-radius:14px}
+  .row-act{display:flex;gap:8px;flex-wrap:wrap}
+
+  .fcard{background:var(--white);border-radius:20px;box-shadow:var(--shadow-lg);border:1px solid var(--grey-line);overflow:hidden}
+  .fcard-head{background:linear-gradient(135deg,var(--cyan) 0%,var(--cyan-deep) 100%);color:#fff;padding:26px 24px;position:relative}
+  .fcard-head::after{content:"";position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .fcard-head .home{font-size:14px;opacity:.9;letter-spacing:.06em}
+  .fcard-head h2{color:#fff;font-size:24px;margin-top:6px}
+  .fcard-head .resident{font-size:16px;opacity:.95;margin-top:2px}
+  .fcard-body{padding:24px}
+
+  .step-dots{display:flex;align-items:center;justify-content:center;gap:8px;padding:18px 0 4px}
+  .step-dots .d{width:30px;height:6px;border-radius:999px;background:var(--grey-line);transition:.3s}
+  .step-dots .d.on{background:var(--cyan)}
+
+  .feebox{background:var(--cyan-soft);border-radius:14px;padding:18px 20px;margin:18px 0;border:1px solid var(--cyan-line)}
+  .feerow{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;font-size:16px}
+  .feerow + .feerow{border-top:1px dashed var(--cyan-line)}
+  .feerow .amt{font-weight:800;font-size:20px;color:var(--navy)}
+  .feerow.big .amt{font-size:26px;color:var(--cyan-deep)}
+
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid var(--grey-line);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:.15s;background:#fff}
+  .check-item:hover{border-color:var(--cyan);background:#fafdfe}
+  .check-item.checked{border-color:var(--cyan);background:var(--cyan-soft)}
+  .check-item input{width:24px;height:24px;margin-top:2px;accent-color:var(--cyan);flex-shrink:0}
+  .check-item label{cursor:pointer;font-size:16px;line-height:1.5}
+  .check-item .ttl{font-weight:700}
+
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:700;font-size:15px;margin-bottom:7px;color:var(--ink)}
+  .field input,.field select{width:100%;font-family:inherit;font-size:17px;padding:14px 16px;border:1.5px solid var(--grey-line);border-radius:12px;background:#fff;color:var(--ink);transition:.15s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+
+  .sign-area{border:2px dashed var(--grey-line);border-radius:14px;background:#fbfdfe;position:relative;touch-action:none}
+  .sign-area canvas{display:block;width:100%;height:170px;border-radius:14px;cursor:crosshair}
+  .sign-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#aebac2;font-size:16px;pointer-events:none;transition:.2s}
+  .sign-meta{font-size:12.5px;color:var(--ink-soft);margin-top:8px;display:flex;gap:14px;flex-wrap:wrap}
+  .sign-meta span{display:inline-flex;align-items:center;gap:5px}
+
+  .pay-opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px solid var(--grey-line);border-radius:14px;margin-bottom:12px;cursor:pointer;transition:.15s;background:#fff}
+  .pay-opt:hover{border-color:var(--cyan);transform:translateX(2px)}
+  .pay-opt.sel{border-color:var(--cyan);background:var(--cyan-soft);box-shadow:0 4px 14px rgba(8,145,178,.15)}
+  .pay-opt .ic{width:46px;height:46px;border-radius:12px;background:var(--grey);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden}
+  .pay-opt .ic img{width:100%;height:100%;object-fit:contain;padding:6px}
+  .pay-opt.sel .ic{background:#fff}
+  .pay-opt .meta .t{font-weight:700;font-size:17px}
+  .pay-opt .meta .d{font-size:13.5px;color:var(--ink-soft)}
+  .pay-opt .rec{margin-left:auto;font-size:11px;font-weight:800;color:var(--cyan-deep);background:#fff;border:1px solid var(--cyan);padding:3px 9px;border-radius:999px;white-space:nowrap}
+
+  .done-wrap{text-align:center;padding:30px 10px}
+  .check-ring{width:96px;height:96px;margin:0 auto 18px;border-radius:50%;background:var(--cyan-soft);display:flex;align-items:center;justify-content:center;animation:pop .5s cubic-bezier(.17,.67,.3,1.4)}
+  @keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+  .check-ring svg{width:48px;height:48px}
+  .check-ring svg path{stroke:var(--cyan);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .5s .25s forwards ease}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .sq-card{background:linear-gradient(135deg,#0f3a4a,#0b2630);border-radius:16px;padding:22px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden}
+  .sq-card::after{content:"";position:absolute;right:-20px;top:-20px;width:90px;height:90px;border-radius:50%;background:rgba(8,145,178,.25)}
+  .sq-card .lbl{font-size:11px;opacity:.6;letter-spacing:.1em}
+  .sq-card .no{font-size:20px;letter-spacing:.14em;font-variant-numeric:tabular-nums;margin:6px 0 16px}
+  .sq-foot{display:flex;justify-content:space-between;font-size:13px;opacity:.85}
+  .sq-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);margin-top:10px}
+
+  .sms-stage{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;justify-content:center}
+  .phone{width:300px;flex-shrink:0;background:#0f1115;border-radius:38px;padding:12px;box-shadow:var(--shadow-lg);border:2px solid #23262e}
+  .phone .notch{width:120px;height:22px;background:#0f1115;border-radius:0 0 14px 14px;margin:0 auto 6px}
+  .phone .scr{background:#e9ebf0;border-radius:28px;min-height:430px;padding:16px 12px;display:flex;flex-direction:column}
+  .phone .scr .stbar{display:flex;justify-content:space-between;font-size:12px;color:#3a3f48;font-weight:700;padding:0 6px 8px}
+  .sender{text-align:center;font-size:13px;color:#7a8089;margin-bottom:12px}
+  .sender b{display:block;color:#2b2f36;font-size:15px}
+  .bubble{background:#fff;border-radius:18px 18px 18px 5px;padding:13px 15px;font-size:14.5px;line-height:1.6;color:#23262e;box-shadow:0 1px 3px rgba(0,0,0,.08);max-width:90%;margin-bottom:8px;opacity:0;transform:translateY(10px)}
+  .bubble.show{animation:bubbleIn .4s forwards}
+  @keyframes bubbleIn{to{opacity:1;transform:none}}
+  .bubble .lnk{color:var(--cyan-deep);font-weight:700;word-break:break-all}
+  .bubble .time{font-size:11px;color:#9aa0a8;margin-top:5px}
+  .sms-side{flex:1;min-width:280px;max-width:420px}
+
+  .timeline{position:relative;padding-left:30px;margin-top:18px}
+  .timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--grey-line)}
+  .tl-item{position:relative;padding-bottom:20px}
+  .tl-item::before{content:"";position:absolute;left:-26px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--grey-line)}
+  .tl-item.done::before{border-color:var(--cyan);background:var(--cyan)}
+  .tl-item.now::before{border-color:var(--warn);background:#fff;animation:pulse 1.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(181,86,46,.4)}70%{box-shadow:0 0 0 8px rgba(181,86,46,0)}100%{box-shadow:0 0 0 0 rgba(181,86,46,0)}}
+  .tl-item .tl-t{font-weight:700;font-size:15px}
+  .tl-item .tl-d{font-size:13px;color:var(--ink-soft)}
+
+  .note{font-size:13.5px;color:var(--ink-soft);background:#fff;border:1px solid var(--grey-line);border-left:4px solid var(--cyan);border-radius:10px;padding:13px 16px;margin-top:14px;line-height:1.6}
+
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(15,58,74,.5);z-index:200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+  .modal-bg.open{display:flex;animation:fade .25s}
+  .modal{background:#fff;border-radius:18px;max-width:440px;width:100%;box-shadow:var(--shadow-lg);overflow:hidden;animation:pop .3s}
+  .modal-head{padding:20px 24px;border-bottom:1px solid var(--grey-line);font-weight:800;font-size:18px;color:var(--navy)}
+  .modal-body{padding:22px 24px}
+  .modal-foot{padding:16px 24px;border-top:1px solid var(--grey-line);display:flex;gap:10px;justify-content:flex-end}
+
+  .seg{display:inline-flex;background:var(--grey);border-radius:10px;padding:3px}
+  .seg button{border:none;background:transparent;font-family:inherit;font-size:14px;font-weight:700;padding:8px 16px;border-radius:8px;cursor:pointer;color:var(--ink-soft)}
+  .seg button.on{background:#fff;color:var(--cyan-deep);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+  .footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 16px 50px;line-height:1.8}
+  .footer a{color:var(--cyan-deep);text-decoration:none;font-weight:700}
+
+  .hide{display:none!important}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:#fff;padding:14px 24px;border-radius:12px;font-size:15px;font-weight:700;box-shadow:var(--shadow-lg);z-index:300;opacity:0;transition:.35s}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  @media(max-width:560px){
+    body{font-size:17px}
+    h1{font-size:25px}
+    .demo-bar{flex-wrap:wrap}
+    .demo-bar .views{width:100%;order:3}
+    td,th{padding:11px 12px}
+    .opt-hide-sp{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="logo">
+    <span class="mark"><img src="assets/img/logo.png" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='<span>C</span>'"></span>
+    CarePay Register
+  </div>
+  <span class="tag opt-hide-sp">介護施設向け 契約・請求ハブ ｜ デモ</span>
+  <div class="views">
+    <button class="active" data-view="admin">① 施設 管理画面</button>
+    <button data-view="family">② 家族 登録フロー</button>
+    <button data-view="sms">③ 未収→再請求SMS</button>
+  </div>
+</div>
+
+<!-- ① 管理画面 -->
+<section class="screen active" id="view-admin">
+  <div class="wrap">
+    <div class="admin-top">
+      <div>
+        <h1>ダッシュボード</h1>
+        <p class="sub">さくら苑　令和ホーム ／ 事務 担当：本日 2026年5月28日</p>
+      </div>
+      <button class="btn btn-green" onclick="openEnroll()">＋ 入居者を登録</button>
+    </div>
+    <div class="stat-grid">
+      <div class="stat warn"><div class="num">3</div><div class="lbl">未完了の手続き</div></div>
+      <div class="stat warn"><div class="num">2</div><div class="lbl">今月の未収</div></div>
+      <div class="stat green"><div class="num">1</div><div class="lbl">本日の新規入居</div></div>
+      <div class="stat"><div class="num">5</div><div class="lbl">再請求 対応中</div></div>
+      <div class="stat green"><div class="num">¥1,284,000</div><div class="lbl">今月の請求済 売上</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <h2>入居者ステータス一覧</h2>
+        <div class="seg" id="filterSeg">
+          <button class="on" data-f="all">すべて</button>
+          <button data-f="unpaid">未収のみ</button>
+          <button data-f="wait">手続き中</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+      <table id="statusTable">
+        <thead><tr><th>入居者</th><th>支払者</th><th class="opt-hide-sp">支払方法</th><th>ステータス</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr data-cat="done"><td class="who">山田 太郎<small>301号室 ・ 入居 2026/04/01</small></td><td>長男 山田 健一</td><td class="opt-hide-sp">口座振替</td><td><span class="badge b-done">口座登録完了・初回請求済</span></td><td><div class="row-act"><button class="btn btn-ghost btn-sm" onclick="toast('明細を表示しました')">明細</button></div></td></tr>
+          <tr data-cat="done"><td class="who">佐藤 花子<small>208号室 ・ 入居 2026/03/15</small></td><td>本人</td><td class="opt-hide-sp">クレジット(Square)</td><td><span class="badge b-card">カード登録完了</span></td><td><div class="row-act"><button class="btn btn-ghost btn-sm" onclick="toast('明細を表示しました')">明細</button></div></td></tr>
+          <tr data-cat="unpaid"><td class="who">鈴木 一郎<small>115号室 ・ 入居 2026/02/01</small></td><td>長女 田中 美咲</td><td class="opt-hide-sp">口座振替</td><td><span class="badge b-unpaid">5月分 未収</span></td><td><div class="row-act"><button class="btn btn-warn btn-sm" onclick="goSMS()">再請求SMS</button></div></td></tr>
+          <tr data-cat="unpaid"><td class="who">高橋 みつ<small>402号室 ・ 入居 2025/11/20</small></td><td>長男 高橋 茂</td><td class="opt-hide-sp">口座振替</td><td><span class="badge b-unpaid">5月分 未収（再振替待ち）</span></td><td><div class="row-act"><button class="btn btn-warn btn-sm" onclick="goSMS()">再請求SMS</button></div></td></tr>
+          <tr data-cat="wait"><td class="who">渡辺 ゆき<small>307号室 ・ 入居 2026/05/28</small></td><td>長女 伊藤 香</td><td class="opt-hide-sp">―</td><td><span class="badge b-sent">SMS送信済（同意待ち）</span></td><td><div class="row-act"><button class="btn btn-ghost btn-sm" onclick="goFamily()">家族画面を確認</button></div></td></tr>
+          <tr data-cat="wait"><td class="who">小林 茂雄<small>120号室 ・ 入居 2026/05/25</small></td><td>長男 小林 大輔</td><td class="opt-hide-sp">口座振替</td><td><span class="badge b-wait">口座登録中</span></td><td><div class="row-act"><button class="btn btn-ghost btn-sm" onclick="toast('登録状況を確認中…')">状況確認</button></div></td></tr>
+          <tr data-cat="wait"><td class="who">中村 とし<small>233号室 ・ 入居 2026/05/22</small></td><td>姪 中村 久美</td><td class="opt-hide-sp">紙対応</td><td><span class="badge b-paper">紙対応（事務処理中）</span></td><td><div class="row-act"><button class="btn btn-ghost btn-sm" onclick="toast('紙書類のスキャンを保存しました')">書類</button></div></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <p class="note">※ これは画面の流れを確認するためのデモです。実際のSquare決済・SMS送信・口座振替（収納代行会社連携）は動作しません。本システムは決済会社ではなく、<b>契約・同意・家族導線・未収管理を一元化する「介護特化の契約・請求ハブ」</b>として動作します。</p>
+  </div>
+</section>
+
+<!-- ② 家族 登録フロー -->
+<section class="screen" id="view-family">
+  <div class="family-shell">
+    <div class="step-dots" id="stepDots"><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+    <div class="fcard">
+      <div class="fcard-head">
+        <div class="home">さくら苑　令和ホーム</div>
+        <h2 id="fHeadTitle">お支払いのご登録</h2>
+        <div class="resident" id="fHeadResident">入居者：渡辺 ゆき 様</div>
+      </div>
+      <div class="fcard-body" id="fBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 未収→再請求SMS -->
+<section class="screen" id="view-sms">
+  <div class="wrap">
+    <h1>未収 → 再請求SMS の流れ</h1>
+    <p class="sub" style="margin-bottom:24px">口座振替が失敗（残高不足など）した場合、ワンタップで家族へSMSを送り、Square請求書（カード払い）へ誘導します。</p>
+    <div class="sms-stage">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="scr">
+          <div class="stbar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="sender">メッセージ<b>さくら苑 令和ホーム</b></div>
+          <div id="smsBubbles"></div>
+        </div>
+      </div>
+      <div class="sms-side">
+        <div class="panel" style="margin-bottom:18px">
+          <div class="panel-head"><h2 style="font-size:19px">対象：鈴木 一郎 様（5月分 未収）</h2></div>
+          <div style="padding:20px 22px">
+            <div class="feerow"><span>5月 ご利用料</span><span class="amt" style="font-size:18px">¥138,000</span></div>
+            <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+              <button class="btn btn-warn" id="sendSmsBtn" onclick="playSMS()">再請求SMSを送信</button>
+              <button class="btn btn-ghost" onclick="resetSMS()">リセット</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2 style="font-size:19px">回収ステータス</h2></div>
+          <div style="padding:18px 22px 22px">
+            <div class="timeline" id="smsTimeline">
+              <div class="tl-item done"><div class="tl-t">口座振替 実行</div><div class="tl-d">5/27 ・ 残高不足で失敗</div></div>
+              <div class="tl-item now" id="tlSend"><div class="tl-t">再請求SMS 送信</div><div class="tl-d">家族（長女）へ通知</div></div>
+              <div class="tl-item" id="tlOpen"><div class="tl-t">家族がリンクを開封</div><div class="tl-d">―</div></div>
+              <div class="tl-item" id="tlPaid"><div class="tl-t">Squareでカード決済 完了</div><div class="tl-d">―</div></div>
+            </div>
+          </div>
+        </div>
+        <p class="note">未収が出た瞬間に、事務が電話・郵送で督促する負担をなくし、家族のスマホに直接リンクを届けます。これが事務負担を減らす中心機能です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-bg" id="enrollModal">
+  <div class="modal">
+    <div class="modal-head">入居者の新規登録</div>
+    <div class="modal-body">
+      <div class="field"><label>入居者氏名</label><input placeholder="例）渡辺 ゆき"></div>
+      <div style="display:flex;gap:12px">
+        <div class="field" style="flex:1"><label>部屋番号</label><input placeholder="307"></div>
+        <div class="field" style="flex:1"><label>月額利用料</label><input placeholder="¥138,000"></div>
+      </div>
+      <div class="field"><label>支払者（家族）氏名・続柄</label><input placeholder="例）長女 伊藤 香"></div>
+      <div class="field"><label>家族の携帯番号（SMS送信先）</label><input placeholder="090-0000-0000"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost btn-sm" onclick="closeEnroll()">キャンセル</button>
+      <button class="btn btn-green btn-sm" onclick="submitEnroll()">登録してSMS送信</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  CarePay Register（デモ） ｜ <a href="https://myaruze.tamjump.com/" target="_blank" rel="noopener">myaruze.tamjump.com</a><br>
+  ｍやるゼ！ 連携予定 ／ 初期費用 0 円 ／ 無料デモ受付中
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const views=document.querySelectorAll('.demo-bar .views button');
+function showView(v){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  views.forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+views.forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+function goFamily(){showView('family');renderStep(0);}
+function goSMS(){showView('sms');resetSMS();}
+
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200);}
+
+document.getElementById('filterSeg').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filterSeg button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');
+  const f=e.target.dataset.f;
+  document.querySelectorAll('#statusTable tbody tr').forEach(tr=>tr.classList.toggle('hide',!(f==='all'||tr.dataset.cat===f)));
+});
+
+function openEnroll(){document.getElementById('enrollModal').classList.add('open');}
+function closeEnroll(){document.getElementById('enrollModal').classList.remove('open');}
+function submitEnroll(){closeEnroll();toast('登録しました。家族へSMSを送信しました');}
+document.getElementById('enrollModal').addEventListener('click',e=>{if(e.target.id==='enrollModal')closeEnroll();});
+
+const fBody=document.getElementById('fBody');
+const fTitle=document.getElementById('fHeadTitle');
+const dots=document.querySelectorAll('#stepDots .d');
+let payChoice=null;
+function setDots(i){dots.forEach((d,n)=>d.classList.toggle('on',n<=i));}
+
+const steps=[
+  ()=>{fTitle.textContent='お支払いのご登録';return `
+    <p style="font-size:16px;color:var(--ink-soft);margin-bottom:4px">ご家族の方へ</p>
+    <p style="margin-bottom:6px">下記の内容をご確認のうえ、お支払い方法のご登録をお願いいたします。</p>
+    <div class="feebox">
+      <div class="feerow"><span>月額ご利用料</span><span class="amt">¥138,000</span></div>
+      <div class="feerow"><span>入居一時金（初回のみ）</span><span class="amt">¥50,000</span></div>
+      <div class="feerow big"><span>初回お支払い合計</span><span class="amt">¥188,000</span></div>
+    </div>
+    <p style="font-size:14.5px;color:var(--ink-soft)">お支払い開始月：2026年6月分より</p>
+    <button class="btn btn-primary btn-block btn-lg" style="margin-top:20px" onclick="renderStep(1)">登録をはじめる</button>`;},
+  ()=>{fTitle.textContent='ご契約内容の同意';return `
+    <p style="margin-bottom:16px">以下の項目をご確認のうえ、チェックをお願いします。</p>
+    <div class="check-item" onclick="toggleChk(this,'c1')"><input type="checkbox" id="c1"><label for="c1"><span class="ttl">契約内容を確認しました</span><br><small style="color:var(--ink-soft)">月額利用料・初回費用・開始月</small></label></div>
+    <div class="check-item" onclick="toggleChk(this,'c2')"><input type="checkbox" id="c2"><label for="c2"><span class="ttl">お支払いに同意します</span></label></div>
+    <div class="check-item" onclick="toggleChk(this,'c3')"><input type="checkbox" id="c3"><label for="c3"><span class="ttl">個人情報の取扱いに同意します</span></label></div>
+    <div class="field" style="margin-top:18px"><label>お名前（ご署名者）</label><input placeholder="伊藤 香"></div>
+    <div style="display:flex;gap:12px">
+      <div class="field" style="flex:1"><label>続柄</label><select><option>長女</option><option>長男</option><option>本人</option><option>後見人</option><option>その他</option></select></div>
+      <div class="field" style="flex:1.4"><label>電話番号</label><input placeholder="090-0000-0000"></div>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" id="agreeNext" style="margin-top:8px;opacity:.45;pointer-events:none" onclick="renderStep(2)">署名へ進む</button>`;},
+  ()=>{fTitle.textContent='ご署名';setTimeout(initSign,30);const ts=new Date().toLocaleString('ja-JP');return `
+    <p style="margin-bottom:14px">下の枠内に、指またはマウスでご署名ください。</p>
+    <div class="sign-area" id="signArea"><div class="sign-hint" id="signHint">ここに署名</div><canvas id="signCanvas"></canvas></div>
+    <div style="text-align:right;margin-top:8px"><button class="btn btn-ghost btn-sm" onclick="clearSign()">書き直す</button></div>
+    <div class="sign-meta"><span>🕒 タイムスタンプ：${ts}</span><span>🌐 IP：203.0.113.45</span><span>📱 端末：iPhone / Safari</span></div>
+    <button class="btn btn-primary btn-block btn-lg" id="signNext" style="margin-top:18px;opacity:.45;pointer-events:none" onclick="renderStep(3)">お支払い方法の選択へ</button>`;},
+  ()=>{fTitle.textContent='お支払い方法の選択';return `
+    <p style="margin-bottom:16px">ご希望のお支払い方法をお選びください。</p>
+    <div class="pay-opt" onclick="selPay(this,'口座振替')"><div class="ic">🏦</div><div class="meta"><div class="t">口座振替</div><div class="d">毎月の自動引き落とし</div></div><span class="rec">おすすめ</span></div>
+    <div class="pay-opt" onclick="selPay(this,'クレジットカード')"><div class="ic">💳</div><div class="meta"><div class="t">クレジットカード</div><div class="d">Squareでの登録・自動課金</div></div></div>
+    <div class="pay-opt" onclick="selPay(this,'初回のみカード')"><div class="ic">🧾</div><div class="meta"><div class="t">初回のみカード決済</div><div class="d">入居一時金などをその場で</div></div></div>
+    <div class="pay-opt" onclick="selPay(this,'銀行振込')"><div class="ic">🏧</div><div class="meta"><div class="t">銀行振込</div><div class="d">指定口座へお振込み</div></div></div>
+    <div class="pay-opt" onclick="selPay(this,'紙対応')"><div class="ic">📄</div><div class="meta"><div class="t">紙の書類で対応</div><div class="d">書類を郵送でやりとり</div></div></div>
+    <button class="btn btn-primary btn-block btn-lg" id="payNext" style="margin-top:8px;opacity:.45;pointer-events:none" onclick="afterPay()">この方法で進む</button>`;},
+  ()=>{fTitle.textContent='カード情報の登録';setTimeout(()=>{document.getElementById('cardNoInput')?.addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim();e.target.value=v;document.getElementById('cardFace').textContent=v.padEnd(19,'•').slice(0,19);});},30);return `
+    <div class="sq-card"><div class="lbl">CARD NUMBER</div><div class="no" id="cardFace">•••• •••• •••• ••••</div><div class="sq-foot"><span>お名前</span><span>有効期限</span></div></div>
+    <div class="field"><label>カード番号</label><input id="cardNoInput" inputmode="numeric" placeholder="4242 4242 4242 4242"></div>
+    <div style="display:flex;gap:12px"><div class="field" style="flex:1"><label>有効期限</label><input placeholder="MM / YY"></div><div class="field" style="flex:1"><label>セキュリティコード</label><input placeholder="123"></div></div>
+    <div class="sq-badge">🔒 決済は Square により安全に処理されます（デモ）</div>
+    <button class="btn btn-primary btn-block btn-lg" style="margin-top:18px" onclick="renderStep(4)">¥188,000 を登録して支払う</button>`;},
+  ()=>{fTitle.textContent='ご登録ありがとうございました';const label=payChoice||'お支払い方法';return `
+    <div class="done-wrap">
+      <div class="check-ring"><svg viewBox="0 0 60 60"><path d="M16 31 L26 41 L45 20"/></svg></div>
+      <h2 style="font-size:23px">登録が完了しました</h2>
+      <p style="color:var(--ink-soft);margin-top:8px">お支払い方法：<b style="color:var(--cyan-deep)">${label}</b></p>
+      <div class="feebox" style="text-align:left;margin-top:22px">
+        <div class="feerow"><span>入居者</span><span style="font-weight:700">渡辺 ゆき 様</span></div>
+        <div class="feerow"><span>初回お支払い</span><span class="amt" style="font-size:18px">¥188,000</span></div>
+        <div class="feerow"><span>受付番号</span><span style="font-weight:700">CP-20260528-307</span></div>
+      </div>
+      <p style="font-size:14px;color:var(--ink-soft);margin-top:18px">控えをSMS・メールでお送りしました。<br>施設の管理画面にも自動で反映されます。</p>
+      <button class="btn btn-ghost btn-block" style="margin-top:20px" onclick="goAdminFromDone()">施設の管理画面で反映を見る</button>
+      <button class="btn btn-primary btn-block" style="margin-top:10px" onclick="renderStep(0)">最初から見る</button>
+    </div>`;}
+];
+
+function _render(i){let html;if(i===4){html=steps[5]();setDots(4);}else{html=steps[i]();setDots(Math.min(i,4));}fBody.innerHTML=html;window.scrollTo({top:0,behavior:'smooth'});}
+function renderStep(i){if(i==='card'){fBody.innerHTML=steps[4]();fTitle.textContent='カード情報の登録';setDots(3);window.scrollTo({top:0,behavior:'smooth'});return;}_render(i);}
+function toggleChk(el,id){const cb=document.getElementById(id);cb.checked=!cb.checked;el.classList.toggle('checked',cb.checked);const all=['c1','c2','c3'].every(x=>document.getElementById(x).checked);const btn=document.getElementById('agreeNext');btn.style.opacity=all?'1':'.45';btn.style.pointerEvents=all?'auto':'none';}
+function selPay(el,name){document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');payChoice=name;const btn=document.getElementById('payNext');btn.style.opacity='1';btn.style.pointerEvents='auto';}
+function afterPay(){if(payChoice==='クレジットカード'||payChoice==='初回のみカード'){renderStep('card');}else{renderStep(4);}}
+function goAdminFromDone(){showView('admin');toast('渡辺 ゆき様：登録完了が反映されました');}
+
+let signing=false,signed=false,ctx,canvas;
+function initSign(){canvas=document.getElementById('signCanvas');if(!canvas)return;const r=canvas.getBoundingClientRect();canvas.width=r.width;canvas.height=170;ctx=canvas.getContext('2d');ctx.strokeStyle='#0891b2';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';signed=false;
+  const pos=e=>{const b=canvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-b.left,y:t.clientY-b.top};};
+  const start=e=>{signing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault();if(!signed){signed=true;document.getElementById('signHint').style.opacity=0;const b=document.getElementById('signNext');b.style.opacity='1';b.style.pointerEvents='auto';}};
+  const move=e=>{if(!signing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault();};
+  const end=()=>signing=false;
+  canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',move);window.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});canvas.addEventListener('touchend',end);}
+function clearSign(){if(!ctx)return;ctx.clearRect(0,0,canvas.width,canvas.height);signed=false;document.getElementById('signHint').style.opacity=1;const b=document.getElementById('signNext');b.style.opacity='.45';b.style.pointerEvents='none';}
+
+const smsMsgs=[{t:'さくら苑 令和ホーム ご利用料のお支払いが確認できませんでした。',d:'9:41'},{t:'お手数ですが、下記よりお支払いをお願いいたします。',d:'9:41'},{t:'__LINK__',d:'9:41'}];
+function resetSMS(){document.getElementById('smsBubbles').innerHTML='';document.getElementById('sendSmsBtn').disabled=false;document.getElementById('sendSmsBtn').textContent='再請求SMSを送信';['tlOpen','tlPaid'].forEach(id=>document.getElementById(id).className='tl-item');document.getElementById('tlSend').className='tl-item now';}
+function playSMS(){const box=document.getElementById('smsBubbles');box.innerHTML='';const btn=document.getElementById('sendSmsBtn');btn.disabled=true;btn.textContent='送信しました ✓';document.getElementById('tlSend').className='tl-item done';document.getElementById('tlSend').querySelector('.tl-d').textContent='5/28 9:41 送信完了';
+  smsMsgs.forEach((m,i)=>{setTimeout(()=>{const b=document.createElement('div');b.className='bubble';if(m.t==='__LINK__'){b.innerHTML=`<span class="lnk">https://carepay.jp/pay/8f3a2c</span><div style="margin-top:8px"><button class="btn btn-primary btn-sm" onclick="smsPay()">▶ 開いて支払う（Square）</button></div><div class="time">${m.d}</div>`;}else{b.innerHTML=`${m.t}<div class="time">${m.d}</div>`;}box.appendChild(b);requestAnimationFrame(()=>b.classList.add('show'));},500+i*650);});}
+function smsPay(){document.getElementById('tlOpen').className='tl-item done';document.getElementById('tlOpen').querySelector('.tl-d').textContent='9:43 リンクを開封';toast('Square請求書を開きました…');setTimeout(()=>{document.getElementById('tlPaid').className='tl-item done';document.getElementById('tlPaid').querySelector('.tl-d').textContent='9:44 ¥138,000 決済完了';toast('カード決済が完了しました（¥138,000）');},1400);}
+
+renderStep(0);
+</script>
+</body>
+</html>
