@@ -620,17 +620,17 @@
     </div>
     <div class="feature-grid">
       <div class="fcard">
-        <div class="ic"><img src="assets/img/illust_paperless.png" alt="" onerror="this.parentNode.innerHTML='<span class=&quot;emoji&quot;>📄</span>'></div>
+        <div class="ic"><img src="assets/img/illust_paperless.png" alt=""></div>
         <h3>通帳・銀行印が不要</h3>
         <p>従来の口座振替依頼書に必要だった通帳記載情報や銀行届出印が要りません。本人認証ベースの登録により、印鑑相違による差し戻しが起きません。</p>
       </div>
       <div class="fcard">
-        <div class="ic"><img src="assets/img/illust_remote.png" alt="" onerror="this.parentNode.innerHTML='<span class=&quot;emoji&quot;>📱</span>'></div>
+        <div class="ic"><img src="assets/img/illust_remote.png" alt=""></div>
         <h3>遠隔・オンラインで完結</h3>
         <p>利用者・入居者やご家族は、SMSで届くURLからスマホで登録。来所や郵送の往復が不要で、遠方のご家族でもその場で手続きが終わります。</p>
       </div>
       <div class="fcard">
-        <div class="ic"><img src="assets/img/illust_dashboard.png" alt="" onerror="this.parentNode.innerHTML='<span class=&quot;emoji&quot;>📊</span>'></div>
+        <div class="ic"><img src="assets/img/illust_dashboard.png" alt=""></div>
         <h3>請求・未収を一元管理</h3>
         <p>口座振替・カード・振込・コンビニをまたいで、契約・同意・未収・督促・ステータスを一画面に。数万人規模の請求でも事務の手間を増やしません。</p>
       </div>
@@ -1026,7 +1026,7 @@
             <div class="phone">
               <div class="notch"></div>
               <div class="scr">
-                <div class="stbar"><span>9:41</span><span>📶 🔋</span></div>
+                <div class="stbar"><span>9:41</span><span></span></div>
                 <div class="sender">メッセージ<b>さくら苑 令和ホーム</b></div>
                 <div id="smsBubbles"></div>
               </div>
@@ -1067,8 +1067,8 @@
               <p class="sub">未収・督促・回収のすべてを、CarePAY 一画面で。CSV エクスポートにも対応。</p>
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="dbtn dbtn-ghost dbtn-sm" onclick="arExportCSV()">📥 CSVエクスポート</button>
-              <button class="dbtn dbtn-red dbtn-sm" onclick="arBatchAction()">⚡ 一括督促SMS</button>
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="arExportCSV()">CSVエクスポート</button>
+              <button class="dbtn dbtn-red dbtn-sm" onclick="arBatchAction()">一括督促SMS</button>
             </div>
           </div>
 
@@ -1082,14 +1082,14 @@
 
           <!-- タブ切替 -->
           <div class="ar-tabs">
-            <button class="on" data-artab="list" onclick="arSwitch('list')">📋 状態一覧</button>
-            <button data-artab="aging" onclick="arSwitch('aging')">📊 エージング照会</button>
+            <button class="on" data-artab="list" onclick="arSwitch('list')">状態一覧</button>
+            <button data-artab="aging" onclick="arSwitch('aging')">エージング照会</button>
           </div>
 
           <!-- 状態一覧 -->
           <div class="ar-panel" id="ar-list">
             <div class="ar-filters">
-              <input type="search" placeholder="🔍 利用者名・施設で検索" id="arSearch" oninput="arFilter()">
+              <input type="search" placeholder="利用者名・施設で検索" id="arSearch" oninput="arFilter()">
               <select id="arStatus" onchange="arFilter()">
                 <option value="">全ステータス</option>
                 <option value="invoiced">請求済</option>
@@ -1183,10 +1183,10 @@
               <p class="sub">医療・介護の必須記載項目を網羅。完全ペーパーレスでアプリ内発行＆家族のスマホへ送信。</p>
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('pdf')">📄 PDFダウンロード</button>
-              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('mail')">✉️ メール送信</button>
-              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('sms')">📱 SMS送信</button>
-              <button class="dbtn dbtn-red dbtn-sm" onclick="billAction('issue')">🔒 電子発行</button>
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('pdf')">PDFダウンロード</button>
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('mail')">メール送信</button>
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('sms')">SMS送信</button>
+              <button class="dbtn dbtn-red dbtn-sm" onclick="billAction('issue')">電子発行</button>
             </div>
           </div>
 
@@ -1331,15 +1331,15 @@ const steps=[
   <p style="margin-bottom:12px">下の枠内に、指またはマウスでご署名ください。</p>
   <div class="sign-area" id="signArea"><div class="sign-hint" id="signHint">ここに署名</div><canvas id="signCanvas"></canvas></div>
   <div style="text-align:right;margin-top:8px"><button class="dbtn dbtn-ghost dbtn-sm" onclick="clearSign()">書き直す</button></div>
-  <div class="sign-meta"><span>🕒 ${ts}</span><span>🌐 IP 203.0.113.45</span><span>📱 iPhone / Safari</span></div>
+  <div class="sign-meta"><span>日時 ${ts}</span><span>IP 203.0.113.45</span><span>端末 iPhone / Safari</span></div>
   <button class="dbtn dbtn-red dbtn-block dbtn-lg" id="signNext" style="margin-top:16px;opacity:.45;pointer-events:none" onclick="renderStep(3)">お支払い方法の選択へ</button>`;},
  ()=>{fTitle.textContent='お支払い方法の選択';return `
   <p style="margin-bottom:14px">ご希望のお支払い方法をお選びください。</p>
-  <div class="pay-opt" onclick="selPay(this,'口座振替')"><div class="ic">🏦</div><div class="meta"><div class="t">口座振替</div><div class="d">通帳・銀行印なしで登録（おすすめ）</div></div><span class="rec">おすすめ</span></div>
-  <div class="pay-opt" onclick="selPay(this,'クレジットカード')"><div class="ic">💳</div><div class="meta"><div class="t">クレジットカード</div><div class="d">Squareでの登録・自動課金</div></div></div>
-  <div class="pay-opt" onclick="selPay(this,'初回のみカード')"><div class="ic">🧾</div><div class="meta"><div class="t">初回のみカード決済</div><div class="d">口振開始までの立替に</div></div></div>
-  <div class="pay-opt" onclick="selPay(this,'銀行振込')"><div class="ic">🏧</div><div class="meta"><div class="t">銀行振込</div><div class="d">指定口座へお振込み</div></div></div>
-  <div class="pay-opt" onclick="selPay(this,'紙対応')"><div class="ic">📄</div><div class="meta"><div class="t">紙の書類で対応</div><div class="d">書類を郵送でやりとり</div></div></div>
+  <div class="pay-opt" onclick="selPay(this,'口座振替')"><div class="meta"><div class="t">口座振替</div><div class="d">通帳・銀行印なしで登録（おすすめ）</div></div><span class="rec">おすすめ</span></div>
+  <div class="pay-opt" onclick="selPay(this,'クレジットカード')"><div class="meta"><div class="t">クレジットカード</div><div class="d">Squareでの登録・自動課金</div></div></div>
+  <div class="pay-opt" onclick="selPay(this,'初回のみカード')"><div class="meta"><div class="t">初回のみカード決済</div><div class="d">口振開始までの立替に</div></div></div>
+  <div class="pay-opt" onclick="selPay(this,'銀行振込')"><div class="meta"><div class="t">銀行振込</div><div class="d">指定口座へお振込み</div></div></div>
+  <div class="pay-opt" onclick="selPay(this,'紙対応')"><div class="meta"><div class="t">紙の書類で対応</div><div class="d">書類を郵送でやりとり</div></div></div>
   <button class="dbtn dbtn-red dbtn-block dbtn-lg" id="payNext" style="margin-top:6px;opacity:.45;pointer-events:none" onclick="afterPay()">この方法で進む</button>`;},
  ()=>{fTitle.textContent='口座情報の登録';setTimeout(()=>{document.querySelectorAll('#bankGrid button').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('#bankGrid button').forEach(x=>x.classList.remove('sel'));this.classList.add('sel');}));},30);return `
   <div class="note" style="margin-top:0;margin-bottom:16px">通帳・銀行印は不要です。金融機関を選び、口座情報を入力するだけで登録できます（デモ）。</div>
@@ -1351,7 +1351,7 @@ const steps=[
   <div class="note" style="margin-top:0;margin-bottom:14px">カード情報は <b>Square</b> のセキュアな入力欄で直接扱われ、CarePAY のサーバーにカード番号は送信・保存されません（PCI DSS 準拠）。</div>
   <div id="sq-card-container" class="sq-card-mount"></div>
   <div id="sq-card-errors" class="sq-card-err"></div>
-  <div class="sq-badge">🔒 Square Web Payments SDK によりトークン化されます</div>
+  <div class="sq-badge">Square Web Payments SDK によりトークン化されます</div>
   <button class="dbtn dbtn-red dbtn-block dbtn-lg" id="sqPayBtn" style="margin-top:16px" onclick="squareTokenize()">¥188,000 を登録して支払う</button>`;},
  ()=>{fTitle.textContent='ご登録ありがとうございました';const label=payChoice||'お支払い方法';return `
   <div class="done-wrap"><div class="check-ring"><svg viewBox="0 0 60 60"><path d="M16 31 L26 41 L45 20"/></svg></div>
