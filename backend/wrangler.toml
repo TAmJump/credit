@@ -1,0 +1,27 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "carepay-api"
+main = "src/index.js"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1（サーバーレス SQLite）
+# 初回：  npx wrangler d1 create carepay
+#   → 出力された database_id を下に貼り付ける
+# マイグレーション： npx wrangler d1 migrations apply carepay --remote
+[[d1_databases]]
+binding = "DB"
+database_name = "carepay"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+# 許可するフロントエンドのオリジン（GitHub Pages）
+ALLOWED_ORIGIN = "https://tamjump.github.io"
+
+# 機密はコードに書かない。以下は `wrangler secret put <NAME>` で登録：
+#   SQUARE_ACCESS_TOKEN     … Square Payments API トークン（CreatePayment / CreateCard）
+#   SQUARE_WEBHOOK_KEY      … Square Webhook 署名検証キー
+#   NTA_WEBAPI_ID           … 国税庁 適格請求書発行事業者公表 Web-API のID（登録番号照合）
+
+[observability]
+enabled = true
