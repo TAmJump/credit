@@ -52,9 +52,9 @@
   .hero-visual{position:relative}
   .hero-photo{width:100%;aspect-ratio:3/4;border-radius:22px;object-fit:cover;object-position:center top;box-shadow:var(--shadow-lg);background:var(--grey2);display:block}
   .hero-photo.placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--ink-mute);border:2px dashed var(--line);text-align:center;padding:30px}
-  .hero-badge{position:absolute;left:-14px;bottom:24px;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:16px 20px;display:flex;align-items:center;gap:14px}
-  .hero-badge .big{font-size:30px;font-weight:900;color:var(--red);line-height:1}
-  .hero-badge .lbl{font-size:12.5px;color:var(--ink-soft);font-weight:700;line-height:1.5}
+  .hero-badge{position:absolute;left:-10px;bottom:18px;background:#fff;border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 18px;display:flex;align-items:center;gap:12px;border:1px solid var(--line)}
+  .hero-badge .big{font-size:26px;font-weight:900;color:var(--red);line-height:1;letter-spacing:.01em}
+  .hero-badge .lbl{font-size:11.5px;color:var(--ink-soft);font-weight:700;line-height:1.5}
   @media(max-width:820px){.hero-in{grid-template-columns:1fr;padding:46px 22px 54px}.hero h1{font-size:32px}.hero-badge{left:8px}}
 
   .trust{background:#fff;border-bottom:1px solid var(--line)}
@@ -175,8 +175,8 @@
   @media(max-width:820px){.cast-grid3{grid-template-columns:1fr;max-width:480px}}
   .cast-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.2s;text-align:left}
   .cast-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-  .cast-card .pic{aspect-ratio:4/5;background:var(--grey);overflow:hidden;display:flex;align-items:flex-start;justify-content:center}
-  .cast-card .pic img{width:100%;height:auto;min-height:100%;object-fit:cover;object-position:center 18%;display:block}
+  .cast-card .pic{aspect-ratio:4/4.4;background:var(--grey);overflow:hidden}
+  .cast-card .pic img{width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block}
   .cast-card .info{padding:18px 20px 22px}
   .cast-card .nm{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink)}
   .cast-card .ttl{font-size:13px;color:var(--red-deep);font-weight:700;margin-top:4px;line-height:1.5}
@@ -233,8 +233,8 @@
     <div class="hero-visual">
       <img src="assets/img/cast_team.png" class="hero-photo" alt="ご家族とスタッフがタブレットで手続きをする様子" onerror="this.classList.add('placeholder');this.removeAttribute('src');this.innerHTML='<div style=&quot;font-size:34px&quot;>&#127973;</div><div style=&quot;margin-top:10px;font-weight:700&quot;>hero.jpg をここに表示</div><div style=&quot;font-size:12px;margin-top:6px&quot;>assets/img/hero.jpg に画像を置くと反映されます</div>'">
       <div class="hero-badge">
-        <div class="big">0円</div>
-        <div class="lbl">通帳・印鑑の<br>準備コスト</div>
+        <div class="big">最短<span style="font-size:18px">即日</span></div>
+        <div class="lbl">登録から<br>口座振替の実行まで</div>
       </div>
     </div>
   </div>
