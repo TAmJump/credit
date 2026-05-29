@@ -133,6 +133,18 @@
   .price-list .v small{font-weight:500;font-size:12px;color:var(--ink-soft)}
   .price-list .v.hl{color:var(--red)}
   .price-note{margin-top:18px;font-size:12px;color:var(--ink-soft);line-height:1.8}
+  .price-hero{background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:20px;padding:34px 26px;text-align:center;color:#fff;box-shadow:var(--shadow-lg);margin-bottom:18px}
+  .price-hero .ph-main{display:flex;align-items:baseline;justify-content:center;gap:4px;flex-wrap:wrap}
+  .price-hero .ph-cur{font-size:30px;font-weight:800}
+  .price-hero .ph-num{font-size:64px;font-weight:900;line-height:1}
+  .price-hero .ph-unit{font-size:16px;font-weight:700;opacity:.95;margin-left:6px}
+  .price-hero .ph-sub{margin-top:14px;font-size:14px;font-weight:700;opacity:.95;background:rgba(255,255,255,.16);display:inline-block;padding:7px 16px;border-radius:999px}
+  .pillars{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:26px}
+  @media(min-width:761px){.pillars{grid-template-columns:repeat(3,1fr);gap:18px}}
+  .pillar{background:#fff;border:1px solid var(--grey-line);border-radius:16px;padding:24px 22px;box-shadow:var(--shadow)}
+  .pillar .p-ic{width:52px;height:52px;border-radius:14px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px}
+  .pillar h4{font-size:17px;font-weight:800;margin-bottom:8px}
+  .pillar p{font-size:14px;color:var(--ink-soft);line-height:1.8}
   .sp-br{display:none}
   @media(max-width:480px){
     .sp-br{display:inline}                 /* スマホでは項目名・補足を意図した位置で改行 */
@@ -632,39 +644,67 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-tag">Pricing</div>
-      <h2>一般的な口座振替と、<br class="d-only">CarePay の費用を比べると。</h2>
-      <p>口座振替の「裏側」は既存の収納代行を使うため、相場どおりの低い振替手数料はそのまま。立ち上げの初期費用・月額を抑え、回収開始までの立替や請求書発行までを1つにまとめます。</p>
+      <h2>料金は、利用者1人あたり<br class="d-only">月額だけ。</h2>
+      <p>初期費用も基本月額もかかりません。患者・利用者の支払いは施設・病院へ直接入金され、CarePay はお金に一切触れません。私たちがいただくのは、契約・口座振替をオンライン化するソフトの利用料だけです。</p>
     </div>
 
+    <!-- 価格ヒーロー -->
+    <div class="price-hero">
+      <div class="ph-main">
+        <span class="ph-cur">¥</span><span class="ph-num">30</span>
+        <span class="ph-unit">/ 利用者1人・月</span>
+      </div>
+      <div class="ph-sub">初期費用 ¥0 ・ 基本月額 ¥0 ・ お金は施設に直接</div>
+    </div>
+
+    <!-- 3本柱 -->
+    <div class="pillars">
+      <div class="pillar">
+        <div class="p-ic">🗂️</div>
+        <h4>現場の手間を削減</h4>
+        <p>契約・同意・口座振替の登録を、紙と来店なしでオンライン完結。現場が一番欲しがる契約まわりの作業をなくします。</p>
+      </div>
+      <div class="pillar">
+        <div class="p-ic">🛡️</div>
+        <h4>お金に触れない安心設計</h4>
+        <p>患者・利用者の入金は施設・病院の口座へ直接。CarePay は資金を預からないので、収納の主体は施設のまま変わりません。</p>
+      </div>
+      <div class="pillar">
+        <div class="p-ic">💴</div>
+        <h4>分かりやすい課金</h4>
+        <p>料金は「1人 月¥30」だけ。段階も上限もなく、その月の利用者数ぶんだけ。請求が読みやすく、稟議も通しやすい。</p>
+      </div>
+    </div>
+
+    <!-- 相場との比較 -->
     <div class="price-grid">
       <div class="price-col">
         <div class="price-tag">一般的な口座振替代行</div>
         <ul class="price-list">
           <li><span class="k">初期費用</span><span class="v">約3万円〜</span></li>
-          <li><span class="k">月額</span><span class="v">約3,000円前後</span></li>
-          <li><span class="k">口座振替<br class="sp-br">1件あたり</span><span class="v">約100円前後<br class="sp-br"><small>（最安85円〜）</small></span></li>
-          <li><span class="k">回収前の<br class="sp-br">立替</span><span class="v">基本なし</span></li>
-          <li><span class="k">請求書・<br class="sp-br">領収書発行</span><span class="v">別ツール</span></li>
-          <li><span class="k">未収・督促<br class="sp-br">管理</span><span class="v">別管理</span></li>
+          <li><span class="k">基本月額</span><span class="v">約3,000円前後</span></li>
+          <li><span class="k">課金の<br class="sp-br">考え方</span><span class="v">月額＋件数<br class="sp-br"><small>（1件 約100円〜）</small></span></li>
+          <li><span class="k">資金の<br class="sp-br">受け取り</span><span class="v">代行が収納</span></li>
+          <li><span class="k">契約・登録</span><span class="v">紙・来店<br class="sp-br">が残りがち</span></li>
         </ul>
       </div>
 
       <div class="price-col feat">
         <div class="price-tag">CarePay</div>
         <ul class="price-list">
-          <li><span class="k">初期費用</span><span class="v">抑えた設計<br class="sp-br"><small>※業態で個別ご案内</small></span></li>
-          <li><span class="k">月額</span><span class="v">抑えた設計</span></li>
-          <li><span class="k">口座振替<br class="sp-br">1件あたり</span><span class="v">相場水準<br class="sp-br"><small>（収納代行に準拠）</small></span></li>
-          <li><span class="k">回収前の<br class="sp-br">立替</span><span class="v hl">カードで即日<br class="sp-br"><small>（3.6%／非対面）</small></span></li>
-          <li><span class="k">請求書・<br class="sp-br">領収書発行</span><span class="v hl">標準搭載</span></li>
-          <li><span class="k">未収・督促<br class="sp-br">管理</span><span class="v hl">一画面で一元</span></li>
+          <li><span class="k">初期費用</span><span class="v hl">¥0</span></li>
+          <li><span class="k">基本月額</span><span class="v hl">¥0</span></li>
+          <li><span class="k">課金の<br class="sp-br">考え方</span><span class="v hl">1人 月¥30<br class="sp-br"><small>のみ</small></span></li>
+          <li><span class="k">資金の<br class="sp-br">受け取り</span><span class="v hl">施設へ直接<br class="sp-br"><small>（触れない）</small></span></li>
+          <li><span class="k">契約・登録</span><span class="v hl">オンライン<br class="sp-br">完結</span></li>
         </ul>
       </div>
     </div>
 
     <p class="price-note">
-      ※ 金額は一般的な相場の目安で、収納代行／決済事業者の料率・件数により変わります。実際の費用は導入時にご案内します。<br>
-      ※ 社会保険診療・介護保険サービスは消費税が非課税です。カード立替（非対面 3.6%）は自費取引などが対象です。
+      ※ 「一般的な口座振替代行」は公開されている相場の目安です。実際の費用は事業者・件数により変わります。<br>
+      ※ 口座振替の1件あたり手数料は収納代行会社に支払うもので、CarePay は上乗せしません。回収開始までの立替にカード（非対面）を使う場合、その決済手数料は別途かかります。<br>
+      ※ 社会保険診療・介護保険サービスは消費税が非課税です。
     </p>
   </div>
 </section>
