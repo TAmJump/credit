@@ -7,6 +7,13 @@
 <meta name="description" content="医療・介護・福祉事業者向けの口座振替サービス。通帳情報・銀行印・来店はすべて不要。スマホひとつ、遠隔で口座振替の登録から実行までを完結します。決済はSquare。">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/img/favicon.png">
+<!-- PWA -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#cf4747">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CarePAY">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <style>
   :root{
     --red:#cf4747; --red-deep:#b23b3b; --red-soft:#fbecec; --red-line:#f1cfcf;
@@ -482,5 +489,10 @@
   <div class="copy">© CarePay / TAmJ.Corp　｜　<a href="https://myaruze.tamjump.com/" style="color:var(--ink-soft)">ｍやるゼ！</a> 連携予定</div>
 </footer>
 
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});
+}
+</script>
 </body>
 </html>
