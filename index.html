@@ -193,6 +193,10 @@
   /* 旧 .feat .circ は撤去 */
   .feat .circ{display:none!important}
 
+
+  .feat-grid-more .feat[style*="grid-column: span 3"]{max-width:760px;margin:0 auto;text-align:center;background:var(--red-soft);border-radius:18px;padding:30px 28px}
+  @media(max-width:820px){.feat-grid-more .feat[style*="grid-column: span 3"]{grid-column:1!important}}
+
 </style>
 </head>
 <body>
@@ -304,6 +308,14 @@
         <div class="illust"><img src="assets/img/illust_dashboard.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>📊</div>'"></div>
         <h3>請求状況を一画面で</h3>
         <p>誰が、いつ、いくら、どの方法で、どこまで進んでいるか。事業者の管理画面で、毎月の回収状況を一覧で把握できます。</p>
+      </div>
+    </div>
+
+    <div class="feat-grid feat-grid-more">
+      <div class="feat" style="grid-column: span 3">
+        <div class="illust" style="width:120px;height:120px"><img src="assets/img/illust_dashboard.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>💼</div>'"></div>
+        <h3>債権管理まで内包</h3>
+        <p>未収・督促段階・滞留日数（エージング）・回収予定を、CarePAY 一つで管理。CSV エクスポートや一括督促SMSにも対応し、債権管理システムを別途導入する必要がありません。<br><a href="demo.html#ar" onclick="event.preventDefault();location.href='demo.html'" style="color:var(--red);font-weight:800">▶ 債権管理のデモを見る</a></p>
       </div>
     </div>
   </div>
