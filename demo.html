@@ -396,6 +396,57 @@
   .bar-fill.r{background:var(--red)}
   .bar-r{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
 
+
+  /* ===== 請求書・領収書 ===== */
+  .bill-layout{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:flex-start}
+  @media(max-width:920px){.bill-layout{grid-template-columns:1fr}}
+  .bill-side{display:flex;flex-direction:column;gap:12px}
+  .bill-card{background:#fff;border:1px solid var(--grey-line);border-radius:12px;padding:14px 16px}
+  .bill-card .bill-h{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--red);margin-bottom:10px}
+  .bill-card select{width:100%;font-family:inherit;font-size:14px;padding:9px 12px;border:1.5px solid var(--grey-line);border-radius:9px;background:#fff;color:var(--ink)}
+  .bill-card select:focus{outline:none;border-color:var(--red)}
+  .bill-note{font-size:11.5px;color:var(--ink-soft);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px dashed var(--grey-line)}
+  .bill-radio{display:flex;flex-direction:column;gap:6px}
+  .bill-radio label{display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 11px;border:1.5px solid var(--grey-line);border-radius:8px;cursor:pointer;transition:.12s}
+  .bill-radio label:hover{border-color:var(--red)}
+  .bill-radio input{accent-color:var(--red)}
+  .bill-radio label.sel{border-color:var(--red);background:var(--red-soft);color:var(--red-deep);font-weight:700}
+  .bill-meta{list-style:none;font-size:11.5px;color:var(--ink-soft);line-height:1.85}
+  .bill-meta li{padding:2px 0}
+  .bill-meta b{color:var(--ink);font-weight:700;font-family:"SF Mono",ui-monospace,monospace;font-size:11px}
+
+  .bill-paper-wrap{background:var(--grey);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center}
+  .bill-paper{background:#fff;width:100%;max-width:680px;aspect-ratio:210/297;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:38px 42px;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:#1a1a1a;font-size:12px;line-height:1.65;overflow:hidden;position:relative}
+  .bill-paper h1{font-family:inherit;font-size:24px;font-weight:700;text-align:center;letter-spacing:.5em;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #1a1a1a}
+  .bill-paper .doc-no{position:absolute;top:34px;right:42px;font-size:10px;color:#666;font-family:"SF Mono",ui-monospace,monospace}
+  .bill-paper .to{font-size:14px;margin-bottom:10px}
+  .bill-paper .to span{display:inline-block;border-bottom:1.5px solid #1a1a1a;min-width:230px;padding:0 8px 3px;font-weight:700;font-size:16px}
+  .bill-paper .to small{font-size:11px;color:#444;margin-left:6px}
+  .bill-paper .greet{font-size:11.5px;color:#444;margin-bottom:14px}
+  .bill-paper .amount-box{text-align:center;margin:14px 0 18px}
+  .bill-paper .amount-box .lbl{font-size:11px;letter-spacing:.2em;color:#444;margin-bottom:4px}
+  .bill-paper .amount-box .amt{font-size:30px;font-weight:700;letter-spacing:.04em;padding:8px 30px;border-top:1.5px solid #1a1a1a;border-bottom:double 4px #1a1a1a;display:inline-block;font-family:"Hiragino Sans","Yu Gothic UI",sans-serif}
+  .bill-paper table{width:100%;border-collapse:collapse;font-size:11px;margin:10px 0;font-family:"Hiragino Sans","Yu Gothic UI",sans-serif}
+  .bill-paper table th{background:#f0f0f0;border:1px solid #999;padding:6px 8px;font-weight:700;text-align:center;font-size:10px}
+  .bill-paper table td{border:1px solid #999;padding:6px 8px;font-size:11px}
+  .bill-paper table td.r{text-align:right;font-variant-numeric:tabular-nums}
+  .bill-paper table td.total{background:#f7f7f7;font-weight:700}
+  .bill-paper .issuer{margin-top:18px;text-align:right;font-size:11px;line-height:1.7}
+  .bill-paper .issuer .nm{font-size:14px;font-weight:700;margin-bottom:3px}
+  .bill-paper .seal{display:inline-block;width:46px;height:46px;border:2px solid #b00;border-radius:50%;color:#b00;text-align:center;line-height:42px;font-size:11px;font-weight:700;margin-left:14px;vertical-align:middle;transform:rotate(-8deg)}
+  .bill-paper .footer-note{position:absolute;bottom:34px;left:42px;right:42px;font-size:9.5px;color:#666;line-height:1.6;border-top:1px dashed #aaa;padding-top:8px;font-family:"Hiragino Sans","Yu Gothic UI",sans-serif}
+  .bill-paper .qr{position:absolute;bottom:32px;right:42px;width:54px;height:54px;background:#000;background-image:linear-gradient(45deg,#fff 25%,transparent 25%),linear-gradient(-45deg,#fff 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#fff 75%),linear-gradient(-45deg,transparent 75%,#fff 75%);background-size:8px 8px;background-position:0 0,0 4px,4px -4px,-4px 0px;border:3px solid #fff;box-shadow:0 0 0 1px #000}
+  .bill-paper .stamp-eseal{display:inline-block;width:60px;height:60px;border:2px solid #b00;border-radius:50%;color:#b00;text-align:center;font-size:9px;font-weight:700;line-height:1.3;padding-top:10px;letter-spacing:.05em;background:#fff;transform:rotate(-6deg)}
+  .bill-paper .section-h{font-family:"Hiragino Sans","Yu Gothic UI",sans-serif;font-size:11px;font-weight:700;color:#444;background:#f0f0f0;padding:5px 10px;margin:14px 0 6px;letter-spacing:.06em;border-left:3px solid #b00}
+  .bill-foot-note{font-size:11px;color:var(--ink-soft);margin-top:14px;line-height:1.7;max-width:680px}
+
+  @media(max-width:680px){
+    .bill-paper{padding:24px 22px;font-size:11px}
+    .bill-paper h1{font-size:19px;letter-spacing:.3em}
+    .bill-paper .amount-box .amt{font-size:22px;padding:6px 18px}
+  }
+
+
 </style>
 </head>
 <body>
@@ -656,6 +707,7 @@
         <button data-view="family" onclick="switchView('family')">② 家族 登録フロー</button>
         <button data-view="sms" onclick="switchView('sms')">③ 未収→再請求SMS</button>
         <button data-view="ar" onclick="switchView('ar')">④ 債権管理</button>
+        <button data-view="bill" onclick="switchView('bill')">⑤ 請求書・領収書発行</button>
       </div>
       <button class="demo-close" onclick="closeDemo()">✕</button>
     </div>
@@ -875,6 +927,76 @@
 
       <!-- /④ 債権管理 -->
 
+      <!-- ⑤ 請求書・領収書発行 -->
+      <section class="screen" id="view-bill">
+        <div class="dwrap">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px">
+            <div>
+              <h1 class="dh">請求書・領収書 発行</h1>
+              <p class="sub">医療・介護の必須記載項目を網羅。完全ペーパーレスでアプリ内発行＆家族のスマホへ送信。</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('pdf')">📄 PDFダウンロード</button>
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('mail')">✉️ メール送信</button>
+              <button class="dbtn dbtn-ghost dbtn-sm" onclick="billAction('sms')">📱 SMS送信</button>
+              <button class="dbtn dbtn-red dbtn-sm" onclick="billAction('issue')">🔒 電子発行</button>
+            </div>
+          </div>
+
+          <div class="bill-layout">
+            <!-- 左：設定パネル -->
+            <aside class="bill-side">
+              <div class="bill-card">
+                <h3 class="bill-h">① 業態テンプレート</h3>
+                <select id="billType" onchange="billRender()">
+                  <option value="medical_ins">医療（保険診療）</option>
+                  <option value="medical_pay">医療（自費・自由診療）</option>
+                  <option value="care_home">介護保険施設（老健・介護医療院・特養）</option>
+                  <option value="care_visit">介護保険サービス（訪問・通所）</option>
+                  <option value="care_home_residence">居宅サービス（医療費控除対応）</option>
+                  <option value="welfare">福祉サービス（障害福祉等）</option>
+                </select>
+                <p class="bill-note" id="billNote"></p>
+              </div>
+
+              <div class="bill-card">
+                <h3 class="bill-h">② 発行物</h3>
+                <div class="bill-radio" id="billDocs"></div>
+              </div>
+
+              <div class="bill-card">
+                <h3 class="bill-h">③ 対象</h3>
+                <div class="field"><label>利用者氏名</label><input id="bUser" value="鈴木 一郎" oninput="billRender()"></div>
+                <div class="field"><label>対象月</label><input id="bMonth" value="2026年5月分" oninput="billRender()"></div>
+                <div class="field"><label>金額（合計）</label><input id="bAmt" value="138000" oninput="billRender()"></div>
+              </div>
+
+              <div class="bill-card">
+                <h3 class="bill-h">④ 電子発行</h3>
+                <ul class="bill-meta">
+                  <li>発行番号：<b id="bIssueNo">CP-2026-0528-00138</b></li>
+                  <li>タイムスタンプ：<b id="bTs"></b></li>
+                  <li>署名ハッシュ：<b id="bHash">SHA-256: a3f7…b9c2</b></li>
+                  <li>QR検証 ✓ 改ざん防止</li>
+                </ul>
+              </div>
+            </aside>
+
+            <!-- 右：A4プレビュー -->
+            <main class="bill-paper-wrap">
+              <div class="bill-paper" id="billPaper"></div>
+              <p class="bill-foot-note">
+                ※ 本プレビューは厚生労働省の通知・告示に基づく必須記載項目を反映しています。<br>
+                医療：保険医療機関等は<b>個別の費用ごとに区分して記載した領収証の無償交付が義務</b>（平成18年〜）。<br>
+                介護：施設種別の明記＋医療費控除対象額の区分明示／居宅サービスは「居宅サービス計画を作成した介護支援事業者名」「医療費控除の対象となる金額」の明示が必要。
+              </p>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <!-- /⑤ -->
+
     </div>
   </div>
 </div>
@@ -913,6 +1035,7 @@ function switchView(v){
   if(v==='family')renderStep(0);
   if(v==='sms')resetSMS();
   if(v==='ar')arInit();
+  if(v==='bill')billInit();
 }
 document.getElementById('demoOverlay').addEventListener('click',e=>{if(e.target.id==='demoOverlay')closeDemo();});
 
@@ -1108,6 +1231,190 @@ function arExportCSV(){
   URL.revokeObjectURL(url);
   toast('CSV を出力しました');
 }
+
+/* ===== 請求書・領収書 発行 ===== */
+const billTemplates = {
+  medical_ins: {
+    label:'医療（保険診療）',
+    note:'保険医療機関は、平成18年4月1日より患者から一部負担金等の支払を受けるときは「個別の費用ごとに区分して記載した領収証」を無償交付することが義務付けられています（厚生労働省）。',
+    docs:[{v:'invoice',l:'請求書'},{v:'receipt',l:'領収証（必須区分付）'},{v:'detail',l:'医療費明細書（H20〜義務）'}],
+    issuer:{name:'医療法人○○ ○○クリニック',addr:'東京都〇〇区〇〇 1-2-3',extra:'保険医療機関 コード 12-3456789'}
+  },
+  medical_pay: {
+    label:'医療（自費・自由診療）',
+    note:'自費診療でも領収書交付は事業者として義務。インボイス制度対応の場合は適格請求書発行事業者の登録番号を記載します。',
+    docs:[{v:'invoice',l:'請求書（インボイス対応）'},{v:'receipt',l:'領収証'}],
+    issuer:{name:'医療法人○○ ○○クリニック',addr:'東京都〇〇区〇〇 1-2-3',extra:'適格請求書発行事業者 T1234567890123'}
+  },
+  care_home: {
+    label:'介護保険施設（老健・介護医療院・特養）',
+    note:'厚労省通知に基づき、施設名に加えて「介護老人保健施設」「介護医療院」等の種別を明記。利用料は「介護サービス費」「食費」「居住費」「日常生活費」など区分ごとに記載し、医療費控除対象額が明らかになるようにすること。',
+    docs:[{v:'invoice',l:'請求書'},{v:'receipt',l:'領収証（医療費控除対応・区分付）'},{v:'mc_proof',l:'医療費控除対象額の明細'}],
+    issuer:{name:'介護老人保健施設 さくら苑',addr:'東京都〇〇区〇〇 4-5-6',extra:'介護保険事業所番号 13-1234567'}
+  },
+  care_visit: {
+    label:'介護保険サービス（訪問・通所）',
+    note:'介護給付費請求書（様式第一）に基づくサービスごとの単位数・点数を明示。利用者負担額・保険請求額・公費請求額を区分。',
+    docs:[{v:'invoice',l:'利用料 請求書'},{v:'receipt',l:'領収証'},{v:'service_detail',l:'サービス提供明細（単位数）'}],
+    issuer:{name:'訪問介護ステーション さくら',addr:'東京都〇〇区〇〇 7-8-9',extra:'介護保険事業所番号 13-7654321'}
+  },
+  care_home_residence: {
+    label:'居宅サービス（医療費控除対応）',
+    note:'国税庁通達に基づき、介護保険法の領収証に「居宅サービス計画を作成した介護支援事業者名」と「医療費控除の対象となる金額」を明示することで、医療費控除の確定申告に利用可能。',
+    docs:[{v:'invoice',l:'請求書'},{v:'receipt',l:'領収証（居宅・医療費控除対応）'}],
+    issuer:{name:'居宅介護支援事業所 〇〇',addr:'東京都〇〇区〇〇 1-1-1',extra:'介護支援事業者として明記'}
+  },
+  welfare: {
+    label:'福祉サービス（障害福祉等）',
+    note:'障害福祉サービス等の利用料については、自立支援給付分・利用者負担分・実費分を区分して記載。',
+    docs:[{v:'invoice',l:'請求書'},{v:'receipt',l:'領収証'}],
+    issuer:{name:'障害福祉サービス事業所 〇〇',addr:'東京都〇〇区〇〇 2-2-2',extra:'指定事業所番号 13-9999999'}
+  }
+};
+let billDocSel='receipt';
+function billInit(){
+  document.getElementById('bTs').textContent = new Date().toLocaleString('ja-JP');
+  billRender();
+}
+function billRender(){
+  const t = billTemplates[document.getElementById('billType').value];
+  document.getElementById('billNote').textContent = t.note;
+  // ドキュメント切替
+  const dwrap = document.getElementById('billDocs');
+  if(!t.docs.find(d=>d.v===billDocSel)) billDocSel = t.docs[0].v;
+  dwrap.innerHTML = t.docs.map(d=>`
+    <label class="${d.v===billDocSel?'sel':''}" onclick="billDocPick('${d.v}')">
+      <input type="radio" name="bdoc" ${d.v===billDocSel?'checked':''}> ${d.l}
+    </label>`).join('');
+  // プレビュー
+  const user = document.getElementById('bUser').value;
+  const month = document.getElementById('bMonth').value;
+  const amt = parseInt(document.getElementById('bAmt').value||0);
+  document.getElementById('billPaper').innerHTML = billHTML(t, user, month, amt, billDocSel);
+}
+function billDocPick(v){ billDocSel=v; billRender(); }
+
+function fmt(n){ return '¥'+ (n||0).toLocaleString(); }
+
+function billHTML(t, user, month, amt, doc){
+  const docTitle = {invoice:'請  求  書',receipt:'領  収  証',detail:'医療費明細書',mc_proof:'医療費控除対象額の明細',service_detail:'サービス提供明細書'}[doc];
+  const docNo = 'No. CP-2026-0528-00138';
+  const date = new Date().toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'});
+  const issuer = `
+    <div class="issuer">
+      <div class="nm">${t.issuer.name}<span class="stamp-eseal">電子<br>発行印</span></div>
+      <div>${t.issuer.addr}</div>
+      <div>${t.issuer.extra}</div>
+      <div>発行日：${date}</div>
+    </div>`;
+  const footer = `<div class="footer-note">本書類はCarePAYにより電子的に発行され、タイムスタンプおよびハッシュ署名により改ざんが防止されています。<br>右下QRコードからオンライン検証が可能です。 / 発行ID: CP-2026-0528-00138</div><div class="qr"></div>`;
+
+  // テンプレートごとの本体
+  let body = '';
+  if(t.label.startsWith('医療（保険')){
+    body = `
+      <div class="section-h">保険診療 費用区分（厚労省規定）</div>
+      <table>
+        <thead><tr><th>区分</th><th>点数</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>初・再診料</td><td class="r">73点</td><td class="r">¥730</td></tr>
+          <tr><td>医学管理等</td><td class="r">225点</td><td class="r">¥2,250</td></tr>
+          <tr><td>在宅医療</td><td class="r">0点</td><td class="r">¥0</td></tr>
+          <tr><td>検査</td><td class="r">340点</td><td class="r">¥3,400</td></tr>
+          <tr><td>画像診断</td><td class="r">0点</td><td class="r">¥0</td></tr>
+          <tr><td>投薬</td><td class="r">120点</td><td class="r">¥1,200</td></tr>
+          <tr><td>注射 / 処置 / 手術 / 麻酔</td><td class="r">0点</td><td class="r">¥0</td></tr>
+          <tr><td>リハビリテーション</td><td class="r">0点</td><td class="r">¥0</td></tr>
+          <tr><td>放射線治療 / 入院料等</td><td class="r">0点</td><td class="r">¥0</td></tr>
+          <tr class="total"><td>保険合計</td><td class="r">758点</td><td class="r">¥7,580</td></tr>
+          <tr><td>負担割合</td><td colspan="2" class="r">3割</td></tr>
+          <tr><td>保険外負担</td><td colspan="2" class="r">¥0</td></tr>
+        </tbody>
+      </table>`;
+  } else if(t.label.includes('介護保険施設')){
+    const ins = Math.round(amt*0.65), food = Math.round(amt*0.15), live = Math.round(amt*0.13), life = amt - ins - food - live;
+    body = `
+      <div class="section-h">介護老人保健施設 ご利用料（区分別・医療費控除対応）</div>
+      <table>
+        <thead><tr><th>区分</th><th>内容</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>介護サービス費（自己負担）</td><td>1割負担</td><td class="r">${fmt(ins)}</td></tr>
+          <tr><td>食費</td><td>朝・昼・夕</td><td class="r">${fmt(food)}</td></tr>
+          <tr><td>居住費</td><td>多床室</td><td class="r">${fmt(live)}</td></tr>
+          <tr><td>日常生活費 等</td><td>理美容・洗濯 等</td><td class="r">${fmt(life)}</td></tr>
+          <tr class="total"><td colspan="2">合計</td><td class="r">${fmt(amt)}</td></tr>
+          <tr><td colspan="2"><b>うち 医療費控除対象額</b></td><td class="r"><b>${fmt(ins+food+live)}</b></td></tr>
+        </tbody>
+      </table>`;
+  } else if(t.label.includes('介護保険サービス')){
+    body = `
+      <div class="section-h">介護保険サービス 提供内訳（様式第一準拠）</div>
+      <table>
+        <thead><tr><th>サービス種別</th><th>単位数</th><th>回数</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>訪問介護 身体介護 30分</td><td class="r">250</td><td class="r">8</td><td class="r">¥22,000</td></tr>
+          <tr><td>訪問介護 生活援助 45分</td><td class="r">181</td><td class="r">12</td><td class="r">¥23,892</td></tr>
+          <tr><td>通所介護 7-8時間 要介護3</td><td class="r">1,003</td><td class="r">10</td><td class="r">¥110,330</td></tr>
+          <tr class="total"><td>保険請求対象 合計</td><td colspan="2" class="r">―</td><td class="r">${fmt(amt+30000)}</td></tr>
+          <tr><td>うち 保険給付（9割）</td><td colspan="2" class="r">―</td><td class="r">${fmt(Math.round((amt+30000)*0.9))}</td></tr>
+          <tr><td><b>利用者負担額（1割）</b></td><td colspan="2" class="r">―</td><td class="r"><b>${fmt(amt)}</b></td></tr>
+        </tbody>
+      </table>`;
+  } else if(t.label.includes('居宅サービス')){
+    body = `
+      <div class="section-h">居宅サービス ご利用料（医療費控除対応／国税庁通達準拠）</div>
+      <table>
+        <thead><tr><th>項目</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>利用者負担額（合計）</td><td class="r">${fmt(amt)}</td></tr>
+          <tr><td><b>うち 医療費控除の対象となる金額</b></td><td class="r"><b>${fmt(Math.round(amt*0.7))}</b></td></tr>
+          <tr><td>居宅サービス計画を作成した<br>介護支援事業者名</td><td class="r">居宅介護支援事業所 〇〇</td></tr>
+        </tbody>
+      </table>`;
+  } else if(t.label.includes('福祉')){
+    body = `
+      <div class="section-h">障害福祉サービス ご利用料</div>
+      <table>
+        <thead><tr><th>区分</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>自立支援給付対象サービス費</td><td class="r">¥${(amt*0.9|0).toLocaleString()}</td></tr>
+          <tr><td>利用者負担額（1割）</td><td class="r">${fmt(Math.round(amt*0.1))}</td></tr>
+          <tr><td>実費負担分（食費・送迎等）</td><td class="r">${fmt(Math.round(amt*0.05))}</td></tr>
+          <tr class="total"><td>合計</td><td class="r">${fmt(amt)}</td></tr>
+        </tbody>
+      </table>`;
+  } else {
+    body = `
+      <div class="section-h">ご利用内容</div>
+      <table>
+        <thead><tr><th>項目</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>自由診療 / 自費サービス料</td><td class="r">${fmt(amt)}</td></tr>
+          <tr class="total"><td>合計（税込）</td><td class="r">${fmt(amt)}</td></tr>
+        </tbody>
+      </table>`;
+  }
+
+  return `
+    <div class="doc-no">${docNo}</div>
+    <h1>${docTitle}</h1>
+    <div class="to"><span>${user} 様</span> <small>（${month}）</small></div>
+    <div class="greet">${doc==='receipt'?'下記の金額を正に領収いたしました。':'下記のとおりご請求申し上げます。'}</div>
+    <div class="amount-box">
+      <div class="lbl">${doc==='receipt'?'領 収 金 額':'ご 請 求 金 額'}（税込）</div>
+      <div class="amt">${fmt(amt)}</div>
+    </div>
+    ${body}
+    ${issuer}
+    ${footer}
+  `;
+}
+
+function billAction(kind){
+  const map = {pdf:'PDFをダウンロードしました',mail:'家族のメールアドレスへ送信しました',sms:'家族のスマートフォンへSMSリンクを送信しました',issue:'電子発行が完了しました（タイムスタンプ＋ハッシュ署名 付与）'};
+  toast(map[kind]||'実行しました');
+}
+
 </script>
 </body>
 </html>
