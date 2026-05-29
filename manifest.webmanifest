@@ -1,0 +1,25 @@
+{
+  "name": "CarePAY｜医療・介護・福祉のための請求OS",
+  "short_name": "CarePAY",
+  "description": "契約から回収まで一気通貫。医療・介護・福祉の現場専用の請求・口座振替・債権管理・請求書発行プラットフォーム。",
+  "lang": "ja",
+  "dir": "ltr",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#cf4747",
+  "categories": ["business", "finance", "medical", "productivity"],
+  "icons": [
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "画面デモを見る", "short_name": "デモ", "url": "./demo.html?source=pwa", "icons": [{ "src": "assets/img/icon-192.png", "sizes": "192x192" }] },
+    { "name": "債権管理", "short_name": "債権管理", "url": "./demo.html?view=ar&source=pwa" },
+    { "name": "請求書・領収書発行", "short_name": "請求書発行", "url": "./demo.html?view=bill&source=pwa" }
+  ]
+}
