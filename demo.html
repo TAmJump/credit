@@ -118,6 +118,27 @@
   .compare .arrow{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:24px;font-weight:900;padding:0 18px}
   @media(max-width:760px){.compare .arrow{padding:14px;font-size:18px}.compare .arrow::after{content:"↓"}.compare .arrow span{display:none}}
   .compare .arrow span::after{content:"→"}
+  /* ---- 料金比較（モバイルファースト：既定は縦積み、広い画面で2列）---- */
+  .price-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:761px){.price-grid{grid-template-columns:1fr 1fr;gap:22px}}
+  .price-col{background:#fff;border:1px solid var(--grey-line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .price-col.feat{border:2px solid var(--red);box-shadow:var(--shadow-lg)}
+  .price-tag{font-size:15px;font-weight:800;letter-spacing:.03em;padding:16px 18px;background:var(--grey-2);color:var(--ink-soft)}
+  .price-col.feat .price-tag{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff}
+  .price-list{list-style:none}
+  .price-list li{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:14px 18px;border-top:1px solid var(--grey-line);min-height:44px}
+  .price-list li:first-child{border-top:none}
+  .price-list .k{flex:0 0 40%;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .price-list .v{flex:1;text-align:right;font-size:15px;font-weight:700;color:var(--ink);line-height:1.5}
+  .price-list .v small{font-weight:500;font-size:12px;color:var(--ink-soft)}
+  .price-list .v.hl{color:var(--red)}
+  .price-note{margin-top:18px;font-size:12px;color:var(--ink-soft);line-height:1.8}
+  .sp-br{display:none}
+  @media(max-width:480px){
+    .sp-br{display:inline}                 /* スマホでは項目名・補足を意図した位置で改行 */
+    .price-list .k{flex:0 0 44%;font-size:13px}
+    .price-list .v{font-size:14.5px}
+  }
 
   /* スケジュール */
   .timeline-h{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:step;max-width:980px;margin:0 auto}
@@ -462,6 +483,35 @@
     .bill-paper .amount-box .amt{font-size:22px;padding:6px 18px}
   }
 
+  /* ===== モバイル／アプリ最適化（縦長スマホ前提の最終調整）===== */
+  /* 文中の任意改行 <br class="m-only"> はスマホでのみ効かせる（PCでは無視）。
+     逆に <br class="d-only"> はPCのみ。これで端末ごとに読みやすい折返しを設計する。*/
+  .m-only{display:none}
+  @media(max-width:600px){
+    .m-only{display:inline}
+    .d-only{display:none}
+    .wrap{padding:0 18px}
+    section.block{padding:48px 0}
+    .sec-head h2{font-size:24px;line-height:1.5}
+    .sec-head p{font-size:14.5px;line-height:1.85}
+    .eyebrow{font-size:12px}
+    /* タップ領域は最低44px。リンク・ボタン・ナビCTAを指で押しやすく */
+    .nav .links a.cta,.dbtn,button{min-height:44px}
+    .price-list li{padding:13px 16px}
+  }
+  /* スマホの極小幅でも見出しが詰まらないように */
+  @media(max-width:380px){
+    .sec-head h2{font-size:21px}
+    .price-list .k{flex-basis:46%}
+  }
+  /* PWA／ノッチ端末：下部の安全領域を確保（ホームバー被り防止）*/
+  @supports(padding:max(0px)){
+    body{padding-bottom:env(safe-area-inset-bottom)}
+    .demo-modal{padding-bottom:max(0px,env(safe-area-inset-bottom))}
+  }
+  /* iOS のテキスト自動拡大を抑止し、レイアウト崩れを防ぐ */
+  html{-webkit-text-size-adjust:100%}
+
 
 </style>
 </head>
@@ -476,6 +526,7 @@
     </a>
     <nav class="links">
       <a href="#features">特長</a>
+      <a href="#pricing">料金</a>
       <a href="#flow">導入の流れ</a>
       <a href="#segments">対象事業者</a>
       <a href="#square">決済</a>
@@ -573,6 +624,48 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== 料金比較 ===== -->
+<section class="block alt" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Pricing</div>
+      <h2>一般的な口座振替と、<br class="d-only">CarePay の費用を比べると。</h2>
+      <p>口座振替の「裏側」は既存の収納代行を使うため、相場どおりの低い振替手数料はそのまま。立ち上げの初期費用・月額を抑え、回収開始までの立替や請求書発行までを1つにまとめます。</p>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-col">
+        <div class="price-tag">一般的な口座振替代行</div>
+        <ul class="price-list">
+          <li><span class="k">初期費用</span><span class="v">約3万円〜</span></li>
+          <li><span class="k">月額</span><span class="v">約3,000円前後</span></li>
+          <li><span class="k">口座振替<br class="sp-br">1件あたり</span><span class="v">約100円前後<br class="sp-br"><small>（最安85円〜）</small></span></li>
+          <li><span class="k">回収前の<br class="sp-br">立替</span><span class="v">基本なし</span></li>
+          <li><span class="k">請求書・<br class="sp-br">領収書発行</span><span class="v">別ツール</span></li>
+          <li><span class="k">未収・督促<br class="sp-br">管理</span><span class="v">別管理</span></li>
+        </ul>
+      </div>
+
+      <div class="price-col feat">
+        <div class="price-tag">CarePay</div>
+        <ul class="price-list">
+          <li><span class="k">初期費用</span><span class="v">抑えた設計<br class="sp-br"><small>※業態で個別ご案内</small></span></li>
+          <li><span class="k">月額</span><span class="v">抑えた設計</span></li>
+          <li><span class="k">口座振替<br class="sp-br">1件あたり</span><span class="v">相場水準<br class="sp-br"><small>（収納代行に準拠）</small></span></li>
+          <li><span class="k">回収前の<br class="sp-br">立替</span><span class="v hl">カードで即日<br class="sp-br"><small>（3.6%／非対面）</small></span></li>
+          <li><span class="k">請求書・<br class="sp-br">領収書発行</span><span class="v hl">標準搭載</span></li>
+          <li><span class="k">未収・督促<br class="sp-br">管理</span><span class="v hl">一画面で一元</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="price-note">
+      ※ 金額は一般的な相場の目安で、収納代行／決済事業者の料率・件数により変わります。実際の費用は導入時にご案内します。<br>
+      ※ 社会保険診療・介護保険サービスは消費税が非課税です。カード立替（非対面 3.6%）は自費取引などが対象です。
+    </p>
   </div>
 </section>
 
