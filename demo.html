@@ -96,9 +96,9 @@
   @media(max-width:900px){.feature-grid{grid-template-columns:1fr}}
   .fcard{background:#fff;border:1px solid var(--grey-line);border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);transition:.2s}
   .fcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--red-line)}
-  .fcard .ic{width:54px;height:54px;border-radius:13px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px;overflow:hidden}
-  .fcard .ic img{width:34px;height:34px;object-fit:contain;filter:grayscale(1) brightness(.4)}
-  .fcard .ic .emoji{font-size:26px}
+  .fcard .ic{width:76px;height:76px;border-radius:18px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px;overflow:hidden}
+  .fcard .ic img{width:100%;height:100%;object-fit:contain;padding:11px}
+  .fcard .ic .emoji{font-size:34px}
   .fcard h3{font-size:19px;font-weight:800;margin-bottom:10px}
   .fcard p{color:var(--ink-soft);font-size:15px;line-height:1.8}
 
@@ -532,17 +532,17 @@
     </div>
     <div class="feature-grid">
       <div class="fcard">
-        <div class="ic"><span class="emoji">🔓</span></div>
+        <div class="ic"><img src="assets/img/illust_paperless.png" alt="" onerror="this.parentNode.innerHTML='<span class=&quot;emoji&quot;>📄</span>'></div>
         <h3>通帳・銀行印が不要</h3>
         <p>従来の口座振替依頼書に必要だった通帳記載情報や銀行届出印が要りません。本人認証ベースの登録により、印鑑相違による差し戻しが起きません。</p>
       </div>
       <div class="fcard">
-        <div class="ic"><span class="emoji">📱</span></div>
+        <div class="ic"><img src="assets/img/illust_remote.png" alt="" onerror="this.parentNode.innerHTML='<span class=&quot;emoji&quot;>📱</span>'></div>
         <h3>遠隔・オンラインで完結</h3>
         <p>利用者・入居者やご家族は、SMSで届くURLからスマホで登録。来所や郵送の往復が不要で、遠方のご家族でもその場で手続きが終わります。</p>
       </div>
       <div class="fcard">
-        <div class="ic"><span class="emoji">🗂️</span></div>
+        <div class="ic"><img src="assets/img/illust_dashboard.png" alt="" onerror="this.parentNode.innerHTML='<span class=&quot;emoji&quot;>📊</span>'></div>
         <h3>請求・未収を一元管理</h3>
         <p>口座振替・カード・振込・コンビニをまたいで、契約・同意・未収・督促・ステータスを一画面に。数万人規模の請求でも事務の手間を増やしません。</p>
       </div>
@@ -591,7 +591,7 @@
       <div class="tstep"><div class="day">翌月27日</div><div class="ttl">初回口座振替</div><div class="desc">初回の引き落としを実行。以降は毎月27日（休日の場合は翌営業日）に自動振替します。</div></div>
     </div>
     <div class="sched-summary">
-      標準スケジュール：<b>毎月20日まで</b>の登録確定分を、<b>翌月27日</b>に初回振替。最短で<b>約1〜5週間</b>で口振開始。
+      標準スケジュール：<b>毎月20日まで</b>に確定した登録分を、<b>翌月27日</b>に初回振替します。それまでは<b>カードで即日立替</b>できるので、回収開始を待つ必要はありません。
     </div>
     <p class="sched-note">
       ※ 上記は標準的な目安です。初回振替日まではカード・振込・コンビニ等で立替請求が可能です。<br>
