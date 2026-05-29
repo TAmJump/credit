@@ -7,6 +7,14 @@
 <meta name="robots" content="noindex">
 <meta name="description" content="医療・介護・福祉事業者向けの口座振替サービス。通帳情報・銀行印は不要。遠隔・オンラインで利用者の口座振替登録が完結。決済はSquare。最短で口振開始までを明確にスケジュール化。">
 <link rel="icon" href="assets/img/favicon.png">
+<!-- PWA -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#cf4747">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CarePAY">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<!-- Square Web Payments SDK (sandbox). 本番化時は https://web.squarecdn.com/v1/square.js に差し替え -->
+<script src="https://sandbox.web.squarecdn.com/v1/square.js" defer></script>
 <style>
   :root{
     --red:#cf4747; --red-deep:#b23b3b; --red-soft:#fbecec; --red-line:#f1cfcf;
@@ -285,6 +293,10 @@
   .sq-card .no{font-size:19px;letter-spacing:.14em;font-variant-numeric:tabular-nums;margin:6px 0 15px}
   .sq-foot{display:flex;justify-content:space-between;font-size:13px;opacity:.85}
   .sq-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);margin-top:10px}
+  .sq-card-mount{min-height:64px;border:1px solid var(--grey-line);border-radius:12px;padding:6px;background:var(--white)}
+  .sq-card-mount:empty{border-style:dashed}
+  .sq-card-err{color:var(--red-deep);font-size:13px;margin-top:8px;min-height:1px}
+  .sq-fallback{font-size:12px;color:var(--ink-soft);margin-top:8px}
   .note{font-size:13px;color:var(--ink-soft);background:#fff;border:1px solid var(--grey-line);border-left:4px solid var(--red);border-radius:10px;padding:13px 15px;margin-top:14px;line-height:1.7}
   .sms-stage{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;justify-content:center}
   .phone{width:290px;flex-shrink:0;background:#eef1f3;border-radius:36px;padding:11px;box-shadow:var(--shadow-lg);border:2px solid #dfe4e7}
@@ -406,6 +418,9 @@
   .bill-card select{width:100%;font-family:inherit;font-size:14px;padding:9px 12px;border:1.5px solid var(--grey-line);border-radius:9px;background:#fff;color:var(--ink)}
   .bill-card select:focus{outline:none;border-color:var(--red)}
   .bill-note{font-size:11.5px;color:var(--ink-soft);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px dashed var(--grey-line)}
+  .reg-hint{display:block;font-size:11px;margin-top:5px;font-weight:700}
+  .reg-hint.ok{color:var(--green)}
+  .reg-hint.ng{color:var(--red-deep)}
   .bill-radio{display:flex;flex-direction:column;gap:6px}
   .bill-radio label{display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 11px;border:1.5px solid var(--grey-line);border-radius:8px;cursor:pointer;transition:.12s}
   .bill-radio label:hover{border-color:var(--red)}
@@ -438,6 +453,7 @@
   .bill-paper .qr{position:absolute;bottom:32px;right:42px;width:54px;height:54px;background:#000;background-image:linear-gradient(45deg,#fff 25%,transparent 25%),linear-gradient(-45deg,#fff 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#fff 75%),linear-gradient(-45deg,transparent 75%,#fff 75%);background-size:8px 8px;background-position:0 0,0 4px,4px -4px,-4px 0px;border:3px solid #fff;box-shadow:0 0 0 1px #000}
   .bill-paper .stamp-eseal{display:inline-block;width:60px;height:60px;border:2px solid #b00;border-radius:50%;color:#b00;text-align:center;font-size:9px;font-weight:700;line-height:1.3;padding-top:10px;letter-spacing:.05em;background:#fff;transform:rotate(-6deg)}
   .bill-paper .section-h{font-family:"Hiragino Sans","Yu Gothic UI",sans-serif;font-size:11px;font-weight:700;color:#444;background:#f0f0f0;padding:5px 10px;margin:14px 0 6px;letter-spacing:.06em;border-left:3px solid #b00}
+  .bill-paper .bill-taxnote{font-size:10.5px;color:#555;line-height:1.6;margin:12px 0 4px;padding:7px 9px;background:#f7f7f7;border:1px solid #e4e4e4;border-radius:4px}
   .bill-foot-note{font-size:11px;color:var(--ink-soft);margin-top:14px;line-height:1.7;max-width:680px}
 
   @media(max-width:680px){
@@ -968,7 +984,12 @@
                 <h3 class="bill-h">③ 対象</h3>
                 <div class="field"><label>利用者氏名</label><input id="bUser" value="鈴木 一郎" oninput="billRender()"></div>
                 <div class="field"><label>対象月</label><input id="bMonth" value="2026年5月分" oninput="billRender()"></div>
-                <div class="field"><label>金額（合計）</label><input id="bAmt" value="138000" oninput="billRender()"></div>
+                <div class="field"><label>金額（合計・税込）</label><input id="bAmt" value="138000" oninput="billRender()"></div>
+                <div class="field">
+                  <label>適格請求書発行事業者 登録番号</label>
+                  <input id="bRegNo" value="T1234567890123" maxlength="14" oninput="billRender()" placeholder="T + 13桁">
+                  <span id="bRegHint" class="reg-hint"></span>
+                </div>
               </div>
 
               <div class="bill-card">
@@ -1095,12 +1116,12 @@ const steps=[
   <div style="display:flex;gap:12px"><div class="field" style="flex:1"><label>支店番号</label><input inputmode="numeric" placeholder="001"></div><div class="field" style="flex:1.3"><label>口座番号</label><input inputmode="numeric" placeholder="1234567"></div></div>
   <div class="field"><label>口座名義（カナ）</label><input placeholder="ワタナベ ユキ"></div>
   <button class="dbtn dbtn-red dbtn-block dbtn-lg" style="margin-top:6px" onclick="renderStep(6)">口座振替を登録する</button>`;},
- ()=>{fTitle.textContent='カード情報の登録';setTimeout(()=>{document.getElementById('cardNoInput')?.addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim();e.target.value=v;document.getElementById('cardFace').textContent=v.padEnd(19,'•').slice(0,19);});},30);return `
-  <div class="sq-card"><div class="lbl">CARD NUMBER</div><div class="no" id="cardFace">•••• •••• •••• ••••</div><div class="sq-foot"><span>お名前</span><span>有効期限</span></div></div>
-  <div class="field"><label>カード番号</label><input id="cardNoInput" inputmode="numeric" placeholder="4242 4242 4242 4242"></div>
-  <div style="display:flex;gap:12px"><div class="field" style="flex:1"><label>有効期限</label><input placeholder="MM / YY"></div><div class="field" style="flex:1"><label>セキュリティコード</label><input placeholder="123"></div></div>
-  <div class="sq-badge">🔒 決済は Square により安全に処理されます（デモ）</div>
-  <button class="dbtn dbtn-red dbtn-block dbtn-lg" style="margin-top:16px" onclick="renderStep(6)">¥188,000 を登録して支払う</button>`;},
+ ()=>{fTitle.textContent='カード情報の登録';setTimeout(initSquareCard,30);return `
+  <div class="note" style="margin-top:0;margin-bottom:14px">カード情報は <b>Square</b> のセキュアな入力欄で直接扱われ、CarePAY のサーバーにカード番号は送信・保存されません（PCI DSS 準拠）。</div>
+  <div id="sq-card-container" class="sq-card-mount"></div>
+  <div id="sq-card-errors" class="sq-card-err"></div>
+  <div class="sq-badge">🔒 Square Web Payments SDK によりトークン化されます</div>
+  <button class="dbtn dbtn-red dbtn-block dbtn-lg" id="sqPayBtn" style="margin-top:16px" onclick="squareTokenize()">¥188,000 を登録して支払う</button>`;},
  ()=>{fTitle.textContent='ご登録ありがとうございました';const label=payChoice||'お支払い方法';return `
   <div class="done-wrap"><div class="check-ring"><svg viewBox="0 0 60 60"><path d="M16 31 L26 41 L45 20"/></svg></div>
   <h2 style="font-size:22px">登録が完了しました</h2>
@@ -1120,6 +1141,51 @@ function renderStep(i){
 function toggleChk(el,id){const cb=document.getElementById(id);cb.checked=!cb.checked;el.classList.toggle('checked',cb.checked);const all=['c1','c2','c3'].every(x=>document.getElementById(x).checked);const b=document.getElementById('agreeNext');b.style.opacity=all?'1':'.45';b.style.pointerEvents=all?'auto':'none';}
 function selPay(el,name){document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');payChoice=name;const b=document.getElementById('payNext');b.style.opacity='1';b.style.pointerEvents='auto';}
 function afterPay(){if(payChoice==='クレジットカード'||payChoice==='初回のみカード')renderStep(5);else if(payChoice==='口座振替')renderStep(4);else renderStep(6);}
+
+/* ===== Square Web Payments SDK ===== */
+// 本番化時：sandbox の Application ID / Location ID を Developer Console から取得して差し替え。
+// SDK script も head で web.squarecdn.com に切替。トークンはサーバ側 CreatePayment / CreateCard へ送る。
+const SQUARE_CFG = { appId:'sandbox-sq0idb-REPLACE_ME', locationId:'REPLACE_LOCATION_ID' };
+let sqCard=null;
+function sqConfigured(){ return !(SQUARE_CFG.appId.includes('REPLACE')||SQUARE_CFG.locationId.includes('REPLACE')); }
+async function initSquareCard(){
+  const mount=document.getElementById('sq-card-container'); if(!mount)return;
+  // 資格情報が未設定／SDK未ロードの場合はデモ用フォールバック表示
+  if(!window.Square || !sqConfigured()){
+    mount.innerHTML='<div class="sq-card"><div class="lbl">CARD NUMBER</div><div class="no">4242 4242 4242 4242</div>'+
+      '<div class="sq-foot"><span>S. WATANABE</span><span>12 / 28</span></div></div>'+
+      '<div class="sq-fallback">デモ表示：本番では Square のセキュア入力欄がここに描画されます（資格情報を設定すると有効化）。</div>';
+    sqCard=null; return;
+  }
+  try{
+    const payments=window.Square.payments(SQUARE_CFG.appId, SQUARE_CFG.locationId);
+    sqCard=await payments.card();
+    await sqCard.attach('#sq-card-container');
+  }catch(e){ document.getElementById('sq-card-errors').textContent='決済フォームの初期化に失敗しました：'+e.message; }
+}
+async function squareTokenize(){
+  const btn=document.getElementById('sqPayBtn');
+  const errBox=document.getElementById('sq-card-errors'); if(errBox)errBox.textContent='';
+  // フォールバック（デモ）：そのまま完了へ
+  if(!sqCard){ toast('カードを登録しました（デモ）'); renderStep(6); return; }
+  btn.disabled=true; const orig=btn.textContent; btn.textContent='処理中…';
+  try{
+    const verificationDetails={
+      amount:'188000', currencyCode:'JPY', intent:'CHARGE_AND_STORE',
+      billingContact:{ familyName:'渡辺', givenName:'ゆき' }
+    };
+    const result=await sqCard.tokenize(verificationDetails);
+    if(result.status==='OK'){
+      // 本番：result.token をサーバへ送って CreatePayment / CreateCard を実行
+      const last4=result.details?.card?.last4||'****';
+      toast('カードを登録しました（****'+last4+'）');
+      renderStep(6);
+    }else{
+      errBox.textContent=(result.errors||[]).map(x=>x.message).join(' / ')||'トークン化に失敗しました';
+    }
+  }catch(e){ errBox.textContent='エラー：'+(e.message||e); }
+  finally{ btn.disabled=false; btn.textContent=orig; }
+}
 let signing=false,signed=false,ctx,canvas;
 function initSign(){canvas=document.getElementById('signCanvas');if(!canvas)return;const r=canvas.getBoundingClientRect();canvas.width=r.width;canvas.height=160;ctx=canvas.getContext('2d');ctx.strokeStyle='#cf4747';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';signed=false;
  const pos=e=>{const b=canvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-b.left,y:t.clientY-b.top};};
@@ -1244,7 +1310,7 @@ const billTemplates = {
     label:'医療（自費・自由診療）',
     note:'自費診療でも領収書交付は事業者として義務。インボイス制度対応の場合は適格請求書発行事業者の登録番号を記載します。',
     docs:[{v:'invoice',l:'請求書（インボイス対応）'},{v:'receipt',l:'領収証'}],
-    issuer:{name:'医療法人○○ ○○クリニック',addr:'東京都〇〇区〇〇 1-2-3',extra:'適格請求書発行事業者 T1234567890123'}
+    issuer:{name:'医療法人○○ ○○クリニック',addr:'東京都〇〇区〇〇 1-2-3',extra:'適格請求書発行事業者'}
   },
   care_home: {
     label:'介護保険施設（老健・介護医療院・特養）',
@@ -1290,24 +1356,56 @@ function billRender(){
   const user = document.getElementById('bUser').value;
   const month = document.getElementById('bMonth').value;
   const amt = parseInt(document.getElementById('bAmt').value||0);
-  document.getElementById('billPaper').innerHTML = billHTML(t, user, month, amt, billDocSel);
+  // 登録番号（T+13桁）の検証
+  const regNo = (document.getElementById('bRegNo').value||'').trim().toUpperCase();
+  const regOk = /^T\d{13}$/.test(regNo);
+  const hint = document.getElementById('bRegHint');
+  hint.className = 'reg-hint ' + (regNo==='' ? '' : (regOk?'ok':'ng'));
+  hint.innerHTML = regNo==='' ? '未入力（適格請求書には登録番号の記載が必須）'
+    : (regOk ? '✓ 形式OK（国税庁 公表サイトで照合可）'
+             : '✕ 形式不正：T のあとに半角数字13桁');
+  document.getElementById('billPaper').innerHTML = billHTML(t, user, month, amt, billDocSel, regNo, regOk);
 }
 function billDocPick(v){ billDocSel=v; billRender(); }
 
 function fmt(n){ return '¥'+ (n||0).toLocaleString(); }
 
-function billHTML(t, user, month, amt, doc){
+function billHTML(t, user, month, amt, doc, regNo, regOk){
   const docTitle = {invoice:'請  求  書',receipt:'領  収  証',detail:'医療費明細書',mc_proof:'医療費控除対象額の明細',service_detail:'サービス提供明細書'}[doc];
   const docNo = 'No. CP-2026-0528-00138';
   const date = new Date().toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'});
+  const regLine = `<div>${t.issuer.extra}</div>` + ((regNo && regOk) ? `<div>登録番号：${regNo}</div>` : '');
   const issuer = `
     <div class="issuer">
       <div class="nm">${t.issuer.name}<span class="stamp-eseal">電子<br>発行印</span></div>
       <div>${t.issuer.addr}</div>
-      <div>${t.issuer.extra}</div>
+      ${regLine}
       <div>発行日：${date}</div>
     </div>`;
   const footer = `<div class="footer-note">本書類はCarePAYにより電子的に発行され、タイムスタンプおよびハッシュ署名により改ざんが防止されています。<br>右下QRコードからオンライン検証が可能です。 / 発行ID: CP-2026-0528-00138</div><div class="qr"></div>`;
+
+  // 消費税の取扱い（インボイス：税率ごとに区分した消費税額の記載）
+  // 自由診療(自費)は課税。社会保険診療・介護保険サービスは消費税法上 非課税。
+  const taxable = t.label.includes('自費');
+  let taxBlock = '';
+  if(doc==='invoice'||doc==='receipt'){
+    if(taxable){
+      const tax10 = Math.round(amt*10/110);      // 税込から10%分を逆算
+      const net10 = amt - tax10;
+      taxBlock = `
+      <div class="section-h">税率ごとに区分した消費税額等（適格請求書 記載事項）</div>
+      <table>
+        <thead><tr><th>適用税率</th><th>対象額（税抜）</th><th>消費税額</th></tr></thead>
+        <tbody>
+          <tr><td>標準税率 10%</td><td class="r">${fmt(net10)}</td><td class="r">${fmt(tax10)}</td></tr>
+          <tr><td>軽減税率 8%</td><td class="r">¥0</td><td class="r">¥0</td></tr>
+          <tr class="total"><td>合計（税込）</td><td class="r">${fmt(net10)}</td><td class="r">${fmt(tax10)}</td></tr>
+        </tbody>
+      </table>`;
+    } else {
+      taxBlock = `<div class="bill-taxnote">※ 社会保険診療・介護保険の対象サービスは消費税法上「非課税」のため、適格請求書における税率別消費税額の記載対象外です。</div>`;
+    }
+  }
 
   // テンプレートごとの本体
   let body = '';
@@ -1405,6 +1503,7 @@ function billHTML(t, user, month, amt, doc){
       <div class="amt">${fmt(amt)}</div>
     </div>
     ${body}
+    ${taxBlock}
     ${issuer}
     ${footer}
   `;
@@ -1414,6 +1513,16 @@ function billAction(kind){
   const map = {pdf:'PDFをダウンロードしました',mail:'家族のメールアドレスへ送信しました',sms:'家族のスマートフォンへSMSリンクを送信しました',issue:'電子発行が完了しました（タイムスタンプ＋ハッシュ署名 付与）'};
   toast(map[kind]||'実行しました');
 }
+
+/* PWA: service worker + deep-link (?view=) for app shortcuts */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});
+}
+(function(){
+  const v=new URLSearchParams(location.search).get('view');
+  const allowed=['admin','family','sms','ar','bill'];
+  if(v && allowed.includes(v)){ window.addEventListener('DOMContentLoaded',()=>switchView(v)); }
+})();
 
 </script>
 </body>
