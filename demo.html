@@ -1146,6 +1146,7 @@ function afterPay(){if(payChoice==='クレジットカード'||payChoice==='初�
 // 本番化時：sandbox の Application ID / Location ID を Developer Console から取得して差し替え。
 // SDK script も head で web.squarecdn.com に切替。トークンはサーバ側 CreatePayment / CreateCard へ送る。
 const SQUARE_CFG = { appId:'sandbox-sq0idb-7y88I9PhLK9ZoqwNNggksw', locationId:'LYFS542ADA78W' };
+const CAREPAY_API = 'https://carepay-api.animalb001.workers.dev';
 let sqCard=null;
 function sqConfigured(){ return !(SQUARE_CFG.appId.includes('REPLACE')||SQUARE_CFG.locationId.includes('REPLACE')); }
 async function initSquareCard(){
@@ -1176,10 +1177,26 @@ async function squareTokenize(){
     };
     const result=await sqCard.tokenize(verificationDetails);
     if(result.status==='OK'){
-      // 本番：result.token をサーバへ送って CreatePayment / CreateCard を実行
       const last4=result.details?.card?.last4||'****';
-      toast('カードを登録しました（****'+last4+'）');
-      renderStep(6);
+      btn.textContent='決済中…';
+      // トークンをバックエンドへ → Square CreatePayment（sandbox 実課金）
+      try{
+        const res=await fetch(CAREPAY_API+'/api/payments/card',{
+          method:'POST', headers:{'content-type':'application/json'},
+          body:JSON.stringify({ invoice_id:'inv_demo', source_id:result.token, amount:188000 })
+        });
+        const data=await res.json();
+        if(data.ok){
+          toast('決済完了 ****'+last4+'（Square払い ¥188,000）');
+          renderStep(6);
+        }else{
+          errBox.textContent='決済エラー：'+(typeof data.square==='string'?data.square:JSON.stringify(data.square||data.error||data));
+        }
+      }catch(netErr){
+        // バックエンド未到達時はトークン化までを成功として扱う
+        toast('カードをトークン化しました ****'+last4+'（決済APIは未接続）');
+        renderStep(6);
+      }
     }else{
       errBox.textContent=(result.errors||[]).map(x=>x.message).join(' / ')||'トークン化に失敗しました';
     }
