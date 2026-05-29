@@ -1145,7 +1145,7 @@ function afterPay(){if(payChoice==='クレジットカード'||payChoice==='初�
 /* ===== Square Web Payments SDK ===== */
 // 本番化時：sandbox の Application ID / Location ID を Developer Console から取得して差し替え。
 // SDK script も head で web.squarecdn.com に切替。トークンはサーバ側 CreatePayment / CreateCard へ送る。
-const SQUARE_CFG = { appId:'sandbox-sq0idb-REPLACE_ME', locationId:'REPLACE_LOCATION_ID' };
+const SQUARE_CFG = { appId:'sandbox-sq0idb-7y88I9PhLK9ZoqwNNggksw', locationId:'LYFS542ADA78W' };
 let sqCard=null;
 function sqConfigured(){ return !(SQUARE_CFG.appId.includes('REPLACE')||SQUARE_CFG.locationId.includes('REPLACE')); }
 async function initSquareCard(){
