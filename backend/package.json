@@ -1,0 +1,16 @@
+{
+  "name": "carepay-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create carepay",
+    "db:migrate": "wrangler d1 migrations apply carepay --remote",
+    "db:migrate:local": "wrangler d1 migrations apply carepay --local"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}
