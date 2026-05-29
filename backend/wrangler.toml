@@ -3,6 +3,7 @@ name = "carepay-api"
 main = "src/index.js"
 compatibility_date = "2026-05-01"
 compatibility_flags = ["nodejs_compat"]
+account_id = "b9de28abfd009bbf696ceec4da62c5b8"
 
 # D1（サーバーレス SQLite）
 # 初回：  npx wrangler d1 create carepay
