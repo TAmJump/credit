@@ -70,7 +70,8 @@
   .hero-visual .ph .ph-fallback{text-align:center;color:var(--ink-soft);font-size:14px;padding:20px}
   .hero-visual .ph .ph-fallback b{display:block;color:var(--ink-mid);font-size:16px;margin-bottom:6px}
   .float-card{position:absolute;background:#fff;border:1px solid var(--grey-line);border-radius:13px;box-shadow:var(--shadow-lg);padding:13px 16px;display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:700}
-  .float-card .ic{width:34px;height:34px;border-radius:9px;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .float-card .ic{width:34px;height:34px;border-radius:9px;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;overflow:hidden}
+  .float-card .ic img{width:100%;height:100%;object-fit:contain;padding:5px}
   .float-card.a{left:-14px;bottom:26px}
   .float-card.b{right:-10px;top:24px}
   @media(max-width:900px){.float-card{display:none}}
@@ -142,6 +143,8 @@
   .pillars{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:26px}
   @media(min-width:761px){.pillars{grid-template-columns:repeat(3,1fr);gap:18px}}
   .pillar{background:#fff;border:1px solid var(--grey-line);border-radius:16px;padding:24px 22px 24px 24px;box-shadow:var(--shadow);border-left:4px solid var(--red)}
+  .pillar .p-ic{width:56px;height:56px;border-radius:14px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px;overflow:hidden}
+  .pillar .p-ic img{width:100%;height:100%;object-fit:contain;padding:9px}
   .pillar h4{font-size:17px;font-weight:800;margin-bottom:8px}
   .pillar p{font-size:14px;color:var(--ink-soft);line-height:1.8}
   .sp-br{display:none}
@@ -591,8 +594,8 @@
              onerror="this.style.display='none';this.parentNode.querySelector('.ph-fallback').style.display='block'">
         <div class="ph-fallback" style="display:none"><b>hero.jpg をここに表示</b>assets/img/hero.jpg を置くと反映されます</div>
       </div>
-      <div class="float-card a"><span class="ic">🔓</span>銀行印・通帳<br>不要</div>
-      <div class="float-card b"><span class="ic">📱</span>遠隔・オンライン<br>で登録完結</div>
+      <div class="float-card a"><span class="ic"><img src="assets/img/ic_no_seal.png" alt=""></span>銀行印・通帳<br>不要</div>
+      <div class="float-card b"><span class="ic"><img src="assets/img/ic_remote.png" alt=""></span>遠隔・オンライン<br>で登録完結</div>
     </div>
   </div>
 </section>
@@ -755,14 +758,17 @@
     <!-- 3本柱 -->
     <div class="pillars">
       <div class="pillar">
+        <div class="p-ic"><img src="assets/img/ic_contract.png" alt=""></div>
         <h4>現場の手間を削減</h4>
         <p>契約・同意・口座振替の登録を、紙と来店なしでオンライン完結。現場が一番欲しがる契約まわりの作業をなくします。</p>
       </div>
       <div class="pillar">
+        <div class="p-ic"><img src="assets/img/ic_money_direct.png" alt=""></div>
         <h4>お金に触れない安心設計</h4>
         <p>患者・利用者の入金は施設・病院の口座へ直接。CarePay は資金を預からないので、収納の主体は施設のまま変わりません。</p>
       </div>
       <div class="pillar">
+        <div class="p-ic"><img src="assets/img/ic_invoice.png" alt=""></div>
         <h4>分かりやすい課金</h4>
         <p>料金は「1人 月¥30」だけ。段階も上限もなく、その月の利用者数ぶんだけ。請求が読みやすく、稟議も通しやすい。</p>
       </div>
