@@ -50,7 +50,7 @@
   .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
   .btn-ghost:hover{border-color:var(--red);color:var(--red)}
   .hero-visual{position:relative}
-  .hero-photo{width:100%;aspect-ratio:4/3.4;border-radius:22px;object-fit:cover;box-shadow:var(--shadow-lg);background:var(--grey2);display:block}
+  .hero-photo{width:100%;aspect-ratio:3/4;border-radius:22px;object-fit:cover;object-position:center top;box-shadow:var(--shadow-lg);background:var(--grey2);display:block}
   .hero-photo.placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--ink-mute);border:2px dashed var(--line);text-align:center;padding:30px}
   .hero-badge{position:absolute;left:-14px;bottom:24px;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:16px 20px;display:flex;align-items:center;gap:14px}
   .hero-badge .big{font-size:30px;font-weight:900;color:var(--red);line-height:1}
@@ -122,7 +122,7 @@
   .who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .who{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff;transition:.2s}
   .who:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
-  .who .ph{aspect-ratio:16/9;background:var(--grey2);width:100%;display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:13px;border-bottom:1px solid var(--line);overflow:hidden}
+  .who .ph{aspect-ratio:16/10;background:var(--red-soft);width:100%;display:flex;align-items:center;justify-content:center;color:var(--ink-mute);border-bottom:1px solid var(--line);overflow:hidden}
   .who .bd{padding:18px 20px}
   .who h3{font-size:17px;font-weight:800;margin-bottom:6px}
   .who p{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
@@ -171,19 +171,27 @@
   .cast-hero p{font-size:15px;color:var(--ink-soft);line-height:1.95}
   @media(max-width:780px){.cast-hero{grid-template-columns:1fr;gap:18px}}
 
-  .cast-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
-  @media(max-width:980px){.cast-grid{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:560px){.cast-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-  .cast-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s;text-align:left}
-  .cast-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .cast-card .pic{aspect-ratio:3/4;background:var(--grey);overflow:hidden}
-  .cast-card .pic img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-  .cast-card .info{padding:12px 14px 14px}
-  .cast-card .nm{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:15px;font-weight:700;letter-spacing:.04em;color:var(--ink)}
-  .cast-card .sub{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:11.5px;color:var(--ink-soft)}
-  .cast-card .sub b{font-weight:800;color:var(--red);font-size:12px;letter-spacing:.02em}
-  .cast-card .ttl{font-size:11.5px;color:var(--ink-soft);margin-top:3px;line-height:1.5}
-  .cast-line{height:1px;background:var(--red-line);width:32px;margin:6px 0 8px}
+  .cast-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:980px;margin:0 auto}
+  @media(max-width:820px){.cast-grid3{grid-template-columns:1fr;max-width:480px}}
+  .cast-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.2s;text-align:left}
+  .cast-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .cast-card .pic{aspect-ratio:4/5;background:var(--grey);overflow:hidden;display:flex;align-items:flex-start;justify-content:center}
+  .cast-card .pic img{width:100%;height:auto;min-height:100%;object-fit:cover;object-position:center 18%;display:block}
+  .cast-card .info{padding:18px 20px 22px}
+  .cast-card .nm{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink)}
+  .cast-card .ttl{font-size:13px;color:var(--red-deep);font-weight:700;margin-top:4px;line-height:1.5}
+  .cast-card .bio{font-size:13px;color:var(--ink-soft);line-height:1.85;margin-top:10px}
+  .cast-line{height:1px;background:var(--red-line);width:36px;margin:8px 0 10px}
+  /* 旧cast-hero削除 */ .cast-hero{display:none}
+
+
+  .feat-grid-more{margin-top:32px}
+  .feat .illust{width:140px;height:140px;margin:0 auto 18px;background:var(--red-soft);border-radius:22px;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .feat:hover .illust{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .feat .illust img{width:100%;height:100%;object-fit:contain;padding:14px}
+  .feat .illust-fb{font-size:48px;line-height:1}
+  /* 旧 .feat .circ は撤去 */
+  .feat .circ{display:none!important}
 
 </style>
 </head>
@@ -223,7 +231,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img src="assets/img/cast_yui.png" class="hero-photo" alt="ご家族とスタッフがタブレットで手続きをする様子" onerror="this.classList.add('placeholder');this.removeAttribute('src');this.innerHTML='<div style=&quot;font-size:34px&quot;>&#127973;</div><div style=&quot;margin-top:10px;font-weight:700&quot;>hero.jpg をここに表示</div><div style=&quot;font-size:12px;margin-top:6px&quot;>assets/img/hero.jpg に画像を置くと反映されます</div>'">
+      <img src="assets/img/cast_team.png" class="hero-photo" alt="ご家族とスタッフがタブレットで手続きをする様子" onerror="this.classList.add('placeholder');this.removeAttribute('src');this.innerHTML='<div style=&quot;font-size:34px&quot;>&#127973;</div><div style=&quot;margin-top:10px;font-weight:700&quot;>hero.jpg をここに表示</div><div style=&quot;font-size:12px;margin-top:6px&quot;>assets/img/hero.jpg に画像を置くと反映されます</div>'">
       <div class="hero-badge">
         <div class="big">0円</div>
         <div class="lbl">通帳・印鑑の<br>準備コスト</div>
@@ -264,9 +272,39 @@
       <p>CarePay は、紙の口座振替に必要だった「通帳・銀行印・来店」をすべて不要にし、ご利用者・ご家族・事業者の手間を最小化します。</p>
     </div>
     <div class="feat-grid">
-      <div class="feat"><div class="circ"><img src="assets/img/pay_bank.png" alt="" onerror="this.parentNode.textContent='\\1F3E6'"></div><h3>通帳・銀行印 不要</h3><p>通帳のコピーや銀行印の押印は一切不要。画面の案内に沿って入力するだけで、口座振替の登録が完了します。記入ミスや印鑑相違による差し戻しが起きません。</p></div>
-      <div class="feat"><div class="circ"><img src="assets/img/pay_card.png" alt="" onerror="this.parentNode.textContent='\\1F4F1'"></div><h3>来店不要・遠隔で完結</h3><p>ご本人やご家族が遠方にいても、届いたリンクをスマホで開いて手続きするだけ。窓口へ行く必要も、書類を郵送する必要もありません。</p></div>
-      <div class="feat"><div class="circ"><img src="assets/img/pay_onetime.png" alt="" onerror="this.parentNode.textContent='\\26A1'"></div><h3>最短即日で開始</h3><p>従来は1〜2か月かかっていた回収開始を、大幅に短縮。登録したその場から決済を開始できるため、初月から取りこぼしなく回収できます。<span style="font-size:12px;color:var(--ink-mute)">※支払方法により異なります</span></p></div>
+      <div class="feat">
+        <div class="illust"><img src="assets/img/illust_paperless.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>📄</div>'"></div>
+        <h3>通帳・銀行印 不要</h3>
+        <p>通帳コピーや銀行印は一切不要。画面の案内に沿って入力するだけで口座振替の登録が完了。記入ミスや印鑑相違による差し戻しが起きません。</p>
+      </div>
+      <div class="feat">
+        <div class="illust"><img src="assets/img/illust_remote.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>📱</div>'"></div>
+        <h3>来店不要・遠隔で完結</h3>
+        <p>ご本人やご家族が遠方にいても、届いたリンクをスマホで開いて手続きするだけ。窓口へ行く必要も、書類を郵送する必要もありません。</p>
+      </div>
+      <div class="feat">
+        <div class="illust"><img src="assets/img/illust_speed.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>⚡</div>'"></div>
+        <h3>最短即日で開始</h3>
+        <p>従来は1〜2か月かかっていた回収開始を、大幅に短縮。登録したその場から決済を開始できるため、初月から取りこぼしなく回収できます。</p>
+      </div>
+    </div>
+
+    <div class="feat-grid feat-grid-more">
+      <div class="feat">
+        <div class="illust"><img src="assets/img/illust_family.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>👨‍👩‍👧</div>'"></div>
+        <h3>家族導線まで一体化</h3>
+        <p>ご家族へのSMS／メール案内、電子同意、電子署名、進捗の見える化を一気通貫で。既存の口振サービスにはない、現場専用の家族導線です。</p>
+      </div>
+      <div class="feat">
+        <div class="illust"><img src="assets/img/illust_unpaid.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>🔁</div>'"></div>
+        <h3>未収を自動で再請求</h3>
+        <p>引き落とし失敗を検知すると、ご家族のスマホへ自動で再請求のリンクを送信。事務が電話・郵送で督促する負担を減らします。</p>
+      </div>
+      <div class="feat">
+        <div class="illust"><img src="assets/img/illust_dashboard.png" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;illust-fb&quot;>📊</div>'"></div>
+        <h3>請求状況を一画面で</h3>
+        <p>誰が、いつ、いくら、どの方法で、どこまで進んでいるか。事業者の管理画面で、毎月の回収状況を一覧で把握できます。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -318,9 +356,9 @@
       <p>毎月の利用料・サービス料を口座振替で回収する、あらゆる事業者さまにご利用いただけます。</p>
     </div>
     <div class="who-grid">
-      <div class="who"><div class="ph"><img src="assets/img/cast_rei.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><div class="bd"><h3>医療</h3><p>病院・クリニック・歯科・訪問診療・調剤薬局。診療費や自費サービスの継続的な回収に。</p></div></div>
-      <div class="who"><div class="ph"><img src="assets/img/cast_miori.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><div class="bd"><h3>介護</h3><p>有料老人ホーム・サ高住・訪問介護・通所介護・居宅。月額利用料や実費の回収に。</p></div></div>
-      <div class="who"><div class="ph"><img src="assets/img/cast_chinatsu.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div><div class="bd"><h3>福祉</h3><p>障害福祉サービス・児童福祉・就労支援・グループホーム。各種利用料の回収に。</p></div></div>
+      <div class="who"><div class="ph"><img src="assets/img/illust_medical.png" alt="" style="width:100%;height:100%;object-fit:contain;padding:24px" onerror="this.parentNode.innerHTML='<div style=&quot;font-size:60px&quot;>🏥</div>'"></div><div class="bd"><h3>医療</h3><p>病院・クリニック・歯科・訪問診療・調剤薬局。診療費や自費サービスの継続的な回収に。</p></div></div>
+      <div class="who"><div class="ph"><img src="assets/img/illust_care.png" alt="" style="width:100%;height:100%;object-fit:contain;padding:24px" onerror="this.parentNode.innerHTML='<div style=&quot;font-size:60px&quot;>🏡</div>'"></div><div class="bd"><h3>介護</h3><p>有料老人ホーム・サ高住・訪問介護・通所介護・居宅。月額利用料や実費の回収に。</p></div></div>
+      <div class="who"><div class="ph"><img src="assets/img/illust_welfare.png" alt="" style="width:100%;height:100%;object-fit:contain;padding:24px" onerror="this.parentNode.innerHTML='<div style=&quot;font-size:60px&quot;>🤝</div>'"></div><div class="bd"><h3>福祉</h3><p>障害福祉サービス・児童福祉・就労支援・グループホーム。各種利用料の回収に。</p></div></div>
     </div>
   </div>
 </section>
@@ -331,59 +369,37 @@
     <div class="sec-head">
       <span class="tag">Our Team</span>
       <h2>現場を、知っているチームが作っています。</h2>
-      <p>金融・医療事務・介護・福祉の現場経験を持つメンバーが、CarePAY を運営しています。請求と回収の業務を、一番リアルに理解する人たちです。</p>
+      <p>金融・医療事務・介護の現場経験を持つメンバーが、CarePAY を運営しています。請求と回収の業務を、一番リアルに理解する人たちです。</p>
     </div>
 
-    <div class="cast-hero">
-      <div class="img"><img src="assets/img/cast_team.png" alt="CarePAY チーム"></div>
-      <div>
-        <h3>事業者・ご家族・ご利用者、<br>三方の現場を知る11人。</h3>
-        <p>元銀行員、医療事務、介護施設の相談員、福祉のサービス管理責任者、開発リード。CarePAY は、これらの現場を実際に歩いてきたメンバーが集まって作っています。だから、現場の業務フローに矛盾しない請求オペレーションを設計できます。</p>
+    <div class="cast-grid3">
+      <div class="cast-card">
+        <div class="pic"><img src="assets/img/cast_ren.png" alt="桐谷 蓮"></div>
+        <div class="info">
+          <div class="nm">桐谷 蓮</div>
+          <div class="cast-line"></div>
+          <div class="ttl">元銀行員・導入アドバイザー</div>
+          <p class="bio">大手銀行で法人営業を10年。決済代行・収納代行の仕組みに精通。事業者さまの導入をワンストップで伴走します。</p>
+        </div>
       </div>
-    </div>
-
-    <div class="cast-grid">
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_yui.png" alt=""></div>
-        <div class="info"><div class="nm">西園寺 結衣</div><div class="cast-line"></div>
-          <div class="sub"><b>163cm</b></div><div class="ttl">コンシェルジュ</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_ren.png" alt=""></div>
-        <div class="info"><div class="nm">桐谷 蓮</div><div class="cast-line"></div>
-          <div class="sub"><b>184cm</b></div><div class="ttl">元銀行員・導入アドバイザー</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_miori.png" alt=""></div>
-        <div class="info"><div class="nm">三田村 美織</div><div class="cast-line"></div>
-          <div class="sub"><b>158cm</b></div><div class="ttl">介護施設 経理担当</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_rei.png" alt=""></div>
-        <div class="info"><div class="nm">海老沢 玲</div><div class="cast-line"></div>
-          <div class="sub"><b>175cm</b></div><div class="ttl">病院 医事課長</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_sota.png" alt=""></div>
-        <div class="info"><div class="nm">戸塚 颯太</div><div class="cast-line"></div>
-          <div class="sub"><b>178cm</b></div><div class="ttl">訪問看護 事務統括</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_chinatsu.png" alt=""></div>
-        <div class="info"><div class="nm">朝霧 千夏</div><div class="cast-line"></div>
-          <div class="sub"><b>165cm</b></div><div class="ttl">福祉施設 サービス管理責任者</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_kyosuke.png" alt=""></div>
-        <div class="info"><div class="nm">鷹宮 京介</div><div class="cast-line"></div>
-          <div class="sub"><b>172cm</b></div><div class="ttl">クリニック 事務長</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_mai.png" alt=""></div>
-        <div class="info"><div class="nm">立花 麻衣</div><div class="cast-line"></div>
-          <div class="sub"><b>167cm</b></div><div class="ttl">開発リード</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_hikari.png" alt=""></div>
-        <div class="info"><div class="nm">久遠 ひかり</div><div class="cast-line"></div>
-          <div class="sub"><b>161cm</b></div><div class="ttl">利用者ご家族（代表）</div></div></div>
-
-      <div class="cast-card"><div class="pic"><img src="assets/img/cast_kunio.png" alt=""></div>
-        <div class="info"><div class="nm">御園生 邦夫</div><div class="cast-line"></div>
-          <div class="sub"><b>168cm</b></div><div class="ttl">ご入居者（代表）</div></div></div>
-
+      <div class="cast-card">
+        <div class="pic"><img src="assets/img/cast_miori.png" alt="三田村 美織"></div>
+        <div class="info">
+          <div class="nm">三田村 美織</div>
+          <div class="cast-line"></div>
+          <div class="ttl">介護施設 経理担当</div>
+          <p class="bio">有料老人ホームで月次の請求・口振管理を担当。紙の依頼書と未収の現場を知り尽くす。事務オペレーション設計担当。</p>
+        </div>
+      </div>
+      <div class="cast-card">
+        <div class="pic"><img src="assets/img/cast_rei.png" alt="海老沢 玲"></div>
+        <div class="info">
+          <div class="nm">海老沢 玲</div>
+          <div class="cast-line"></div>
+          <div class="ttl">病院 医事課長</div>
+          <p class="bio">中規模病院の医事課長として、自費・継続診療費の回収業務を統括。医療現場の請求実務を CarePAY に持ち込んでいます。</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
