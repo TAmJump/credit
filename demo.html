@@ -120,6 +120,16 @@
   @media(max-width:760px){.compare .arrow{padding:14px;font-size:18px}.compare .arrow::after{content:"↓"}.compare .arrow span{display:none}}
   .compare .arrow span::after{content:"→"}
   .price-note{margin-top:18px;font-size:12px;color:var(--ink-soft);line-height:1.8}
+  /* FAQ アコーディオン */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .faq-item{background:#fff;border:1px solid var(--grey-line);border-radius:14px;overflow:hidden}
+  .faq-item summary{list-style:none;cursor:pointer;padding:18px 50px 18px 20px;font-size:16px;font-weight:700;color:var(--ink);position:relative;line-height:1.6}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:400;color:var(--red);transition:.2s}
+  .faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+  .faq-item summary:hover{color:var(--red)}
+  .faq-a{padding:0 20px 20px;font-size:14.5px;color:var(--ink-soft);line-height:1.9}
+  .faq-a b{color:var(--ink);font-weight:700}
   .pillars{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:26px}
   @media(min-width:761px){.pillars{grid-template-columns:repeat(3,1fr);gap:18px}}
   .pillar{background:#fff;border:1px solid var(--grey-line);border-radius:16px;padding:24px 22px 24px 24px;box-shadow:var(--shadow);border-left:4px solid var(--red)}
@@ -549,6 +559,7 @@
     <nav class="links">
       <a href="#features">特長</a>
       <a href="#howitworks">仕組み</a>
+      <a href="#faq">よくある質問</a>
       <a href="#pricing">料金</a>
       <a href="#flow">導入の流れ</a>
       <a href="#segments">対象事業者</a>
@@ -763,6 +774,63 @@
         <span class="lg grey">■</span> CarePay・収納代行との連携
       </p>
     </div>
+  </div>
+</section>
+
+<!-- ===== よくある質問 ===== -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">FAQ</div>
+      <h2>なぜ通帳・銀行印が<br class="d-only">いらないの？</h2>
+      <p>「登録するだけで口座振替ができる」しくみに、疑問を持たれるのは当然です。安全性とあわせて、正直にお答えします。</p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>通帳も銀行印もなしで、本当に口座振替できるの？</summary>
+        <div class="faq-a">
+          <p>はい。ただし「CarePay に登録しただけ」で振替できるわけではありません。登録の途中で、利用者ご本人が<b>ご自身の銀行のシステムにアクセスし、銀行に対して本人確認</b>を行います。紙の依頼書で「銀行印」が担っていた本人確認を、銀行が定めるオンライン認証（キャッシュカードの暗証番号・生年月日など）に置き換えているだけです。許可しているのは銀行であり、CarePay ではありません。</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>本人確認はどうやっているの？口座番号と署名だけ？</summary>
+        <div class="faq-a">
+          <p>いいえ、電子署名だけではありません。鍵になるのは<b>銀行の本人認証</b>です。利用者は銀行の受付ページで、キャッシュカードの暗証番号や生年月日などを入力して認証します。これは「カードを持っていて暗証番号を知っている本人」しか通らないため、印鑑よりも確実な本人確認です。</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>暗証番号や口座情報は CarePay に渡るの？</summary>
+        <div class="faq-a">
+          <p>暗証番号の入力は<b>銀行のページ側</b>で行われ、CarePay は暗証番号を受け取らず保持しない設計です。CarePay が受け取るのは「銀行が認証OKを返した」という結果のみ。お金そのものにも触れません（入金は施設・病院の口座へ直接）。</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>なぜ銀行がこれを認めているの？</summary>
+        <div class="faq-a">
+          <p>銀行自身が「Web口座振替受付サービス」を公式に提供しているからです。ゆうちょ・都市銀行・多くの地方銀行が対応しています。そこへ接続できるのは「収納機関」として銀行と契約した事業者だけで、その役割を<b>収納代行会社</b>が担います。CarePay は収納代行のしくみと連携することで、この銀行ネットワークを利用します。</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>では収納代行会社は不要になるの？</summary>
+        <div class="faq-a">
+          <p>いいえ、収納代行は必須です。銀行と接続して口座振替を実行しているのは収納代行であり、CarePay はその上に「登録案内・契約同意・未収管理・請求書発行」といった<b>現場の業務</b>を乗せる役割です。決済網そのものは収納代行が、現場で使う体験は CarePay が担う、という分担です。</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Square はクレジットカード専用では？口座振替と関係あるの？</summary>
+        <div class="faq-a">
+          <p>そのとおり、Square はカード決済の部分だけに使います。口座振替は Square を通りません。CarePay は2つの支払いを使い分けています：毎月の継続的な回収は<b>口座振替（収納代行＋銀行）</b>、回収開始までの立替や自費のスポット決済は<b>カード（Square）</b>です。</p>
+        </div>
+      </details>
+    </div>
+
+    <p class="price-note" style="text-align:center">※ 対応する認証方式・金融機関は、連携する収納代行会社および各銀行の仕様に準じます。導入時にご案内します。</p>
   </div>
 </section>
 
