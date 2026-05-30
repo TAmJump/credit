@@ -425,6 +425,15 @@
   .ar-pager div{display:flex;gap:8px}
 
   .ar-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .reg-badge,.doc-badge{display:inline-block;padding:2px 7px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap}
+  .reg-badge{margin-bottom:3px}
+  .reg-web{background:#e8f5e9;color:#2e7d32}
+  .reg-paper{background:#fff3e0;color:#e65100}
+  .reg-none{background:#ffebee;color:#c62828}
+  .doc-ok{background:#e8f5e9;color:#2e7d32}
+  .doc-sent{background:#e3f2fd;color:#1565c0}
+  .doc-un{background:#fafafa;color:#9e9e9e;border:1px solid #e0e0e0}
+  .doc-paper{background:#f3e5f5;color:#6a1b9a}
   .ar-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
   .ar-b-paid{background:#e9f5ee;color:#2e7d4f}
   .ar-b-invoiced{background:#e6eef6;color:#34638e}
@@ -1184,6 +1193,7 @@
                     <th onclick="arSort('due')" class="srt">支払期日</th>
                     <th onclick="arSort('age')" class="srt">経過日数</th>
                     <th>支払方法</th>
+                    <th>登録 / 交付</th>
                     <th>ステータス</th>
                     <th>操作</th>
                   </tr>
@@ -1516,19 +1526,21 @@ function smsPay(){document.getElementById('tlOpen').className='tl-item done';doc
 
 /* ===== 債権管理 ===== */
 const arData=[
- {name:'山田 太郎',room:'301号室',facility:'さくら苑',amount:138000,due:'2026-05-27',age:2,pay:'口座振替',status:'paid'},
- {name:'佐藤 花子',room:'208号室',facility:'さくら苑',amount:128000,due:'2026-05-27',age:2,pay:'カード',status:'paid'},
- {name:'渡辺 健一',room:'412号室',facility:'令和ホーム',amount:152000,due:'2026-05-27',age:2,pay:'口座振替',status:'paid'},
- {name:'伊藤 さくら',room:'105号室',facility:'さくら苑',amount:138000,due:'2026-05-27',age:2,pay:'カード',status:'pending'},
- {name:'鈴木 一郎',room:'115号室',facility:'さくら苑',amount:138000,due:'2026-05-15',age:14,pay:'口座振替',status:'unpaid'},
- {name:'高橋 みつ',room:'402号室',facility:'令和ホーム',amount:138000,due:'2026-05-10',age:19,pay:'口座振替',status:'dunning1'},
- {name:'木村 静子',room:'220号室',facility:'さくら苑',amount:128000,due:'2026-04-27',age:32,pay:'振込',status:'dunning1'},
- {name:'松本 義雄',room:'309号室',facility:'令和ホーム',amount:138000,due:'2026-04-15',age:44,pay:'口座振替',status:'dunning2'},
- {name:'井上 とき',room:'118号室',facility:'さくら苑',amount:54000,due:'2026-04-10',age:49,pay:'紙',status:'dunning2'},
- {name:'林 ヨシ子',room:'215号室',facility:'令和ホーム',amount:64000,due:'2026-03-15',age:75,pay:'振込',status:'dunning3'},
- {name:'山口 修',room:'330号室',facility:'令和ホーム',amount:64000,due:'2026-03-10',age:80,pay:'紙',status:'dunning3'},
- {name:'森 千代子',room:'401号室',facility:'さくら苑',amount:128000,due:'2026-02-15',age:103,pay:'紙',status:'legal'}
+ {name:'山田 太郎',room:'301号室',facility:'さくら苑',amount:138000,due:'2026-05-27',age:2,pay:'口座振替',status:'paid',reg:'web',doc:'opened'},
+ {name:'佐藤 花子',room:'208号室',facility:'さくら苑',amount:128000,due:'2026-05-27',age:2,pay:'カード',status:'paid',reg:'web',doc:'opened'},
+ {name:'渡辺 健一',room:'412号室',facility:'令和ホーム',amount:152000,due:'2026-05-27',age:2,pay:'口座振替',status:'paid',reg:'web',doc:'sent'},
+ {name:'伊藤 さくら',room:'105号室',facility:'さくら苑',amount:138000,due:'2026-05-27',age:2,pay:'カード',status:'pending',reg:'web',doc:'opened'},
+ {name:'鈴木 一郎',room:'115号室',facility:'さくら苑',amount:138000,due:'2026-05-15',age:14,pay:'口座振替',status:'unpaid',reg:'web',doc:'sent'},
+ {name:'高橋 みつ',room:'402号室',facility:'令和ホーム',amount:138000,due:'2026-05-10',age:19,pay:'口座振替',status:'dunning1',reg:'web',doc:'unsent'},
+ {name:'木村 静子',room:'220号室',facility:'さくら苑',amount:128000,due:'2026-04-27',age:32,pay:'振込',status:'dunning1',reg:'paper',doc:'paper'},
+ {name:'松本 義雄',room:'309号室',facility:'令和ホーム',amount:138000,due:'2026-04-15',age:44,pay:'口座振替',status:'dunning2',reg:'web',doc:'opened'},
+ {name:'井上 とき',room:'118号室',facility:'さくら苑',amount:54000,due:'2026-04-10',age:49,pay:'紙',status:'dunning2',reg:'paper',doc:'paper'},
+ {name:'林 ヨシ子',room:'215号室',facility:'令和ホーム',amount:64000,due:'2026-03-15',age:75,pay:'振込',status:'dunning3',reg:'none',doc:'unsent'},
+ {name:'山口 修',room:'330号室',facility:'令和ホーム',amount:64000,due:'2026-03-10',age:80,pay:'紙',status:'dunning3',reg:'paper',doc:'paper'},
+ {name:'森 千代子',room:'401号室',facility:'さくら苑',amount:128000,due:'2026-02-15',age:103,pay:'紙',status:'legal',reg:'paper',doc:'paper'}
 ];
+const regLabel={web:'Web登録',paper:'紙登録',none:'未登録'};
+const docLabel={opened:'交付・開封済',sent:'交付済（未開封）',unsent:'未交付',paper:'紙交付'};
 const arStatusLabel={paid:'入金済',pending:'入金待ち',invoiced:'請求済',unpaid:'未収',dunning1:'督促1（SMS）',dunning2:'督促2（文書）',dunning3:'督促3（電話）',legal:'法的回収検討'};
 const arStatusBadge={paid:'ar-b-paid',pending:'ar-b-pending',invoiced:'ar-b-invoiced',unpaid:'ar-b-unpaid',dunning1:'ar-b-d1',dunning2:'ar-b-d2',dunning3:'ar-b-d3',legal:'ar-b-legal'};
 let arSortKey='age',arSortDesc=true;
@@ -1567,6 +1579,9 @@ function arRender(){
        '<button class="dbtn dbtn-red dbtn-sm" onclick="arSendSMS(\''+r.name+'\')">督促SMS</button>':
        (r.status==='paid'?'<button class="dbtn dbtn-ghost dbtn-sm" onclick="toast(\'明細を表示\')">明細</button>':
         '<button class="dbtn dbtn-ghost dbtn-sm" onclick="arEscalate(\''+r.name+'\')">エスカレ</button>');
+    const regCls = r.reg==='web'?'reg-web':(r.reg==='paper'?'reg-paper':'reg-none');
+    const docCls = r.doc==='opened'?'doc-ok':(r.doc==='sent'?'doc-sent':(r.doc==='paper'?'doc-paper':'doc-un'));
+    const deliverBtn = (r.doc==='unsent')?'<button class="dbtn dbtn-ghost dbtn-sm" style="margin-top:4px" onclick="arDeliver(\''+r.name+'\')">交付</button>':'';
     return `<tr>
       <td><input type="checkbox"></td>
       <td><div class="nm">${r.name}<small>${r.facility} ${r.room}</small></div></td>
@@ -1574,6 +1589,7 @@ function arRender(){
       <td>${r.due}</td>
       <td class="${ageCls}">${r.age}日</td>
       <td>${r.pay}</td>
+      <td><span class="reg-badge ${regCls}">${regLabel[r.reg]}</span><br><span class="doc-badge ${docCls}">${docLabel[r.doc]}</span>${deliverBtn}</td>
       <td><span class="ar-badge ${arStatusBadge[r.status]}">${arStatusLabel[r.status]}</span></td>
       <td>${action}</td>
     </tr>`;
@@ -1594,14 +1610,19 @@ function arRenderAging(){
   }).join('');
 }
 function arSendSMS(name){ toast(name+' 様へ督促SMSを送信しました'); }
+function arDeliver(name){
+  const r=arData.find(x=>x.name===name);
+  if(r){ r.doc='sent'; arRender(); }
+  toast(name+' 様へ請求書・領収書を電子交付しました（SMS／メール）。開封状況を記録します。');
+}
 function arEscalate(name){ toast(name+' 様：督促段階を引き上げました'); }
 function arBatchAction(){
   const checked=document.querySelectorAll('#arBody input[type=checkbox]:checked').length;
   toast((checked||'対象')+'件に督促SMSを一括送信しました');
 }
 function arExportCSV(){
-  const head=['利用者','施設','部屋','請求額','支払期日','経過日数','支払方法','ステータス'];
-  const lines=[head.join(',')].concat(arData.map(r=>[r.name,r.facility,r.room,r.amount,r.due,r.age,r.pay,arStatusLabel[r.status]].join(',')));
+  const head=['利用者','施設','部屋','請求額','支払期日','経過日数','支払方法','登録方法','交付状況','ステータス'];
+  const lines=[head.join(',')].concat(arData.map(r=>[r.name,r.facility,r.room,r.amount,r.due,r.age,r.pay,regLabel[r.reg],docLabel[r.doc],arStatusLabel[r.status]].join(',')));
   const csv='\ufeff'+lines.join('\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob);
@@ -1722,38 +1743,49 @@ function billHTML(t, user, month, amt, doc, regNo, regOk){
   // テンプレートごとの本体
   let body = '';
   if(t.label.startsWith('医療（保険')){
+    // 自己負担額(amt)・負担割合から総点数を逆算し、各部に按分（デモ用の内訳）
+    const ratio = 0.3;                       // 3割負担
+    const total = Math.round(amt/ratio);     // 医療費総額（10割）
+    const pts = Math.round(total/10);        // 総点数
+    const seg = (r)=>({pt:Math.round(pts*r), yen:Math.round(total*r)});
+    const sShin=seg(.10), sKanri=seg(.30), sKensa=seg(.32), sToyaku=seg(.16), sZaitaku=seg(.12);
+    const sumPt = sShin.pt+sKanri.pt+sKensa.pt+sToyaku.pt+sZaitaku.pt;
+    const sumYen= sShin.yen+sKanri.yen+sKensa.yen+sToyaku.yen+sZaitaku.yen;
     body = `
-      <div class="section-h">保険診療 費用区分（厚労省規定）</div>
+      <div class="section-h">医療費の内容の分かる領収証（療担規則第5条の2・厚労省通知準拠）</div>
       <table>
-        <thead><tr><th>区分</th><th>点数</th><th>金額</th></tr></thead>
+        <thead><tr><th>区分</th><th>点数</th><th>金額（10割）</th></tr></thead>
         <tbody>
-          <tr><td>初・再診料</td><td class="r">73点</td><td class="r">¥730</td></tr>
-          <tr><td>医学管理等</td><td class="r">225点</td><td class="r">¥2,250</td></tr>
-          <tr><td>在宅医療</td><td class="r">0点</td><td class="r">¥0</td></tr>
-          <tr><td>検査</td><td class="r">340点</td><td class="r">¥3,400</td></tr>
-          <tr><td>画像診断</td><td class="r">0点</td><td class="r">¥0</td></tr>
-          <tr><td>投薬</td><td class="r">120点</td><td class="r">¥1,200</td></tr>
-          <tr><td>注射 / 処置 / 手術 / 麻酔</td><td class="r">0点</td><td class="r">¥0</td></tr>
-          <tr><td>リハビリテーション</td><td class="r">0点</td><td class="r">¥0</td></tr>
-          <tr><td>放射線治療 / 入院料等</td><td class="r">0点</td><td class="r">¥0</td></tr>
-          <tr class="total"><td>保険合計</td><td class="r">758点</td><td class="r">¥7,580</td></tr>
-          <tr><td>負担割合</td><td colspan="2" class="r">3割</td></tr>
-          <tr><td>保険外負担</td><td colspan="2" class="r">¥0</td></tr>
+          <tr><td>初・再診料</td><td class="r">${sShin.pt}点</td><td class="r">${fmt(sShin.yen)}</td></tr>
+          <tr><td>医学管理等 / 在宅医療</td><td class="r">${sKanri.pt}点</td><td class="r">${fmt(sKanri.yen)}</td></tr>
+          <tr><td>検査 / 画像診断</td><td class="r">${sKensa.pt}点</td><td class="r">${fmt(sKensa.yen)}</td></tr>
+          <tr><td>投薬 / 注射</td><td class="r">${sToyaku.pt}点</td><td class="r">${fmt(sToyaku.yen)}</td></tr>
+          <tr><td>処置 / 手術 / 麻酔 / リハビリ / 入院料等</td><td class="r">${sZaitaku.pt}点</td><td class="r">${fmt(sZaitaku.yen)}</td></tr>
+          <tr class="total"><td>保険診療 合計</td><td class="r">${sumPt}点</td><td class="r">${fmt(sumYen)}</td></tr>
+          <tr><td>負担割合</td><td colspan="2" class="r">${ratio*10}割</td></tr>
+          <tr><td>保険外負担（自費）</td><td colspan="2" class="r">¥0</td></tr>
+          <tr class="total"><td colspan="2"><b>本日のお支払額（一部負担金）</b></td><td class="r"><b>${fmt(amt)}</b></td></tr>
         </tbody>
-      </table>`;
+      </table>
+      <div class="bill-taxnote">※ 当院は、個別の診療報酬の算定項目の分かる「明細書」を無償で交付します（レセプト電子請求義務の保険医療機関等）。明細書には投薬・検査等の名称が記載されます。</div>`;
   } else if(t.label.includes('介護保険施設')){
-    const ins = Math.round(amt*0.65), food = Math.round(amt*0.15), live = Math.round(amt*0.13), life = amt - ins - food - live;
+    const ins = Math.round(amt*0.50), food = Math.round(amt*0.22), live = Math.round(amt*0.20), life = amt - ins - food - live;
+    // 医療費控除対象額：特養＝(自己負担+食費+居住費)の1/2、老健・介護医療院等＝全額（国税庁No.1125）
+    const isTokuyo = t.issuer.name.includes('特別養護') || t.label.includes('特養');
+    const mcBase = ins + food + live;            // 日常生活費は対象外
+    const mcDeduct = isTokuyo ? Math.round(mcBase/2) : mcBase;
+    const mcLabel = isTokuyo ? '（介護サービス費＋食費・居住費）×1/2' : '介護サービス費＋食費・居住費';
     body = `
-      <div class="section-h">介護老人保健施設 ご利用料（区分別・医療費控除対応）</div>
+      <div class="section-h">施設ご利用料（区分別・医療費控除対応／国税庁 No.1125）</div>
       <table>
         <thead><tr><th>区分</th><th>内容</th><th>金額</th></tr></thead>
         <tbody>
-          <tr><td>介護サービス費（自己負担）</td><td>1割負担</td><td class="r">${fmt(ins)}</td></tr>
+          <tr><td>介護サービス費（自己負担）</td><td>1〜3割負担</td><td class="r">${fmt(ins)}</td></tr>
           <tr><td>食費</td><td>朝・昼・夕</td><td class="r">${fmt(food)}</td></tr>
-          <tr><td>居住費</td><td>多床室</td><td class="r">${fmt(live)}</td></tr>
-          <tr><td>日常生活費 等</td><td>理美容・洗濯 等</td><td class="r">${fmt(life)}</td></tr>
+          <tr><td>居住費</td><td>居室区分による</td><td class="r">${fmt(live)}</td></tr>
+          <tr><td>日常生活費 等（控除対象外）</td><td>理美容・洗濯 等</td><td class="r">${fmt(life)}</td></tr>
           <tr class="total"><td colspan="2">合計</td><td class="r">${fmt(amt)}</td></tr>
-          <tr><td colspan="2"><b>うち 医療費控除対象額</b></td><td class="r"><b>${fmt(ins+food+live)}</b></td></tr>
+          <tr><td colspan="2"><b>うち 医療費控除対象額</b><br><span style="font-size:10px;color:#777">${mcLabel}</span></td><td class="r"><b>${fmt(mcDeduct)}</b></td></tr>
         </tbody>
       </table>`;
   } else if(t.label.includes('介護保険サービス')){
@@ -1772,15 +1804,16 @@ function billHTML(t, user, month, amt, doc, regNo, regOk){
       </table>`;
   } else if(t.label.includes('居宅サービス')){
     body = `
-      <div class="section-h">居宅サービス ご利用料（医療費控除対応／国税庁通達準拠）</div>
+      <div class="section-h">居宅サービス ご利用料（医療費控除対応／国税庁 No.1127・通達準拠）</div>
       <table>
         <thead><tr><th>項目</th><th>金額</th></tr></thead>
         <tbody>
           <tr><td>利用者負担額（合計）</td><td class="r">${fmt(amt)}</td></tr>
-          <tr><td><b>うち 医療費控除の対象となる金額</b></td><td class="r"><b>${fmt(Math.round(amt*0.7))}</b></td></tr>
+          <tr><td><b>うち 医療費控除の対象となる金額</b><br><span style="font-size:10px;color:#777">医療系サービス相当分（訪問看護・訪問リハ・通所リハ 等）</span></td><td class="r"><b>${fmt(Math.round(amt*0.7))}</b></td></tr>
           <tr><td>居宅サービス計画を作成した<br>介護支援事業者名</td><td class="r">居宅介護支援事業所 〇〇</td></tr>
         </tbody>
-      </table>`;
+      </table>
+      <div class="bill-taxnote">※ 医療系サービスと併用する場合のみ対象となる福祉系サービスがあります。おむつ代等は別途「おむつ使用証明書」等が必要です。</div>`;
   } else if(t.label.includes('福祉')){
     body = `
       <div class="section-h">障害福祉サービス ご利用料</div>
