@@ -148,6 +148,16 @@
   .pillar h4{font-size:17px;font-weight:800;margin-bottom:8px}
   .pillar p{font-size:14px;color:var(--ink-soft);line-height:1.8}
   .sp-br{display:none}
+  /* 3ステップ説明 */
+  .steps3{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:761px){.steps3{grid-template-columns:repeat(3,1fr);gap:20px}}
+  .step3{position:relative;background:#fff;border:1px solid var(--grey-line);border-radius:18px;padding:26px 22px;box-shadow:var(--shadow)}
+  .step3 .s3-no{position:absolute;top:-12px;left:22px;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(207,71,71,.35)}
+  .step3 .s3-ic{width:60px;height:60px;border-radius:15px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;margin:8px 0 14px;overflow:hidden}
+  .step3 .s3-ic img{width:100%;height:100%;object-fit:contain;padding:10px}
+  .step3 h4{font-size:17px;font-weight:800;margin-bottom:8px}
+  .step3 p{font-size:14px;color:var(--ink-soft);line-height:1.8}
+  .steps3-note{margin-top:16px;font-size:12.5px;color:var(--ink-soft);line-height:1.8;text-align:center}
   /* お金の流れ図 */
   .flowmap{background:var(--grey-2);border:1px solid var(--grey-line);border-radius:20px;padding:28px 22px}
   .flow-pc{display:block;width:100%;height:auto}
@@ -669,7 +679,36 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-tag">How it works</div>
-      <h2>お金の流れは、シンプルです。</h2>
+      <h2>3ステップで、口座振替の登録が完了。</h2>
+      <p>利用者・ご家族がやることは、届いたURLから自分の銀行を選んで認証するだけ。通帳も銀行印も、来店も郵送もいりません。紙だと1〜2か月かかっていた登録が、その場で終わります。</p>
+    </div>
+
+    <div class="steps3">
+      <div class="step3">
+        <div class="s3-no">1</div>
+        <div class="s3-ic"><img src="assets/img/ic_remote.png" alt=""></div>
+        <h4>SMSでURLが届く</h4>
+        <p>施設が利用者・ご家族へ登録用のリンクをSMSで送ります。アプリのインストールは不要です。</p>
+      </div>
+      <div class="step3">
+        <div class="s3-no">2</div>
+        <div class="s3-ic"><img src="assets/img/ic_no_seal.png" alt=""></div>
+        <h4>銀行を選んで認証</h4>
+        <p>自分の銀行を選び、キャッシュカードの暗証番号や生年月日などで本人認証。通帳・銀行印は不要です。</p>
+      </div>
+      <div class="step3">
+        <div class="s3-no">3</div>
+        <div class="s3-ic"><img src="assets/img/ic_money_direct.png" alt=""></div>
+        <h4>登録完了、毎月自動で</h4>
+        <p>以降は毎月の利用料が口座から自動で引き落とされ、施設・病院の口座へ直接入金されます。</p>
+      </div>
+    </div>
+
+    <p class="steps3-note">対応している主要な金融機関（ゆうちょ・都市銀行・地方銀行など）から選べます。対応していない場合は紙の手続きでフォローします。</p>
+
+    <div class="sec-head" style="margin-top:56px">
+      <div class="sec-tag">Money flow</div>
+      <h2>お金の流れも、シンプルです。</h2>
       <p>利用者・ご家族の支払いは、銀行の口座振替やカードを通じて施設・病院へ直接入ります。CarePay は資金に触れません。私たちは、契約・登録などの作業をオンライン化するソフトを提供し、施設から利用料だけをいただきます。</p>
     </div>
 
