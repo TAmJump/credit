@@ -203,6 +203,9 @@
 
   .feat-grid-more .feat[style*="grid-column: span 3"]{max-width:760px;margin:0 auto;text-align:center;background:var(--red-soft);border-radius:18px;padding:30px 28px}
   @media(max-width:820px){.feat-grid-more .feat[style*="grid-column: span 3"]{grid-column:1!important}}
+  .feat .illust.illust-xl{width:320px;height:320px;border-radius:28px;margin-bottom:22px}
+  .feat .illust.illust-xl img{padding:18px}
+  @media(max-width:560px){.feat .illust.illust-xl{width:60vw;height:60vw;max-width:320px;max-height:320px}}
 
   .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
   .pillar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;text-align:center}
@@ -330,7 +333,7 @@
 
     <div class="feat-grid feat-grid-more">
       <div class="feat" style="grid-column: span 3">
-        <div class="illust" style="width:120px;height:120px"><img src="assets/img/illust_dashboard.png" alt=""></div>
+        <div class="illust illust-xl"><img src="assets/img/illust_dashboard.png" alt=""></div>
         <h3>債権管理まで内包</h3>
         <p>未収・督促段階・滞留日数（エージング）・回収予定を、CarePAY 一つで管理。CSV エクスポートや一括督促SMSにも対応し、債権管理システムを別途導入する必要がありません。<br><a href="demo.html" style="color:var(--red);font-weight:800">▶ 債権管理のデモを見る</a></p>
       </div>
@@ -338,7 +341,7 @@
 
     <div class="feat-grid feat-grid-more">
       <div class="feat" style="grid-column: span 3">
-        <div class="illust" style="width:120px;height:120px"><img src="assets/img/illust_paperless.png" alt=""></div>
+        <div class="illust illust-xl"><img src="assets/img/illust_paperless.png" alt=""></div>
         <h3>請求書・領収書も、完全ペーパーレス発行</h3>
         <p>医療（保険診療／自費）、介護保険サービス、介護保険施設（老健・介護医療院）、居宅サービス（医療費控除対応）、福祉サービス。<b>業態ごとに国が定めた必須記載項目を網羅</b>したテンプレートで、請求書・領収書・医療費明細書・医療費控除対象額の明細などをアプリ内で電子発行。タイムスタンプ＋ハッシュ署名で改ざん防止、家族のスマホへそのまま送信できます。<br><a href="demo.html" style="color:var(--red);font-weight:800">▶ 発行画面のデモを見る</a></p>
       </div>
