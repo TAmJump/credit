@@ -52,8 +52,15 @@
   @media(max-width:860px){.nav .links a:not(.cta){display:none}}
 
   /* ===== ヒーロー ===== */
-  .hero{padding:64px 0 52px;border-bottom:1px solid var(--grey-line);background:linear-gradient(180deg,#fff 0%,var(--grey-2) 100%)}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero{position:relative;padding:78px 0 70px;border-bottom:1px solid var(--grey-line);overflow:hidden;
+    background:radial-gradient(820px 420px at 90% -10%,rgba(207,71,71,.12),transparent 58%),
+               radial-gradient(680px 520px at -8% 120%,rgba(207,71,71,.06),transparent 55%),
+               linear-gradient(180deg,#ffffff 0%,#fafbfc 100%)}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:radial-gradient(rgba(23,27,31,.05) 1px,transparent 1.4px);background-size:24px 24px;
+    -webkit-mask:linear-gradient(180deg,#000,transparent 72%);mask:linear-gradient(180deg,#000,transparent 72%)}
+  .hero .wrap{position:relative;z-index:1}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:54px;align-items:center}
   @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px}}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--red-soft);color:var(--red-deep);font-size:13px;font-weight:800;padding:6px 14px;border-radius:999px;letter-spacing:.03em;margin-bottom:20px}
   .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red)}
@@ -78,6 +85,52 @@
   .float-card.a{left:-14px;bottom:26px}
   .float-card.b{right:-10px;top:24px}
   @media(max-width:900px){.float-card{display:none}}
+
+  /* ===== ヒーロー：プロダクトUIモックアップ ===== */
+  .hero-stage{position:relative;padding:30px 26px}
+  .hero-stage::after{content:"";position:absolute;inset:8% 4% -6% 4%;z-index:0;border-radius:30px;
+    background:radial-gradient(60% 60% at 50% 40%,rgba(207,71,71,.16),transparent 70%);filter:blur(34px)}
+  .mock{position:relative;z-index:2;background:#fff;border:1px solid var(--grey-line);border-radius:20px;
+    box-shadow:var(--shadow-lg);overflow:hidden;transform:perspective(1400px) rotateY(-4deg) rotateX(2deg);
+    transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .hero-stage:hover .mock{transform:perspective(1400px) rotateY(0) rotateX(0)}
+  .mock-bar{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid var(--grey-line);background:var(--grey-2)}
+  .mock-bar i{width:9px;height:9px;border-radius:50%;background:#dfe3e7;display:inline-block}
+  .mock-bar i:nth-child(1){background:#f0b9b9}
+  .mock-url{margin-left:10px;font-size:11.5px;color:var(--ink-soft);background:#fff;border:1px solid var(--grey-line);
+    border-radius:7px;padding:4px 12px;font-variant-numeric:tabular-nums}
+  .mock-body{padding:22px 22px 24px}
+  .mock-step{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--red-deep);text-transform:uppercase}
+  .mock-progress{height:5px;border-radius:999px;background:var(--grey);margin:11px 0 20px;overflow:hidden}
+  .mock-progress span{display:block;height:100%;width:66%;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--red-deep))}
+  .mock-label{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:11px}
+  .mock-banks{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:20px}
+  .mock-banks .mb{font-size:12.5px;font-weight:700;color:var(--ink-mid);text-align:center;padding:11px 6px;
+    border:1px solid var(--grey-line);border-radius:11px;background:#fff}
+  .mock-banks .mb.on{border-color:var(--red);color:var(--red-deep);background:var(--red-soft);
+    box-shadow:0 0 0 3px rgba(207,71,71,.10)}
+  .mock-auth{border:1px solid var(--grey-line);border-radius:13px;padding:14px 16px;background:var(--grey-2);margin-bottom:18px}
+  .mock-auth .ma-row{display:flex;align-items:center;justify-content:space-between}
+  .mock-auth .ma-row span:first-child{font-size:13px;font-weight:700;color:var(--ink)}
+  .mock-auth .dots{letter-spacing:6px;color:var(--ink);font-size:14px}
+  .mock-auth .ma-note{font-size:11px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
+  .mock-cta{width:100%;border:none;border-radius:12px;padding:14px;font-family:inherit;font-size:14.5px;font-weight:800;
+    color:#fff;background:linear-gradient(180deg,var(--red),var(--red-deep));box-shadow:0 8px 20px rgba(207,71,71,.30);cursor:pointer}
+  /* 角に置く上質チップ（ステージ内に収まる＝はみ出さない） */
+  .hchip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.86);
+    backdrop-filter:blur(10px);border:1px solid var(--grey-line);border-radius:14px;padding:11px 14px;
+    box-shadow:var(--shadow-lg);font-size:12.5px;font-weight:700;line-height:1.4;color:var(--ink)}
+  .hchip-1{top:6px;right:-6px}
+  .hchip-2{bottom:8px;left:-8px}
+  .hchip .hi{width:34px;height:34px;border-radius:10px;background:var(--red-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+  .hchip .hi img{width:100%;height:100%;object-fit:contain;padding:6px}
+  .hchip b{color:var(--red-deep)}
+  @media(max-width:900px){
+    .hero-stage{padding:8px 0 0}
+    .mock{transform:none}
+    .hchip-1{right:4px} .hchip-2{left:4px}
+  }
+  @media(max-width:480px){.hchip{display:none}}
 
   /* ===== 信頼バー ===== */
   .trust{background:var(--ink);color:#fff;padding:26px 0}
@@ -593,22 +646,36 @@
       <h1 class="hero-title">紙とハンコの口座振替を、<br><span class="accent">オンラインで完結</span>へ。</h1>
       <p class="hero-lead">
         医療・介護・福祉のための口座振替サービス。利用者・入居者は、<b>通帳情報や銀行印を用意せず</b>、スマホやPCから遠隔で口座振替の登録ができます。
-        紙の依頼書、印鑑相違による差し戻し、郵送の往復をなくし、<b>登録から口振開始までを最短スケジュールで確実に</b>。決済基盤は Square。
+        紙の依頼書、印鑑相違による差し戻し、郵送の往復をなくし、<b>登録から口振開始までを最短スケジュールで確実に</b>。口座振替は収納代行と連携、カード決済は Square。
       </p>
       <div class="hero-cta">
         <a class="btn btn-red" onclick="openDemo('family')">登録フローを体験する</a>
         <a class="btn btn-ghost" href="#flow">導入スケジュールを見る</a>
       </div>
-      <p class="hero-note">数万事業者・数万人規模の請求にも対応する設計。クレジットカード・口座振替・コンビニ・振込を一元管理。</p>
+      <p class="hero-note">数万事業者・数万人規模の請求にも対応する設計。口座振替・カード・コンビニ・振込を一元管理。</p>
     </div>
     <div class="hero-visual">
-      <div class="ph">
-        <img src="assets/img/cast_team.png" alt="医療・介護・福祉の現場で、家族がスマホから口座振替を登録している様子"
-             onerror="this.style.display='none';this.parentNode.querySelector('.ph-fallback').style.display='block'">
-        <div class="ph-fallback" style="display:none"><b>CarePAY</b>医療・介護・福祉の現場で</div>
+      <div class="hero-stage">
+        <div class="mock" role="img" aria-label="口座振替の本人認証画面のイメージ">
+          <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">carepay.app ／ 口座振替の登録</span></div>
+          <div class="mock-body">
+            <div class="mock-step">STEP 2 / 3 ・ 銀行で本人認証</div>
+            <div class="mock-progress"><span></span></div>
+            <div class="mock-label">ご利用の金融機関を選択</div>
+            <div class="mock-banks">
+              <div class="mb on">ゆうちょ</div><div class="mb">三井住友</div><div class="mb">みずほ</div>
+              <div class="mb">三菱UFJ</div><div class="mb">地方銀行</div><div class="mb">信用金庫</div>
+            </div>
+            <div class="mock-auth">
+              <div class="ma-row"><span>キャッシュカード暗証番号</span><span class="dots">●●●●</span></div>
+              <div class="ma-note">暗証番号は銀行のページで入力。CarePay は受け取らず、保持しません。</div>
+            </div>
+            <button class="mock-cta" type="button" onclick="openDemo('family')">この内容で登録する</button>
+          </div>
+        </div>
+        <div class="hchip hchip-1"><span class="hi"><img src="assets/img/ic_no_seal.png" alt=""></span><div>印鑑・記入ミスの<br><b>差し戻し 0</b></div></div>
+        <div class="hchip hchip-2"><span class="hi"><img src="assets/img/ic_remote.png" alt=""></span><div>来店不要・<br><b>登録は数分</b></div></div>
       </div>
-      <div class="float-card a"><span class="ic"><img src="assets/img/ic_no_seal.png" alt=""></span>銀行印・通帳<br>不要</div>
-      <div class="float-card b"><span class="ic"><img src="assets/img/ic_remote.png" alt=""></span>遠隔・オンライン<br>で登録完結</div>
     </div>
   </div>
 </section>
