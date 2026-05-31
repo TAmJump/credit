@@ -46,8 +46,14 @@
   .nav .links a.cta:hover,.nav .cta:hover{background:var(--red-deep);color:#fff!important;transform:translateY(-1px)}
   @media(max-width:820px){.nav .links a:not(.cta){display:none}}
 
-  .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--grey) 100%)}
-  .hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;max-width:var(--maxw);margin:0 auto;padding:70px 22px 76px}
+  .hero{position:relative;overflow:hidden;
+    background:radial-gradient(820px 420px at 90% -10%,rgba(207,71,71,.12),transparent 58%),
+               radial-gradient(680px 520px at -8% 120%,rgba(207,71,71,.06),transparent 55%),
+               linear-gradient(180deg,#fff 0%,#fafbfc 100%)}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:radial-gradient(rgba(23,27,31,.05) 1px,transparent 1.4px);background-size:24px 24px;
+    -webkit-mask:linear-gradient(180deg,#000,transparent 72%);mask:linear-gradient(180deg,#000,transparent 72%)}
+  .hero-in{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;max-width:var(--maxw);margin:0 auto;padding:78px 22px 84px}
   .hero .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--red-line);color:var(--red-deep);font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;letter-spacing:.04em}
   .hero h1{font-size:42px;line-height:1.32;letter-spacing:.01em;margin:20px 0 16px;font-weight:900}
   .hero h1 .line{display:block}
@@ -61,6 +67,40 @@
   .hero-visual{position:relative}
   .hero-photo{width:100%;aspect-ratio:3/4;border-radius:22px;object-fit:cover;object-position:center top;box-shadow:var(--shadow-lg);background:var(--grey2);display:block}
   .hero-photo.placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--ink-mute);border:2px dashed var(--line);text-align:center;padding:30px}
+  /* LP プロダクト・モックアップ（請求ダッシュボード） */
+  .lp-stage{position:relative;padding:28px 22px}
+  .lp-stage::after{content:"";position:absolute;inset:8% 4% -6% 4%;z-index:0;border-radius:30px;background:radial-gradient(60% 60% at 50% 40%,rgba(207,71,71,.16),transparent 70%);filter:blur(34px)}
+  .lp-mock{position:relative;z-index:2;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);overflow:hidden;transform:perspective(1400px) rotateY(-4deg) rotateX(2deg);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .lp-stage:hover .lp-mock{transform:perspective(1400px) rotateY(0) rotateX(0)}
+  .lp-bar{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#fafbfc}
+  .lp-bar i{width:9px;height:9px;border-radius:50%;background:#dfe3e7;display:inline-block}
+  .lp-bar i:first-child{background:#f0b9b9}
+  .lp-url{margin-left:10px;font-size:11.5px;color:var(--ink-soft);background:#fff;border:1px solid var(--line);border-radius:7px;padding:4px 12px;font-variant-numeric:tabular-nums}
+  .lp-body{padding:18px}
+  .lp-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .lp-h b{font-size:14px;color:var(--ink)}
+  .lp-h .tg{font-size:11px;font-weight:800;color:var(--red-deep);background:var(--red-soft);border:1px solid var(--red-line);border-radius:999px;padding:3px 11px}
+  .lp-kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .lp-kpi{border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .lp-kpi .k{font-size:11px;color:var(--ink-soft);font-weight:700}
+  .lp-kpi .v{font-size:20px;font-weight:800;color:var(--ink);margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .lp-kpi .v.g{color:#2e7d4f}
+  .lp-kpi .v.r{color:var(--red)}
+  .lp-list{display:flex;flex-direction:column;gap:8px}
+  .lp-row{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .lp-row .nm{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .lp-row .nm small{display:block;font-weight:400;color:var(--ink-mute);font-size:11px;margin-top:1px}
+  .lp-pill{font-size:11px;font-weight:700;border-radius:999px;padding:4px 10px;border:1px solid transparent;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+  .lp-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .lp-pill.done{color:#2e7d4f;background:#eaf5ef;border-color:#cfe8db}
+  .lp-pill.unpaid{color:var(--red);background:var(--red-soft);border-color:var(--red-line)}
+  .lp-chip{position:absolute;z-index:3;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:11px 14px;box-shadow:var(--shadow-lg);font-size:12.5px;font-weight:700;line-height:1.4;color:var(--ink);display:flex;align-items:center;gap:9px}
+  .lp-chip .ico{width:26px;height:26px;border-radius:8px;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0}
+  .lp-chip b{color:var(--red-deep)}
+  .lp-chip-1{top:6px;right:-6px}
+  .lp-chip-2{bottom:10px;left:-10px}
+  @media(max-width:820px){.lp-stage{padding:8px 0 0}.lp-mock{transform:none}.lp-chip-1{right:4px}.lp-chip-2{left:4px}}
+  @media(max-width:480px){.lp-chip{display:none}}
   .hero-badge{position:absolute;left:-10px;bottom:18px;background:#fff;border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 18px;display:flex;align-items:center;gap:12px;border:1px solid var(--line)}
   .hero-badge .big{font-size:26px;font-weight:900;color:var(--red);line-height:1;letter-spacing:.01em}
   .hero-badge .lbl{font-size:11.5px;color:var(--ink-soft);font-weight:700;line-height:1.5}
@@ -272,10 +312,24 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img src="assets/img/cast_team.png" class="hero-photo" alt="施設の窓口で、職員のサポートのもとタブレットから口座振替を登録する様子" onerror="this.classList.add('placeholder');this.removeAttribute('src');this.innerHTML='<div style=&quot;margin-top:10px;font-weight:700&quot;>hero.jpg をここに表示</div><div style=&quot;font-size:12px;margin-top:6px&quot;>assets/img/hero.jpg に画像を置くと反映されます</div>'">
-      <div class="hero-badge">
-        <div class="big">差し戻し<span style="font-size:18px">ゼロ</span></div>
-        <div class="lbl">印鑑相違・<br>記入ミスなし</div>
+      <div class="lp-stage">
+        <div class="lp-mock" role="img" aria-label="請求・回収の管理画面のイメージ">
+          <div class="lp-bar"><i></i><i></i><i></i><span class="lp-url">carepay.app ／ 請求管理</span></div>
+          <div class="lp-body">
+            <div class="lp-h"><b>さくら苑 ／ 5月分</b><span class="tg">回収率 94%</span></div>
+            <div class="lp-kpis">
+              <div class="lp-kpi"><div class="k">請求済</div><div class="v g">¥3,128,000</div></div>
+              <div class="lp-kpi"><div class="k">未収残高</div><div class="v r">¥184,000</div></div>
+            </div>
+            <div class="lp-list">
+              <div class="lp-row"><div class="nm">山田 太郎<small>301号室 ・ 口座振替</small></div><span class="lp-pill done">入金済</span></div>
+              <div class="lp-row"><div class="nm">佐藤 花子<small>208号室 ・ カード</small></div><span class="lp-pill done">入金済</span></div>
+              <div class="lp-row"><div class="nm">鈴木 一郎<small>115号室 ・ 口座振替</small></div><span class="lp-pill unpaid">未収・再請求</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-chip lp-chip-1"><span class="ico">&#10003;</span><div>印鑑・記入ミスの<br><b>差し戻し 0</b></div></div>
+        <div class="lp-chip lp-chip-2"><span class="ico">&#10003;</span><div>未収は自動で<br><b>再請求</b></div></div>
       </div>
     </div>
   </div>
