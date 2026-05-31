@@ -4,7 +4,7 @@
    - HTML ナビゲーションはネット優先（更新を取りこぼさない）→ 失敗時キャッシュ
    - 外部CDN（Square SDK 等）はキャッシュ対象外（常にネット）
 */
-const VERSION = 'carepay-v1';
+const VERSION = 'carepay-v2';
 const SHELL = [
   './',
   './index.html',
