@@ -216,6 +216,19 @@
   .price-note{font-size:12px;color:var(--ink-mute);line-height:1.9;margin-top:22px;max-width:820px;margin-left:auto;margin-right:auto;text-align:center}
   @media(max-width:820px){.pillars{grid-template-columns:1fr}}
 
+  .rails{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .rail{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 26px}
+  .rail-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--red-deep);border:1px solid var(--red-line);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  .rail h3{font-size:22px;font-weight:900;display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+  .rail h3 span{font-size:13px;font-weight:800;color:var(--ink-mute);letter-spacing:.04em}
+  .rail ul{list-style:none}
+  .rail li{font-size:14.5px;padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed rgba(0,0,0,.07);color:var(--ink-soft)}
+  .rail li:last-child{border-bottom:none}
+  .rail li::before{content:"\2713";position:absolute;left:0;color:var(--red);font-weight:900}
+  .rail li b{color:var(--ink)}
+  .rails-note{font-size:13px;color:var(--ink-soft);line-height:1.9;max-width:840px;margin:22px auto 0;text-align:center}
+  @media(max-width:820px){.rails{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -232,6 +245,7 @@
       <a href="#flow">導入の流れ</a>
       <a href="#pricing">料金</a>
       <a href="#who">対象</a>
+      <a href="#payment">決済</a>
       <a href="#cast">チーム</a>
       <a href="#faq">FAQ</a>
       <a href="demo.html" class="cta">画面デモを見る</a>
@@ -444,21 +458,36 @@
   </div>
 </section>
 
-<section class="blk">
+<section class="blk" id="payment">
   <div class="wrap">
-    <div class="sq-band">
-      <div>
-        <h3>カード決済は、Square。</h3>
-        <p>回収開始までの立替や、入居一時金・自費などのスポット決済には、世界中で利用される決済プラットフォーム Square を採用。カード情報は Square 社のシステムに直接送信され、CarePay や事業者のサーバーには保存されません。毎月の口座振替は、銀行と接続する収納代行のしくみと連携して実行します。</p>
+    <div class="sec-head">
+      <span class="tag">Payment</span>
+      <h2>支払いのしくみは、2本立て。</h2>
+      <p>毎月の口座振替は<b>銀行と接続する収納代行</b>が実行し、カードは立替・自費だけに使います。CarePAY は収納代行でも銀行でもなく、どちらにも資金として触れません。</p>
+    </div>
+    <div class="rails">
+      <div class="rail">
+        <div class="rail-tag">毎月の回収（本命）</div>
+        <h3>口座振替 <span>銀行 × 収納代行</span></h3>
         <ul>
-          <li>カード情報は事業者側に残らない</li>
-          <li>立替・自費のスポット決済に対応</li>
-          <li>決済の通知・レシートを自動送信</li>
-          <li>ご家族はカード情報を自分で更新可能</li>
+          <li>銀行のオンライン本人認証（暗証番号など）で登録</li>
+          <li>毎月、口座から自動で引き落とし</li>
+          <li>入金は施設・病院の口座へ<b>直接</b></li>
+          <li><b>Square は通りません</b></li>
         </ul>
       </div>
-      <div class="sq-logo"><div class="big">Square</div><div class="sub">Secure Payments Platform</div></div>
+      <div class="rail">
+        <div class="rail-tag">立替・スポット決済</div>
+        <h3>カード決済 <span>Square</span></h3>
+        <ul>
+          <li>初回振替が始まるまでの<b>即日立替</b></li>
+          <li>入居一時金・自費などの単発決済</li>
+          <li>カード情報は Square に直接送信</li>
+          <li>CarePay・事業者のサーバーには残りません</li>
+        </ul>
+      </div>
     </div>
+    <p class="rails-note">CarePAY は「収納代行の Web 口座振替受付」と「カード決済」を、医療・介護・福祉の現場向けに束ねる<b>受付アプリ＋請求管理画面</b>です。決済網そのもの（銀行・収納代行・Square）は各社が担い、CarePAY は資金に一切触れません。</p>
   </div>
 </section>
 
