@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CarePay｜通帳・銀行印・来店不要。遠隔で完結する口座振替サービス</title>
-<meta name="description" content="医療・介護・福祉事業者向けの口座振替サービス。通帳情報・銀行印・来店はすべて不要。スマホひとつ、遠隔で口座振替の登録から実行までを完結します。決済はSquare。">
+<title>CarePAY｜契約から回収まで一気通貫。医療・介護・福祉の現場専用 請求OS</title>
+<meta name="description" content="医療・介護・福祉の現場専用 請求OS。印鑑の押印も口座番号の手書きも不要。キャッシュカードの暗証番号で本人認証するから、印鑑相違・記入ミスによる差し戻しがゼロ。口座振替は収納代行のしくみと連携し、施設に追加負担は原則なし。CarePAYは資金に触れません。">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/img/favicon.png">
 <!-- PWA -->
@@ -204,6 +204,15 @@
   .feat-grid-more .feat[style*="grid-column: span 3"]{max-width:760px;margin:0 auto;text-align:center;background:var(--red-soft);border-radius:18px;padding:30px 28px}
   @media(max-width:820px){.feat-grid-more .feat[style*="grid-column: span 3"]{grid-column:1!important}}
 
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  .pillar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;text-align:center}
+  .pillar .p-ic{width:72px;height:72px;border-radius:16px;background:var(--red-soft);margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+  .pillar .p-ic img{width:42px;height:42px;object-fit:contain}
+  .pillar h4{font-size:17px;font-weight:900;margin-bottom:9px}
+  .pillar p{font-size:14px;color:var(--ink-soft);line-height:1.85}
+  .price-note{font-size:12px;color:var(--ink-mute);line-height:1.9;margin-top:22px;max-width:820px;margin-left:auto;margin-right:auto;text-align:center}
+  @media(max-width:820px){.pillars{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -218,6 +227,7 @@
       <a href="#problem">課題</a>
       <a href="#feature">特長</a>
       <a href="#flow">導入の流れ</a>
+      <a href="#pricing">料金</a>
       <a href="#who">対象</a>
       <a href="#cast">チーム</a>
       <a href="#faq">FAQ</a>
@@ -235,17 +245,17 @@
         <span class="line">請求業務を、<span class="em">まるごと。</span></span>
         <span class="line">契約から回収まで一気通貫の<br><span class="em">現場専用 請求OS</span>。</span>
       </h1>
-      <p class="lead">入居・利用契約、ご家族への案内、口座振替の登録、毎月の自動引き落とし、未収時の再請求まで。Web口振だけではない、医療・介護・福祉の現場に最適化された請求オペレーションを、CarePAY が一つに束ねます。通帳・銀行印・来店は、すべて不要です。</p>
+      <p class="lead">入居・利用契約、ご家族への案内、口座振替の登録、毎月の自動引き落とし、未収時の再請求、請求書・領収書の発行まで。医療・介護・福祉の現場に最適化された請求オペレーションを、CarePAY が一つに束ねます。<b>印鑑の押印も、口座番号の手書きも不要。</b>キャッシュカードの暗証番号で本人認証するから、印鑑相違・記入ミスによる差し戻しが起きません。</p>
       <div class="btns">
         <a href="#flow" class="btn btn-red">導入の流れと開始時期を見る</a>
         <a href="demo.html" class="btn btn-ghost">登録画面のデモ &#9654;</a>
       </div>
     </div>
     <div class="hero-visual">
-      <img src="assets/img/cast_team.png" class="hero-photo" alt="ご家族とスタッフがタブレットで手続きをする様子" onerror="this.classList.add('placeholder');this.removeAttribute('src');this.innerHTML='<div style=&quot;margin-top:10px;font-weight:700&quot;>hero.jpg をここに表示</div><div style=&quot;font-size:12px;margin-top:6px&quot;>assets/img/hero.jpg に画像を置くと反映されます</div>'">
+      <img src="assets/img/cast_team.png" class="hero-photo" alt="施設の窓口で、職員のサポートのもとタブレットから口座振替を登録する様子" onerror="this.classList.add('placeholder');this.removeAttribute('src');this.innerHTML='<div style=&quot;margin-top:10px;font-weight:700&quot;>hero.jpg をここに表示</div><div style=&quot;font-size:12px;margin-top:6px&quot;>assets/img/hero.jpg に画像を置くと反映されます</div>'">
       <div class="hero-badge">
-        <div class="big">最短<span style="font-size:18px">即日</span></div>
-        <div class="lbl">登録から<br>口座振替の実行まで</div>
+        <div class="big">差し戻し<span style="font-size:18px">ゼロ</span></div>
+        <div class="lbl">印鑑相違・<br>記入ミスなし</div>
       </div>
     </div>
   </div>
@@ -256,7 +266,7 @@
     <div><div class="n">数万<span class="u">社</span></div><div class="c">想定 導入事業者規模</div></div>
     <div><div class="n">数万<span class="u">人</span></div><div class="c">想定 ご利用者・入居者</div></div>
     <div><div class="n">来店<span class="u">0回</span></div><div class="c">登録は完全オンライン</div></div>
-    <div><div class="n">最短<span class="u">即日</span></div><div class="c">登録〜決済開始まで ※</div></div>
+    <div><div class="n">差し戻し<span class="u">0</span></div><div class="c">印鑑相違・記入ミス</div></div>
   </div>
 </div>
 
@@ -279,24 +289,24 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="tag">Why CarePay</span>
-      <h2>準備書類ゼロ。来店ゼロ。<br>遠隔で、口座振替が始まる。</h2>
-      <p>CarePay は、紙の口座振替に必要だった「通帳・銀行印・来店」をすべて不要にし、ご利用者・ご家族・事業者の手間を最小化します。</p>
+      <h2>印鑑も、口座番号の記入も不要。<br>差し戻しゼロで、口座振替が始まる。</h2>
+      <p>CarePay は、紙の口座振替依頼書に必要だった「印鑑の押印・口座番号の手書き」をなくします。本人認証ベースの登録だから、印鑑相違や記入ミスによる差し戻しが起きません。</p>
     </div>
     <div class="feat-grid">
       <div class="feat">
         <div class="illust"><img src="assets/img/illust_paperless.png" alt="" ></div>
-        <h3>通帳・銀行印 不要</h3>
-        <p>通帳コピーや銀行印は一切不要。画面の案内に沿って入力するだけで口座振替の登録が完了。記入ミスや印鑑相違による差し戻しが起きません。</p>
+        <h3>印鑑も口座番号の記入も不要</h3>
+        <p>銀行届出印の押印や、通帳を見ながらの口座番号の転記は不要。キャッシュカードの暗証番号などで本人認証するため、印鑑相違・記入ミスによる差し戻しが起きません。</p>
       </div>
       <div class="feat">
         <div class="illust"><img src="assets/img/illust_remote.png" alt="" ></div>
-        <h3>来店不要・遠隔で完結</h3>
-        <p>ご本人やご家族が遠方にいても、届いたリンクをスマホで開いて手続きするだけ。窓口へ行く必要も、書類を郵送する必要もありません。</p>
+        <h3>来店不要・施設の窓口でもOK</h3>
+        <p>ご家族が遠方でも、届いたリンクをスマホで開いて手続きするだけ。施設の窓口でタブレットを使い、職員のサポートで進めることもできます（暗証番号の入力だけはご本人が行います）。</p>
       </div>
       <div class="feat">
         <div class="illust"><img src="assets/img/illust_speed.png" alt=""></div>
-        <h3>最短即日で開始</h3>
-        <p>従来は1〜2か月かかっていた回収開始を、大幅に短縮。登録したその場から決済を開始できるため、初月から取りこぼしなく回収できます。</p>
+        <h3>回収開始を待たない</h3>
+        <p>口座振替は金融機関側の処理サイクルがあり初回振替は翌月になりますが、それまではカード（Square）で即日立替できます。初月から取りこぼしなく回収できます。</p>
       </div>
     </div>
 
@@ -341,14 +351,14 @@
     <div class="sec-head">
       <span class="tag">How it works</span>
       <h2>「銀行口座の引き落とし文化」は守る。<br>面倒な手続きだけ、なくす。</h2>
-      <p>CarePay は、決済基盤に <span class="em">Square</span> を採用。ご家族が口座情報を紙で書く代わりに、画面上で安全に支払い方法を登録します。毎月の自動引き落としという体験はそのままに、紙の手続きだけを取り除きます。</p>
+      <p>毎月の口座振替は、銀行と接続する<span class="em">収納代行</span>のしくみと連携して実行します。紙の依頼書・印鑑の押印・口座番号の手書きを、銀行のオンライン本人認証（キャッシュカードの暗証番号など）に置き換えるだけ。回収開始までの立替や自費のスポット決済にはカード（<span class="em">Square</span>）を使います。患者・利用者の入金は施設・病院の口座へ直接入り、<b>CarePAY は資金に一切触れません。</b></p>
     </div>
     <div class="compare">
-      <div class="col old"><h4>従来の口座振替</h4><ul><li>紙の依頼書に手書き</li><li>通帳のコピーを用意</li><li>銀行印を押印</li><li>窓口来店または郵送</li><li>開始まで1〜2か月</li><li>記入ミス・印鑑相違で差し戻し</li></ul></div>
+      <div class="col old"><h4>従来の口座振替</h4><ul><li>紙の依頼書に手書き</li><li>口座番号を通帳から転記</li><li>銀行届出印を押印</li><li>窓口来店または郵送</li><li>印鑑相違・記入ミスで差し戻し</li><li>初回振替まで待ち時間</li></ul></div>
       <div class="mid">&#8594;</div>
-      <div class="col new"><h4>CarePay</h4><ul><li>スマホの画面で入力</li><li>通帳コピー不要</li><li>銀行印 不要</li><li>来店・郵送 不要（遠隔OK）</li><li>最短即日で決済開始 ※</li><li>差し戻しが起きにくい</li></ul></div>
+      <div class="col new"><h4>CarePay</h4><ul><li>スマホ／タブレットで入力</li><li>口座番号の手書き不要</li><li>銀行印 不要（暗証番号で認証）</li><li>来店・郵送 不要（施設窓口もOK）</li><li>印鑑相違・記入ミスの差し戻しなし</li><li>初回振替までカードで立替可</li></ul></div>
     </div>
-    <p class="note-disc">※ CarePay は Square のオンライン決済・継続課金を用いて、紙の口座振替を不要にするサービスです。支払い方法・審査状況により決済開始までの期間は異なります。従来型の銀行口座振替（収納代行）も選択でき、その場合は金融機関側の登録期間（目安1〜2か月）を要します。</p>
+    <p class="note-disc">※ 毎月の口座振替は、銀行と接続する収納代行のしくみと連携して実行します。対応する認証方式・金融機関は、連携する収納代行会社および各銀行の仕様に準じます。カード（Square）は、回収開始までの立替や自費のスポット決済に使用します。CarePAY は資金に触れず、入金は施設・病院の口座へ直接行われます。</p>
   </div>
 </section>
 
@@ -360,18 +370,18 @@
       <p>確実なスケジュールで進められます。下記は標準的な進行の目安です。</p>
     </div>
     <div class="flow">
-      <div class="step"><h4>事業者お申し込み</h4><p>CarePay に申し込み、Square 加盟店アカウントを連携。事業者情報・振込先口座を登録します。</p><span class="when">1〜3営業日</span></div>
-      <div class="step"><h4>ご利用者へ案内送信</h4><p>ご家族・ご本人へSMS／メールで登録リンクを送信。来店不要で、その場から手続きできます。</p><span class="when">即時</span></div>
-      <div class="step"><h4>遠隔で登録・同意</h4><p>画面に沿って支払い方法を登録し、電子同意・電子署名。通帳・銀行印は不要です。</p><span class="when">当日（数分）</span></div>
-      <div class="step"><h4>口座振替 実行開始</h4><p>登録完了後、毎月の自動引き落とし（継続課金）を開始。未収時は自動で再請求します。</p><span class="when">最短即日</span></div>
+      <div class="step"><h4>事業者お申し込み</h4><p>CarePay に申し込み、収納代行との連携と Square 加盟店アカウントを準備。事業者情報・入金口座を登録します。</p><span class="when">1〜3営業日</span></div>
+      <div class="step"><h4>ご利用者へ案内送信</h4><p>ご家族・ご本人へSMS／メールで登録リンクを送信。来店不要、施設の窓口でも手続きできます。</p><span class="when">即時</span></div>
+      <div class="step"><h4>銀行を選んで本人認証</h4><p>画面で銀行を選び、キャッシュカードの暗証番号・生年月日などで本人認証。印鑑も口座番号の手書きも不要です。</p><span class="when">当日（数分）</span></div>
+      <div class="step"><h4>口座振替 実行開始</h4><p>翌月の所定日に初回の引き落としを実行。以降は毎月自動で振替し、未収時は自動で再請求します。</p><span class="when">翌月の振替日</span></div>
     </div>
     <div class="sched">
       <div class="row head"><div>支払方法</div><div>内容</div><div>実行開始まで</div></div>
-      <div class="row hi"><div class="method">カード自動課金<br><span style="font-size:12px;font-weight:600;color:var(--ink-soft)">（Square・推奨）</span></div><div class="desc">ご家族がカードを画面登録。通帳・印鑑・来店すべて不要。毎月自動で引き落とし。</div><div class="term">最短 即日</div></div>
+      <div class="row hi"><div class="method">口座振替<br><span style="font-size:12px;font-weight:600;color:var(--ink-soft)">（収納代行と連携・本命）</span></div><div class="desc">暗証番号で本人認証して登録。毎月20日までに確定した分を、翌月の振替日に初回引き落とし。以降は毎月自動。</div><div class="term">翌月の振替日</div></div>
+      <div class="row"><div class="method">カードで立替<br><span style="font-size:12px;font-weight:600;color:var(--ink-soft)">（Square）</span></div><div class="desc">口座振替の初回が始まるまでの間、カードで即日立替。回収開始を待つ必要がありません。</div><div class="term">即日</div></div>
       <div class="row"><div class="method">初回のみ決済<br><span style="font-size:12px;font-weight:600;color:var(--ink-soft)">（入居一時金等）</span></div><div class="desc">入居時の一時金などを、その場でオンライン決済。</div><div class="term">即日</div></div>
-      <div class="row"><div class="method">従来型 口座振替<br><span style="font-size:12px;font-weight:600;color:var(--ink-soft)">（収納代行）</span></div><div class="desc">銀行口座からの引き落とし。金融機関側の登録期間が必要。</div><div class="term">約 1〜2か月</div></div>
     </div>
-    <p class="note-disc">実行開始時期は、事業者さまの申込状況・本人確認・支払方法により前後する場合があります。具体的な開始日は、お申し込み後にスケジュールとしてご提示します。</p>
+    <p class="note-disc">※ 標準スケジュール：毎月20日までに確定した登録分を、翌月の所定日に初回振替します。初回振替日まではカード等で立替請求が可能です。金融機関の処理日・締日は連携する収納代行／各銀行の規定に準じ、具体的な日付は導入時にご案内します。</p>
   </div>
 </section>
 
@@ -435,11 +445,11 @@
   <div class="wrap">
     <div class="sq-band">
       <div>
-        <h3>決済基盤は、Square。</h3>
-        <p>世界中で利用される決済プラットフォーム Square のセキュアな仕組みを採用。カード情報は Square 社のシステムに直接送信され、CarePay や事業者のサーバーには保存されません。</p>
+        <h3>カード決済は、Square。</h3>
+        <p>回収開始までの立替や、入居一時金・自費などのスポット決済には、世界中で利用される決済プラットフォーム Square を採用。カード情報は Square 社のシステムに直接送信され、CarePay や事業者のサーバーには保存されません。毎月の口座振替は、銀行と接続する収納代行のしくみと連携して実行します。</p>
         <ul>
           <li>カード情報は事業者側に残らない</li>
-          <li>継続課金・請求書・再請求に標準対応</li>
+          <li>立替・自費のスポット決済に対応</li>
           <li>決済の通知・レシートを自動送信</li>
           <li>ご家族はカード情報を自分で更新可能</li>
         </ul>
@@ -449,11 +459,43 @@
   </div>
 </section>
 
+<section class="blk alt" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Pricing</span>
+      <h2>導入する施設に、<br>原則、追加のご負担はありません。</h2>
+      <p>CarePay は、口座振替を実行する収納代行のしくみと連携して提供します。施設・病院のお支払いは今までどおり（またはより良いプラン）で、CarePay の利用にあたって新たな費用は原則かかりません。患者・利用者の入金は施設・病院へ直接。CarePay は資金に一切触れません。</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="p-ic"><img src="assets/img/ic_contract.png" alt=""></div>
+        <h4>現場の手間を削減</h4>
+        <p>契約・同意・口座振替の登録を、紙と来店なしでオンライン完結。現場が一番欲しがる契約まわりの作業をなくします。</p>
+      </div>
+      <div class="pillar">
+        <div class="p-ic"><img src="assets/img/ic_money_direct.png" alt=""></div>
+        <h4>お金に触れない安心設計</h4>
+        <p>患者・利用者の入金は施設・病院の口座へ直接。CarePay は資金を預からないので、収納の主体は施設のまま変わりません。</p>
+      </div>
+      <div class="pillar">
+        <div class="p-ic"><img src="assets/img/ic_invoice.png" alt=""></div>
+        <h4>追加負担は原則なし</h4>
+        <p>収納代行のしくみと連携して提供するため、施設は今までどおりのお支払いで導入できます。新たなアプリ利用料は原則いただきません。</p>
+      </div>
+    </div>
+    <p class="price-note">
+      ※ 口座振替の手数料は、振替を実行する収納代行会社の料金体系に基づきます。CarePay の利用料は、原則として施設・病院には新たにご負担いただきません。<br>
+      ※ 回収開始までの立替にカード（Square）を使う場合、その決済手数料は別途かかります。<br>
+      ※ 対応金融機関・料金・入金サイクル等の詳細は、連携する収納代行会社の条件に準じます。導入時にご案内します。
+    </p>
+  </div>
+</section>
+
 <section class="blk">
   <div class="wrap">
     <div class="cta-band">
-      <h2>紙の口座振替を、終わりにしませんか。</h2>
-      <p>通帳・銀行印・来店、すべて不要。まずは登録画面のデモをご覧ください。</p>
+      <h2>印鑑相違も、記入ミスも、差し戻しも。<br>紙の口座振替の面倒を、終わりにしませんか。</h2>
+      <p>導入する施設に、追加のご負担は原則ありません。まずは登録画面のデモをご覧ください。</p>
       <div class="btns">
         <a href="demo.html" class="btn btn-white">画面デモを見る &#9654;</a>
         <a href="#flow" class="btn btn-line">導入スケジュールを確認</a>
@@ -466,12 +508,12 @@
   <div class="wrap">
     <div class="sec-head"><span class="tag">FAQ</span><h2>よくあるご質問</h2></div>
     <div class="faq">
-      <details><summary>本当に通帳や銀行印は不要なのですか？</summary><div class="ans">はい。CarePay は Square のオンライン決済を用いるため、ご家族は画面上で支払い方法を登録するだけです。通帳のコピーや銀行印の押印は必要ありません。窓口への来店も不要で、遠隔のまま手続きが完結します。</div></details>
-      <details><summary>登録から口座振替の実行開始まで、どのくらいかかりますか？</summary><div class="ans">カード自動課金（推奨）の場合、ご家族の登録完了後、最短で即日から毎月の自動引き落としを開始できます。入居一時金などの初回決済も即日可能です。従来型の銀行口座振替（収納代行）を選ぶ場合は、金融機関側の登録期間として目安1〜2か月を要します。具体的な開始日はお申し込み後にスケジュールとしてご提示します。</div></details>
-      <details><summary>ご家族が遠方に住んでいても登録できますか？</summary><div class="ans">できます。SMSやメールで届いた登録リンクを、ご家族がご自身のスマホで開いて手続きするだけです。事業者・ご本人・ご家族が離れていても、来店や郵送なしで完結します。</div></details>
-      <details><summary>クレジットカードを持っていない方はどうなりますか？</summary><div class="ans">カードのほか、従来型の銀行口座振替、銀行振込、紙対応など複数の支払い方法を選べる設計です。ご利用者の事情に合わせて使い分けられます。</div></details>
-      <details><summary>未収（引き落とし失敗）が出たときは？</summary><div class="ans">未収を検知すると、ご家族へ自動で再請求の案内（SMS等）を送り、その場で支払えるリンクへ誘導します。事業者が電話・郵送で督促する負担を減らします。</div></details>
-      <details><summary>カード情報の安全性は大丈夫ですか？</summary><div class="ans">カード情報は決済基盤である Square のシステムに直接送信され、CarePay や事業者のサーバーには保存されません。安全性の高い仕組みで運用します。</div></details>
+      <details><summary>本当に印鑑や口座番号の手書きは不要なのですか？</summary><div class="ans">はい。紙の依頼書で「銀行届出印」が担っていた本人確認を、銀行が定めるオンライン認証（キャッシュカードの暗証番号・生年月日など）に置き換えています。口座番号を通帳から書き写す必要もありません。これにより、印鑑相違や記入ミスによる差し戻しが起きません。</div></details>
+      <details><summary>本人確認はどうやっているのですか？</summary><div class="ans">鍵になるのは銀行側の本人認証です。ご利用者は銀行の受付ページで、キャッシュカードの暗証番号や生年月日などを入力して認証します。これは「カードを持っていて暗証番号を知っている本人」しか通らないため、印鑑よりも確実な本人確認です。許可しているのは銀行であり、CarePay ではありません。</div></details>
+      <details><summary>暗証番号や口座情報は CarePay に渡るのですか？</summary><div class="ans">いいえ。暗証番号の入力は銀行のページ側で行われ、CarePay は暗証番号を受け取らず保持しない設計です。CarePay が受け取るのは「銀行が認証OKを返した」という結果のみ。お金そのものにも触れません（入金は施設・病院の口座へ直接です）。</div></details>
+      <details><summary>高齢のご本人でも登録できますか？窓口でサポートできますか？</summary><div class="ans">できます。運用としては、施設の窓口でタブレットを使い、銀行の選択や生年月日の入力までを職員がサポートし、暗証番号の入力だけをご本人に行っていただく形が可能です。暗証番号は他人に教えてはいけない決まりのため、その入力だけは必ずご本人が行います。</div></details>
+      <details><summary>キャッシュカードを持っていない方はどうなりますか？</summary><div class="ans">オンライン認証の成立にはキャッシュカードと暗証番号が必要です。お持ちでない方や、対応していない金融機関の場合は、従来どおり紙の手続きでフォローします。対応金融機関は連携する収納代行会社・各銀行の仕様に準じ、導入時にご案内します。</div></details>
+      <details><summary>収納代行会社や Square は不要になるのですか？</summary><div class="ans">いいえ。毎月の口座振替は、銀行と接続する収納代行のしくみと連携して実行します。CarePay はその上に「登録案内・契約同意・未収管理・請求書発行」といった現場の業務を乗せる役割です。カード決済（立替・自費）は Square を使います。決済網は収納代行・Square が、現場で使う体験は CarePay が担う、という分担です。</div></details>
     </div>
   </div>
 </section>
@@ -480,10 +522,10 @@
   <div class="foot-in">
     <div>
       <div class="foot-brand"><span style="width:30px;height:30px;border-radius:8px;background:var(--red);display:inline-flex;align-items:center;justify-content:center;overflow:hidden"><img src="assets/img/logo.png" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='C';this.parentNode.style.color='#fff';this.parentNode.style.fontWeight='900'"></span>CarePay</div>
-      <p class="foot-note">医療・介護・福祉事業者向けの口座振替サービス。通帳情報・銀行印・来店を不要にし、遠隔で口座振替の登録から実行までを完結します。決済基盤に Square を採用。<br>※ 本サイトはデモ／開発中のものです。記載のスケジュールは標準的な目安であり、支払方法・審査状況により異なります。</p>
+      <p class="foot-note">医療・介護・福祉の現場専用 請求OS。印鑑の押印も口座番号の手書きも不要にし、印鑑相違・記入ミスによる差し戻しをなくします。口座振替は収納代行のしくみと連携して実行し、CarePay は資金に触れません。カード決済には Square を採用。<br>※ 本サイトはデモ／開発中のものです。記載のスケジュール・対応金融機関・料金は標準的な目安であり、連携先や支払方法・審査状況により異なります。</p>
     </div>
     <div class="foot-links">
-      <a href="#problem">課題</a><a href="#feature">特長</a><a href="#flow">導入の流れ</a><a href="#who">対象業種</a><a href="#faq">FAQ</a><a href="demo.html">画面デモ</a>
+      <a href="#problem">課題</a><a href="#feature">特長</a><a href="#flow">導入の流れ</a><a href="#pricing">料金</a><a href="#who">対象業種</a><a href="#faq">FAQ</a><a href="demo.html">画面デモ</a>
     </div>
   </div>
   <div class="copy">© CarePay / TAmJ.Corp　｜　<a href="https://myaruze.tamjump.com/" style="color:var(--ink-soft)">ｍやるゼ！</a> 連携予定</div>
