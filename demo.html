@@ -256,12 +256,13 @@
   h1.dh{font-size:26px;color:var(--ink);letter-spacing:.01em}
   .sub{color:var(--ink-soft);font-size:14px}
   .admin-top{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
-  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-bottom:24px}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(156px,1fr));gap:13px;margin-bottom:24px}
   .stat{background:#fff;border-radius:13px;padding:18px 20px;box-shadow:var(--shadow);border:1px solid var(--grey-line);position:relative;overflow:hidden}
   .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red)}
   .stat.green::before{background:var(--green)}
   .stat.grey::before{background:#aeb4ba}
-  .stat .num{font-size:32px;font-weight:800;color:var(--red);line-height:1.1}
+  .stat .num{font-size:30px;font-weight:800;color:var(--red);line-height:1.1;white-space:nowrap}
+  .stat .num.money{font-size:21px;letter-spacing:-.01em}
   .stat.green .num{color:var(--green)}
   .stat.grey .num{color:var(--ink-mid)}
   .stat .lbl{font-size:13.5px;color:var(--ink-soft);margin-top:4px}
@@ -1045,7 +1046,7 @@
             <div class="stat"><div class="num">2</div><div class="lbl">今月の未収</div></div>
             <div class="stat green"><div class="num">1</div><div class="lbl">本日の新規登録</div></div>
             <div class="stat grey"><div class="num">5</div><div class="lbl">再請求 対応中</div></div>
-            <div class="stat green"><div class="num">¥1,284,000</div><div class="lbl">今月の請求済 売上</div></div>
+            <div class="stat green"><div class="num money">¥1,284,000</div><div class="lbl">今月の請求済 売上</div></div>
           </div>
           <div class="panel">
             <div class="panel-head">
