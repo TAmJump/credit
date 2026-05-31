@@ -193,8 +193,8 @@
   @media(max-width:900px){.seg-grid{grid-template-columns:1fr}}
   .seg{border:1px solid var(--grey-line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:.2s}
   .seg:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-  .seg .pic{aspect-ratio:16/10;background:var(--grey);border-bottom:1px solid var(--grey-line);overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .seg .pic img{width:100%;height:100%;object-fit:cover}
+  .seg .pic{aspect-ratio:16/10;background:#fff;border-bottom:1px solid var(--grey-line);overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .seg .pic img{width:100%;height:100%;object-fit:contain;padding:18px}
   .seg .pic .ph-fallback{color:var(--ink-soft);font-size:13px;text-align:center;padding:16px}
   .seg .body{padding:24px}
   .seg .body .tag{font-size:12px;font-weight:800;color:var(--red);letter-spacing:.08em}
@@ -596,9 +596,9 @@
     </div>
     <div class="hero-visual">
       <div class="ph">
-        <img src="assets/img/hero.jpg" alt="医療・介護・福祉の現場で、家族がスマホから口座振替を登録している様子"
+        <img src="assets/img/cast_team.png" alt="医療・介護・福祉の現場で、家族がスマホから口座振替を登録している様子"
              onerror="this.style.display='none';this.parentNode.querySelector('.ph-fallback').style.display='block'">
-        <div class="ph-fallback" style="display:none"><b>hero.jpg をここに表示</b>assets/img/hero.jpg を置くと反映されます</div>
+        <div class="ph-fallback" style="display:none"><b>CarePAY</b>医療・介護・福祉の現場で</div>
       </div>
       <div class="float-card a"><span class="ic"><img src="assets/img/ic_no_seal.png" alt=""></span>銀行印・通帳<br>不要</div>
       <div class="float-card b"><span class="ic"><img src="assets/img/ic_remote.png" alt=""></span>遠隔・オンライン<br>で登録完結</div>
@@ -914,7 +914,7 @@
     </div>
     <div class="seg-grid">
       <div class="seg">
-        <div class="pic"><img src="assets/img/seg_medical.jpg" alt="医療" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=ph-fallback>seg_medical.jpg</div>'"></div>
+        <div class="pic"><img src="assets/img/illust_medical.png" alt="医療" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=ph-fallback>医療</div>'"></div>
         <div class="body">
           <div class="tag">MEDICAL</div>
           <h3>医療機関</h3>
@@ -923,7 +923,7 @@
         </div>
       </div>
       <div class="seg">
-        <div class="pic"><img src="assets/img/seg_care.jpg" alt="介護" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=ph-fallback>seg_care.jpg</div>'"></div>
+        <div class="pic"><img src="assets/img/illust_care.png" alt="介護" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=ph-fallback>介護</div>'"></div>
         <div class="body">
           <div class="tag">CARE</div>
           <h3>介護事業者</h3>
@@ -932,7 +932,7 @@
         </div>
       </div>
       <div class="seg">
-        <div class="pic"><img src="assets/img/seg_welfare.jpg" alt="福祉" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=ph-fallback>seg_welfare.jpg</div>'"></div>
+        <div class="pic"><img src="assets/img/illust_welfare.png" alt="福祉" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=ph-fallback>福祉</div>'"></div>
         <div class="body">
           <div class="tag">WELFARE</div>
           <h3>福祉・障害サービス</h3>
