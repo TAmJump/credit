@@ -205,6 +205,7 @@
   @media(max-width:820px){.feat-grid-more .feat[style*="grid-column: span 3"]{grid-column:1!important}}
   .feat .illust.illust-xl{width:440px;height:440px;max-width:100%;border:none;border-radius:28px;margin-bottom:18px;background:transparent}
   .feat .illust.illust-xl img{padding:6px}
+  .feat .illust.illust-xl svg{width:100%;height:100%;display:block;padding:4px}
   @media(max-width:560px){.feat .illust.illust-xl{width:74vw;height:74vw;max-width:440px;max-height:440px}}
 
   .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
@@ -347,7 +348,37 @@
 
     <div class="feat-grid feat-grid-more">
       <div class="feat" style="grid-column: span 3">
-        <div class="illust illust-xl"><img src="assets/img/illust_dashboard.png" alt=""></div>
+        <div class="illust illust-xl"><svg viewBox="0 0 440 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="債権管理（エージングと回収ステータス）のイメージ">
+          <rect x="24" y="30" width="392" height="300" rx="20" fill="#ffffff" stroke="#e6e8ea" stroke-width="2"/>
+          <circle cx="48" cy="56" r="5" fill="#cf4747"/><circle cx="66" cy="56" r="5" fill="#eceef0"/><circle cx="84" cy="56" r="5" fill="#eceef0"/>
+          <text x="392" y="60" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="800" fill="#9299a0">債権管理</text>
+          <!-- エージング棒グラフ -->
+          <g>
+            <rect x="56" y="190" width="40" height="44" rx="6" fill="#f1cfcf"/>
+            <rect x="112" y="160" width="40" height="74" rx="6" fill="#e8a9a9"/>
+            <rect x="168" y="138" width="40" height="96" rx="6" fill="#dd8585"/>
+            <rect x="224" y="118" width="40" height="116" rx="6" fill="#cf4747"/>
+            <rect x="280" y="100" width="40" height="134" rx="6" fill="#b23b3b"/>
+            <line x1="48" y1="234" x2="392" y2="234" stroke="#e6e8ea" stroke-width="2"/>
+            <text x="76"  y="252" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9299a0">未経過</text>
+            <text x="132" y="252" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9299a0">1-30</text>
+            <text x="188" y="252" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9299a0">31-60</text>
+            <text x="244" y="252" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9299a0">61-90</text>
+            <text x="300" y="252" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9299a0">90超</text>
+          </g>
+          <!-- ステータス行 -->
+          <g font-family="sans-serif" font-size="11" fill="#5f6a72">
+            <circle cx="60" cy="284" r="5" fill="#3f8f6b"/><rect x="74" y="280" width="120" height="8" rx="4" fill="#eceef0"/><text x="392" y="288" text-anchor="end" font-weight="800" fill="#3f8f6b">回収済</text>
+            <circle cx="60" cy="306" r="5" fill="#e6a23c"/><rect x="74" y="302" width="150" height="8" rx="4" fill="#eceef0"/><text x="392" y="310" text-anchor="end" font-weight="800" fill="#e6a23c">督促中</text>
+          </g>
+          <!-- 督促バッジ -->
+          <g transform="translate(330,150)">
+            <circle cx="34" cy="34" r="30" fill="#fff" stroke="#cf4747" stroke-width="2"/>
+            <path d="M34 20c-6 0-10 4-10 11v6l-3 4h26l-3-4v-6c0-7-4-11-10-11z" fill="#cf4747"/>
+            <circle cx="34" cy="48" r="3" fill="#cf4747"/>
+            <text x="34" y="76" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="800" fill="#b23b3b">一括督促</text>
+          </g>
+        </svg></div>
         <h3>債権管理まで内包</h3>
         <p>未収・督促段階・滞留日数（エージング）・回収予定を、CarePAY 一つで管理。CSV エクスポートや一括督促SMSにも対応し、債権管理システムを別途導入する必要がありません。<br><a href="demo.html" style="color:var(--red);font-weight:800">▶ 債権管理のデモを見る</a></p>
       </div>
@@ -355,7 +386,40 @@
 
     <div class="feat-grid feat-grid-more">
       <div class="feat" style="grid-column: span 3">
-        <div class="illust illust-xl"><img src="assets/img/illust_paperless.png" alt=""></div>
+        <div class="illust illust-xl"><svg viewBox="0 0 440 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="請求書・領収書の電子発行のイメージ">
+          <!-- 後ろの領収証 -->
+          <g transform="rotate(-7 250 190)">
+            <rect x="196" y="74" width="180" height="232" rx="14" fill="#ffffff" stroke="#e6e8ea" stroke-width="2"/>
+            <rect x="216" y="96" width="70" height="12" rx="6" fill="#f1cfcf"/>
+            <rect x="216" y="124" width="140" height="7" rx="3.5" fill="#eceef0"/>
+            <rect x="216" y="140" width="120" height="7" rx="3.5" fill="#eceef0"/>
+            <rect x="216" y="156" width="135" height="7" rx="3.5" fill="#eceef0"/>
+            <text x="216" y="200" font-family="sans-serif" font-size="12" font-weight="800" fill="#9299a0">領収証</text>
+          </g>
+          <!-- 前面の請求書 -->
+          <rect x="64" y="56" width="196" height="252" rx="16" fill="#ffffff" stroke="#e6e8ea" stroke-width="2"/>
+          <rect x="64" y="56" width="196" height="46" rx="16" fill="#cf4747"/>
+          <rect x="64" y="86" width="196" height="16" fill="#cf4747"/>
+          <text x="84" y="86" font-family="sans-serif" font-size="15" font-weight="800" fill="#ffffff">請求書</text>
+          <rect x="84" y="124" width="120" height="8" rx="4" fill="#eceef0"/>
+          <rect x="84" y="146" width="156" height="7" rx="3.5" fill="#eceef0"/>
+          <rect x="84" y="162" width="140" height="7" rx="3.5" fill="#eceef0"/>
+          <rect x="84" y="178" width="150" height="7" rx="3.5" fill="#eceef0"/>
+          <line x1="84" y1="204" x2="240" y2="204" stroke="#e6e8ea" stroke-width="2"/>
+          <rect x="84" y="216" width="60" height="9" rx="4.5" fill="#f1cfcf"/>
+          <text x="240" y="226" text-anchor="end" font-family="sans-serif" font-size="14" font-weight="900" fill="#cf4747">¥ ——</text>
+          <!-- QR + 電子署名印 -->
+          <g transform="translate(96,242)">
+            <rect x="0" y="0" width="44" height="44" rx="6" fill="#fff" stroke="#23282c" stroke-width="2"/>
+            <rect x="7" y="7" width="12" height="12" fill="#23282c"/><rect x="25" y="7" width="12" height="12" fill="#23282c"/>
+            <rect x="7" y="25" width="12" height="12" fill="#23282c"/><rect x="27" y="27" width="6" height="6" fill="#23282c"/>
+          </g>
+          <g transform="translate(176,236)">
+            <circle cx="28" cy="28" r="27" fill="none" stroke="#cf4747" stroke-width="2.5"/>
+            <path d="M16 28l8 8 16-17" fill="none" stroke="#cf4747" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="28" y="64" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="800" fill="#b23b3b">電子発行</text>
+          </g>
+        </svg></div>
         <h3>請求書・領収書も、完全ペーパーレス発行</h3>
         <p>医療（保険診療／自費）、介護保険サービス、介護保険施設（老健・介護医療院）、居宅サービス（医療費控除対応）、福祉サービス。<b>業態ごとに国が定めた必須記載項目を網羅</b>したテンプレートで、請求書・領収書・医療費明細書・医療費控除対象額の明細などをアプリ内で電子発行。タイムスタンプ＋ハッシュ署名で改ざん防止、家族のスマホへそのまま送信できます。<br><a href="demo.html" style="color:var(--red);font-weight:800">▶ 発行画面のデモを見る</a></p>
       </div>
